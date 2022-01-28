@@ -14,7 +14,7 @@ import javafx.stage.Stage;
 import library.Admin;
 import library.Librarian;
 
-public class addLibrarianGUIController implements Initializable {
+public class addLibrarianController implements Initializable {
 
   @FXML
   private TextField libIdField;
@@ -67,7 +67,9 @@ public class addLibrarianGUIController implements Initializable {
     Stage stage = (Stage) response.getScene().getWindow();
     stage.close();
     stage = new Stage();
-    Parent root = FXMLLoader.load(getClass().getResource("EmployeeList.fxml"));
+    Parent root = FXMLLoader.load(
+      getClass().getResource("fx/EmployeeList.fxml")
+    );
     Scene scene = new Scene(root);
     stage.setScene(scene);
     stage.show();

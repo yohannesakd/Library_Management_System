@@ -22,7 +22,7 @@ import javafx.stage.Stage;
 import javax.swing.Action;
 import library.*;
 
-public class BookListGUIAdminController implements Initializable {
+public class BookListAdminController implements Initializable {
 
   @FXML
   private TableView<Book> tableBook;
@@ -77,7 +77,7 @@ public class BookListGUIAdminController implements Initializable {
     Stage stage = (Stage) add.getScene().getWindow();
     stage.close();
     stage = new Stage();
-    Parent root = FXMLLoader.load(getClass().getResource("addBookGUI.fxml"));
+    Parent root = FXMLLoader.load(getClass().getResource("fx/addBook.fxml"));
 
     Scene scene = new Scene(root);
     stage.setScene(scene);
@@ -89,7 +89,7 @@ public class BookListGUIAdminController implements Initializable {
     Stage stage = (Stage) back.getScene().getWindow();
     stage.close();
     stage = new Stage();
-    Parent root = FXMLLoader.load(getClass().getResource("FirstPage.fxml"));
+    Parent root = FXMLLoader.load(getClass().getResource("fx/FirstPage.fxml"));
 
     Scene scene = new Scene(root);
     stage.setScene(scene);
@@ -99,19 +99,22 @@ public class BookListGUIAdminController implements Initializable {
   @FXML
   public void showRemove(ActionEvent event) {
     removeId.setVisible(true);
+    removeId.requestFocus();
   }
 
   @FXML
   public void showEdit(ActionEvent event) {
     editId.setVisible(true);
+    editId.requestFocus();
   }
 
   @FXML
   public void editBook(ActionEvent event) throws IOException {
+    System.out.println("Sth");
     Stage stage = (Stage) back.getScene().getWindow();
     stage.close();
     stage = new Stage();
-    Parent root = FXMLLoader.load(getClass().getResource("EditBookGUI.fxml"));
+    Parent root = FXMLLoader.load(getClass().getResource("fx/EditBook.fxml"));
 
     Scene scene = new Scene(root);
     stage.setScene(scene);
@@ -131,7 +134,7 @@ public class BookListGUIAdminController implements Initializable {
     }
     Stage stage = (Stage) removeAlert.getScene().getWindow();
     Parent root = FXMLLoader.load(
-      getClass().getResource("BookListGUIAdmin.fxml")
+      getClass().getResource("fx/BookListAdmin.fxml")
     );
 
     Scene scene = new Scene(root);
@@ -210,7 +213,7 @@ public class BookListGUIAdminController implements Initializable {
       tableBook.setItems(sortedSearch);
     } catch (FileNotFoundException ex) {
       Logger
-        .getLogger(BookListGUIAdminController.class.getName())
+        .getLogger(BookListAdminController.class.getName())
         .log(Level.SEVERE, null, ex);
     }
   }

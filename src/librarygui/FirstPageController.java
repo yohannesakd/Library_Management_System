@@ -35,7 +35,7 @@ public class FirstPageController implements Initializable {
     stage.close();
     stage = new Stage();
     Parent root = FXMLLoader.load(
-      getClass().getResource("BookListGUIAdmin.fxml")
+      getClass().getResource("fx/BookListAdmin.fxml")
     );
     Scene scene = new Scene(root);
     stage.setScene(scene);
@@ -58,7 +58,9 @@ public class FirstPageController implements Initializable {
     Stage stage = (Stage) view.getScene().getWindow();
     stage.close();
     stage = new Stage();
-    Parent root = FXMLLoader.load(getClass().getResource("EmployeeList.fxml"));
+    Parent root = FXMLLoader.load(
+      getClass().getResource("fx/EmployeeList.fxml")
+    );
     Scene scene = new Scene(root);
     stage.setScene(scene);
     stage.show();

@@ -6,6 +6,14 @@
   "configurations": [
     {
       "type": "java",
+      "name": "Launch Library",
+      "request": "launch",
+      "mainClass": "librarygui.Library",
+      "projectName": "LibraryGUI_2b523a3c",
+      "vmArgs": "--module-path \"C:\\Program Files\\Java\\javafx-sdk-17.0.2\\lib\" --add-modules javafx.controls,javafx.fxml"
+    },
+    {
+      "type": "java",
       "name": "Launch LibraryGUI",
       "request": "launch",
       "mainClass": "librarygui.LibraryGUI",

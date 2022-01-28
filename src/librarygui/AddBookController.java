@@ -14,7 +14,7 @@ import javafx.stage.Stage;
 import library.Admin;
 import library.Book;
 
-public class AddBookGUIController implements Initializable {
+public class AddBookController implements Initializable {
 
   @FXML
   private Button backbtn;
@@ -52,7 +52,7 @@ public class AddBookGUIController implements Initializable {
     stage.close();
     stage = new Stage();
     Parent root = FXMLLoader.load(
-      getClass().getResource("BookListGUIAdmin.fxml")
+      getClass().getResource("fx/BookListGUIAdmin.fxml")
     );
     Scene scene = new Scene(root);
     stage.setScene(scene);
@@ -78,7 +78,7 @@ public class AddBookGUIController implements Initializable {
     stage.close();
     stage = new Stage();
     Parent root = FXMLLoader.load(
-      getClass().getResource("BookListGUIAdmin.fxml")
+      getClass().getResource("fx/BookListAdmin.fxml")
     );
     Scene scene = new Scene(root);
     stage.setScene(scene);
