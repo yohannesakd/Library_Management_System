@@ -19,7 +19,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import library.Book;
+import javax.swing.Action;
+import library.*;
 
 public class BookListGUIAdminController implements Initializable {
 
@@ -63,6 +64,15 @@ public class BookListGUIAdminController implements Initializable {
   private Button back;
 
   @FXML
+  private TextField removeId;
+
+  @FXML
+  private TextField editId;
+
+  @FXML
+  private Label removeAlert;
+
+  @FXML
   public void addBook(ActionEvent event) throws IOException {
     Stage stage = (Stage) add.getScene().getWindow();
     stage.close();
@@ -87,6 +97,48 @@ public class BookListGUIAdminController implements Initializable {
   }
 
   @FXML
+  public void showRemove(ActionEvent event) {
+    removeId.setVisible(true);
+  }
+
+  @FXML
+  public void showEdit(ActionEvent event) {
+    editId.setVisible(true);
+  }
+
+  @FXML
+  public void editBook(ActionEvent event) throws IOException {
+    Stage stage = (Stage) back.getScene().getWindow();
+    stage.close();
+    stage = new Stage();
+    Parent root = FXMLLoader.load(getClass().getResource("EditBookGUI.fxml"));
+
+    Scene scene = new Scene(root);
+    stage.setScene(scene);
+    stage.show();
+  }
+
+  @FXML
+  public void removeBook(ActionEvent event) throws IOException {
+    try {
+      removeAlert.setText(
+        FileAlter.deleteBook(Integer.parseInt(removeId.getText()))
+      );
+      System.out.println("Something");
+    } catch (NumberFormatException n) {
+      System.out.println("Invalid ID");
+      removeAlert.setText("Invalid ID");
+    }
+    Stage stage = (Stage) removeAlert.getScene().getWindow();
+    Parent root = FXMLLoader.load(
+      getClass().getResource("BookListGUIAdmin.fxml")
+    );
+
+    Scene scene = new Scene(root);
+    stage.setScene(scene);
+    stage.show();
+  }
+
   @Override
   public void initialize(URL url, ResourceBundle rb) {
     bookid.setCellValueFactory(new PropertyValueFactory<>("book_id"));

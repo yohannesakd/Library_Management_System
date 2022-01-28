@@ -29,7 +29,7 @@ public class Admin extends Librarian {
       "|" +
       book.getShelfNo();
     try {
-      System.out.println(bookinput);
+      // System.out.println(bookinput);
       saveToFile("Books.txt", bookinput, true);
     } catch (IOException ex) {
       return "UNSUCESSFULL";
@@ -45,15 +45,27 @@ public class Admin extends Librarian {
 
   public static String addLibrarian(Librarian librarian) {
     String empInput =
-      librarian.getId() + "|" + librarian.getUsername() + "|" + librarian.getPassword()  + "|" + librarian.getFullName()  + "|" + librarian.getPhoneNo() + "|" + librarian.getEmail() + "|" + librarian.getAddress();
+      librarian.getId() +
+      "|" +
+      librarian.getUsername() +
+      "|" +
+      librarian.getPassword() +
+      "|" +
+      librarian.getFullName() +
+      "|" +
+      librarian.getPhoneNo() +
+      "|" +
+      librarian.getEmail() +
+      "|" +
+      librarian.getAddress();
 
-      try{
-        System.out.println(empInput);
-        saveToFile("Librarians.txt", empInput, true);
-      }catch(IOException ex){
-        return "UNSUCCESSFUL";
-      }
-      return "SUCCESSFUL";
+    try {
+      System.out.println(empInput);
+      saveToFile("Librarians.txt", empInput, true);
+    } catch (IOException ex) {
+      return "UNSUCCESSFUL";
+    }
+    return "SUCCESSFUL";
   }
 
   public void removeLibrarian(int id) {}
