@@ -1,0 +1,65 @@
+//    public void search(ActionEvent event){
+//        System.out.println("this is accessed");
+//           try {
+//            tableBook.setItems(searchBook());
+//        } catch (FileNotFoundException ex) {
+//            System.out.println("FileNotFound");
+//        }
+//
+//    }
+//    
+   
+//public ObservableList<Book> searchBook() throws FileNotFoundException{
+//    ArrayList<Book> books = library.FileAlter.retrieveAllbookFile();
+//    ArrayList<Book> searchedBook = new ArrayList<>();
+//    
+//    switch(searchKey.getValue()){
+//        case "book_id":
+//            for (Book book : books) {
+//                if(book.getBook_id() == Integer.parseInt(searchBar.getText()))
+//                    searchedBook.add(book);
+//            }
+//            break;
+//        case "title":
+//            for (Book book : books) {
+//                if(book.getTitle().equals(searchBar.getText()))
+//                    searchedBook.add(book);
+//            }
+//            break;
+//        case "author":
+//            for (Book book : books) {
+//                if(book.getAuthor().equals(searchBar.getText()))
+//                    searchedBook.add(book);
+//            }
+//            break;
+//        case "edition":
+//            for (Book book : books) {
+//                if(book.getEdition().equals(searchBar.getText()))
+//                    searchedBook.add(book);
+//            }
+//            break;
+//        case "isbn":
+//            for (Book book : books) {
+//                if(book.getIsbn() == Integer.parseInt(searchBar.getText()))
+//                    searchedBook.add(book);
+//            }
+//            break;
+//        case "pages":
+//            for (Book book : books) {
+//                if(book.getPages() == Integer.parseInt(searchBar.getText()))
+//                    searchedBook.add(book);
+//            }
+//            break;
+//        case "shelfNo":
+//            for (Book book : books) {
+//                if(book.getShelfNo().equals(searchBar.getText()))
+//                    searchedBook.add(book);
+//            } break; 
+//        case "":
+//            searchedBook = books;
+//    }
+//    
+//    ObservableList<Book> result = FXCollections.observableArrayList(searchedBook);
+//    return result;
+//} 
+//  

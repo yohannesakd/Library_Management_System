@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="librarygui.FirstPageController">
+   <children>
+      <Button fx:id="manageBooks" layoutX="225.0" layoutY="116.0" mnemonicParsing="false" onAction="#bookList" prefHeight="49.0" prefWidth="150.0" text="Manage Books">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="view" layoutX="225.0" layoutY="191.0" mnemonicParsing="false" onAction="#viewBook" prefHeight="49.0" prefWidth="150.0" text="View Book">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Button>
+      <Label alignment="CENTER" layoutX="129.0" layoutY="28.0" prefHeight="49.0" prefWidth="343.0" text="Library Management System">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <MenuBar prefHeight="25.0" prefWidth="600.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="Manage">
+            <items>
+              <MenuItem fx:id="manage_lib" mnemonicParsing="false" onAction="#manageLibrarians" text="Manage Librarians" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </children>
+</AnchorPane>
