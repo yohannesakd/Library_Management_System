@@ -1,4 +1,3 @@
-55|the bbook|us|5|677|45646|4
-675|die hard the book|us the group|4|443|3432|3
-99|The Book of books|Mr Book|90th|900|12345678|20
-199|The Booking|Ato Book|1|901|123456789|12
+675|die hard the book|us the group|4|3432|443|3
+99|The Book of books|Mr Book|90th|12345678|900|20
+199|The Booking|Ato Book|1|123456789|901|12
