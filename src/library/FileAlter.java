@@ -80,4 +80,28 @@ public class FileAlter {
     }
     return emplist;
   }
+
+  public static ArrayList<Admin> retrieveAllAdminFile()
+  throws FileNotFoundException {
+  ArrayList<Admin> adminList = new ArrayList<>();
+  try (Scanner s = new Scanner(new File("Admins.txt"))) {
+    while (s.hasNextLine()) {
+      String line = s.nextLine();
+      String[] values = line.split("\\|");
+
+      Admin lb = new Admin(
+        Integer.parseInt(values[0]),
+        values[1],
+        values[2],
+        values[3],
+        Integer.parseInt(values[4]),
+        values[5],
+        values[6]
+      );
+      adminList.add(lb);
+    }
+  }
+  return adminList;
+}
+
 }
