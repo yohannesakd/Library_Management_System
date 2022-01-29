@@ -138,17 +138,6 @@ public class BookListController implements Initializable {
     stage.show();
   }
 
-  @FXML
-  public void bookPage(ActionEvent event) throws IOException {
-    Stage stage = (Stage) book.getScene().getWindow();
-    Parent root = FXMLLoader.load(
-      getClass().getResource("fx/admin/BookList.fxml")
-    );
-    Scene scene = new Scene(root);
-    stage.setScene(scene);
-    stage.show();
-    book.requestFocus();
-  }
 
   @FXML
   public void homePage(ActionEvent event) throws IOException {
