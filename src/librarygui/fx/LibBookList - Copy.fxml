@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" minWidth="700.0" prefHeight="833.0" prefWidth="1154.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="librarygui.BookListController">
+<AnchorPane id="AnchorPane" minWidth="700.0" prefHeight="833.0" prefWidth="1154.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="librarygui.BookListController">
     <children>
         <Label fx:id="label" layoutX="126" layoutY="120" minHeight="16" minWidth="69" />
       <SplitPane dividerPositions="0.3078078078078078, 0.5" layoutX="26.0" layoutY="120.0" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -95,7 +95,7 @@
             </AnchorPane>
             <AnchorPane layoutX="10.0" layoutY="10.0" maxWidth="358.0" minHeight="0.0" minWidth="200.0" prefHeight="831.0" prefWidth="358.0" SplitPane.resizableWithParent="false">
                <children>
-                  <VBox layoutX="-65.0" prefHeight="821.0" prefWidth="338.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="0.0">
+                  <VBox layoutX="4.0" prefHeight="821.0" prefWidth="338.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="0.0">
                      <children>
                         <TextField fx:id="searchBar" prefHeight="45.0" prefWidth="338.0" promptText="Enter Search Text">
                            <VBox.margin>
@@ -140,7 +140,7 @@
                                           <Insets />
                                        </HBox.margin>
                                     </Label>
-                                    <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="175.0" text="New Member" />
+                                    <Button fx:id="addMember" mnemonicParsing="false" prefHeight="25.0" prefWidth="175.0" text="New Member" />
                                  </children>
                               </HBox>
                            </children>
