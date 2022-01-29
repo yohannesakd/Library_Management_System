@@ -3,12 +3,13 @@ package library;
 public class Issue {
 
   //Setup Attributes
+  private int issue_id;
   private int member_id;
   private int book_id;
   private Object issueDate;
   private Object dueDate;
   private String title;
-  private Object returnedOn;
+  private String name;
 
   //Constructor
   public Issue(
@@ -17,14 +18,24 @@ public class Issue {
     Object issueDate,
     Object dueDate,
     String title,
-    Object returnedOn
+    String name,
+    int issue_id
   ) {
     this.member_id = member_id;
     this.book_id = book_id;
     this.issueDate = issueDate;
     this.dueDate = dueDate;
     this.title = title;
-    this.returnedOn = returnedOn;
+    this.name = name;
+    this.issue_id = issue_id;
+  }
+
+  public void setIssue_id(int issue_id) {
+    this.issue_id = issue_id;
+  }
+
+  public int getIssue_id() {
+    return issue_id;
   }
 
   public void setBook_id(int book_id) {
@@ -41,10 +52,6 @@ public class Issue {
 
   public void setMember_id(int member_id) {
     this.member_id = member_id;
-  }
-
-  public void setReturnedOn(Object returnedOn) {
-    this.returnedOn = returnedOn;
   }
 
   public void setTitle(String title) {
@@ -67,39 +74,22 @@ public class Issue {
     return member_id;
   }
 
-  public Object getReturnedOn() {
-    return returnedOn;
-  }
-
   public String getTitle() {
     return title;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
   }
 
   //primary methods
   @Override
   public String toString() {
-    return (
-      "{" +
-      " member_id='" +
-      getMember_id() +
-      "'" +
-      ", book_id='" +
-      getBook_id() +
-      "'" +
-      ", issueDate='" +
-      getIssueDate() +
-      "'" +
-      ", dueDate='" +
-      getDueDate() +
-      "'" +
-      ", title='" +
-      getTitle() +
-      "'" +
-      ", returnedOn='" +
-      getReturnedOn() +
-      "'" +
-      "}"
-    );
+    return super.toString();
   }
 
   public void displayIssue() {
