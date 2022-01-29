@@ -287,6 +287,7 @@ public class BookListController implements Initializable {
     isbn.setCellValueFactory(new PropertyValueFactory<>("isbn"));
     pages.setCellValueFactory(new PropertyValueFactory<>("pages"));
     shelf.setCellValueFactory(new PropertyValueFactory<>("shelfNo"));
+
     try {
       tableBook.setItems(giveBooks());
     } catch (FileNotFoundException ex) {
