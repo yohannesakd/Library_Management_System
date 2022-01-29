@@ -35,6 +35,25 @@ public class FileAlter {
     return "SUCCESSFULL";
   }
 
+  
+  public static String deleteLibrarian(int id) throws FileNotFoundException {
+    boolean deletion = false;
+    ArrayList<Librarian> librarianlist = retrieveAllemployeeFile();
+
+    if (new File("Librarians.txt").delete()) {} else {
+      return "FILE NOT DELETED";
+    }
+
+    for (Librarian libr : librarianlist) {
+      if (libr.getId() != id) Admin.addLibrarian(libr); else {
+        deletion = true;
+      }
+    }
+    if (!deletion) return "NO FILE DELETED";
+    return "SUCCESSFULL";
+  }
+
+  
     public static String editBook(Book book) throws FileNotFoundException {
     ArrayList<Book> booklist = FileAlter.retrieveAllbookFile();
     boolean alter = false;

@@ -128,7 +128,10 @@ public class BookListController implements Initializable {
 private void handleBookDelete(ActionEvent event) throws IOException{
       Book toBeDeleted = tableBook.getSelectionModel().getSelectedItem();
       
-    if(toBeDeleted == null)removeAlert.setText("PLEASE SELECT A ROW TO DELETE.");
+    if(toBeDeleted == null){
+        removeAlert.setText("PLEASE SELECT A ROW TO DELETE.");
+        return;
+    }
 
     removeAlert.setText(FileAlter.deleteBook(toBeDeleted.getBook_id()));
       
@@ -154,7 +157,10 @@ private void handleBookDelete(ActionEvent event) throws IOException{
   private void handleBookEdit(ActionEvent event)throws IOException
   {
       Book toBeEdited = tableBook.getSelectionModel().getSelectedItem();
-      if(toBeEdited == null)editAlert.setText("PLEASE SELECT THE ROW TO EDIT");
+      if(toBeEdited == null){
+          editAlert.setText("PLEASE SELECT THE ROW TO EDIT");
+          return;
+      }
       editBook(toBeEdited);
       formContainer.setVisible(true);
       bookIdField.requestFocus();
