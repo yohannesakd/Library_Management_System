@@ -127,6 +127,25 @@ public class BookListController implements Initializable {
   @FXML
   private Label editAlert;
 
+  
+  @FXML
+  private void handleBookDelete(ActionEvent event) throws IOException{
+      Book toBeDeleted = tableBook.getSelectionModel().getSelectedItem();
+      try {
+          FileAlter.deleteBook(toBeDeleted.getBook_id());
+      } catch (FileNotFoundException ex) {
+          removeAlert.setVisible(true);
+          removeAlert.setText("FILE NOT DELETED.");
+      }
+      Stage stage = (Stage)removeAlert.getScene().getWindow();
+      Parent root = FXMLLoader.load(getClass().getResource("fx/Admin/BookLIst.fxml"));
+      Scene scene = new Scene(root);
+      stage.setScene(scene);
+      stage.show();
+  
+  }
+  
+  
   @FXML
   public void goBack(ActionEvent event) throws IOException {
     Stage stage = (Stage) book.getScene().getWindow();
