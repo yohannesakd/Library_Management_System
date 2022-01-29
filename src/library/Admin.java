@@ -38,6 +38,8 @@ public class Admin extends Librarian {
     return "SUCESSFULL";
   }
 
+  public void editBook(Book book){}
+  
   public void removeBook(Book book) {}
 
   public String addAdmin(Admin admin) {

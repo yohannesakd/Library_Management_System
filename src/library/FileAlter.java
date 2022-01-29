@@ -35,6 +35,24 @@ public class FileAlter {
     return "SUCCESSFULL";
   }
 
+    public static String editBook(Book book) throws FileNotFoundException {
+    ArrayList<Book> booklist = FileAlter.retrieveAllbookFile();
+    boolean alter = false;
+    if (new File("Books.txt").delete()) {} else {
+      return "FILE NOT DELETED";
+    }
+
+    for (Book booklist1 : booklist) {
+      if (booklist1.getBook_id() != book.getBook_id()) Admin.addBook(booklist1); 
+      else {
+        alter = true;
+        Admin.addBook(book);
+      }
+    }
+    if (!alter) return "NO FILE ALTERED";
+    return "SUCCESSFULL";
+  }
+  
   public static ArrayList<Book> retrieveAllbookFile()
     throws FileNotFoundException {
     ArrayList<Book> booklist = new ArrayList<>();
