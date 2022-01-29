@@ -61,14 +61,10 @@ public class BookListController implements Initializable {
   @FXML
   private Button edit;
 
-  @FXML
-  private TextField editId;
 
   @FXML
   private Button remove;
 
-  @FXML
-  private TextField removeId;
 
   @FXML
   private TextField titleField;
@@ -128,21 +124,66 @@ public class BookListController implements Initializable {
   private Label editAlert;
 
   
-  @FXML
-  private void handleBookDelete(ActionEvent event) throws IOException{
+@FXML
+private void handleBookDelete(ActionEvent event) throws IOException{
       Book toBeDeleted = tableBook.getSelectionModel().getSelectedItem();
-      try {
-          FileAlter.deleteBook(toBeDeleted.getBook_id());
-      } catch (FileNotFoundException ex) {
-          removeAlert.setVisible(true);
-          removeAlert.setText("FILE NOT DELETED.");
-      }
+      
+    if(toBeDeleted == null)removeAlert.setText("PLEASE SELECT A ROW TO DELETE.");
+
+    removeAlert.setText(FileAlter.deleteBook(toBeDeleted.getBook_id()));
+      
       Stage stage = (Stage)removeAlert.getScene().getWindow();
-      Parent root = FXMLLoader.load(getClass().getResource("fx/Admin/BookLIst.fxml"));
+      Parent root = FXMLLoader.load(getClass().getResource("fx/Admin/BookList.fxml"));
       Scene scene = new Scene(root);
       stage.setScene(scene);
       stage.show();
   
+  }
+ 
+  public void editBook(Book book){
+      bookIdField.setText(Integer.toString(book.getBook_id()));
+      titleField.setText(book.getTitle());
+      authorField.setText(book.getAuthor());
+      editionField.setText(book.getEdition());
+      pagesField.setText(Integer.toString(book.getPages()));
+      ISBNField.setText(Long.toString(book.getIsbn()));      
+      shelfNoField.setText(book.getShelfNo());
+}
+  
+  @FXML
+  private void handleBookEdit(ActionEvent event)throws IOException
+  {
+      Book toBeEdited = tableBook.getSelectionModel().getSelectedItem();
+      if(toBeEdited == null)editAlert.setText("PLEASE SELECT THE ROW TO EDIT");
+      editBook(toBeEdited);
+      formContainer.setVisible(true);
+      bookIdField.requestFocus();
+      saveAdd.setVisible(false);
+      saveEdit.setVisible(true);
+
+  }
+  
+  @FXML
+  private void bookEdit(ActionEvent event)throws IOException{
+    Book inpbook = new Book();
+    inpbook.setBook_id(Integer.parseInt(bookIdField.getText()));
+    inpbook.setTitle(titleField.getText());
+    inpbook.setAuthor(authorField.getText());
+    inpbook.setEdition(editionField.getText());
+    inpbook.setPages(Integer.parseInt(pagesField.getText()));
+    inpbook.setIsbn(Long.parseLong(ISBNField.getText()));
+    inpbook.setShelfNo(shelfNoField.getText());
+    
+    FileAlter.editBook(inpbook);
+    
+    Stage stage = (Stage) add.getScene().getWindow();
+    Parent root = FXMLLoader.load(
+      getClass().getResource("fx/admin/BookList.fxml")
+    );
+    Scene scene = new Scene(root);
+    stage.setScene(scene);
+    stage.show();
+
   }
   
   
@@ -202,28 +243,12 @@ public class BookListController implements Initializable {
 
   @FXML
   public void showForm(ActionEvent event) throws IOException {
-    editId.setVisible(false);
-    removeId.setVisible(false);
     formContainer.setVisible(true);
     bookIdField.requestFocus();
     saveEdit.setVisible(false);
   }
 
-  @FXML
-  public void showEditId(ActionEvent event) {
-    removeId.setVisible(false);
-    formContainer.setVisible(false);
-    editId.setVisible(true);
-    editId.requestFocus();
-  }
 
-  @FXML
-  public void showRemoveId(ActionEvent event) {
-    editId.setVisible(false);
-    formContainer.setVisible(false);
-    removeId.setVisible(true);
-    removeId.requestFocus();
-  }
 
   @FXML
   private void completeAddBook(ActionEvent event) throws IOException {
@@ -235,7 +260,7 @@ public class BookListController implements Initializable {
     inpbook.setPages(Integer.parseInt(pagesField.getText()));
     inpbook.setIsbn(Long.parseLong(ISBNField.getText()));
     inpbook.setShelfNo(shelfNoField.getText());
-    inpbook.displayBook();
+
     String str = Admin.addBook(inpbook);
     System.out.println(str);
     response.setText(str);
@@ -251,31 +276,10 @@ public class BookListController implements Initializable {
 
   @FXML
   public void showEditForm(ActionEvent event) throws IOException {
-    editId.setVisible(true);
-    removeId.setVisible(false);
     formContainer.setVisible(true);
     saveAdd.setVisible(false);
   }
 
-  @FXML
-  public void removeBook(ActionEvent event) throws IOException {
-    try {
-      removeAlert.setText(
-        FileAlter.deleteBook(Integer.parseInt(removeId.getText()))
-      );
-      System.out.println("Something");
-    } catch (NumberFormatException n) {
-      removeAlert.setText("Invalid ID");
-    }
-    Stage stage = (Stage) removeAlert.getScene().getWindow();
-    Parent root = FXMLLoader.load(
-      getClass().getResource("fx/admin/BookList.fxml")
-    );
-
-    Scene scene = new Scene(root);
-    stage.setScene(scene);
-    stage.show();
-  }
 
   @FXML
   @Override
