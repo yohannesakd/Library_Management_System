@@ -23,7 +23,7 @@
       </Label>
    </top>
    <center>
-      <AnchorPane id="AnchorPane" prefHeight="391.0" prefWidth="460.0" BorderPane.alignment="CENTER">
+      <AnchorPane id="AnchorPane" prefHeight="455.0" prefWidth="460.0" BorderPane.alignment="CENTER">
           <children>
               <Button fx:id="login" layoutX="190.0" layoutY="338.0" onAction="#handleButtonAction" prefHeight="46.0" prefWidth="79.0" text="Login">
                <textFill>
@@ -65,7 +65,7 @@
             </Label>
             <TextField fx:id="userName" layoutX="115.0" layoutY="193.0" prefHeight="34.0" prefWidth="230.0" promptText="Username" />
             <PasswordField fx:id="passWord" layoutX="114.0" layoutY="268.0" onAction="#handleButtonAction" prefHeight="34.0" prefWidth="230.0" promptText="Password" />
-            <Label fx:id="alert" alignment="CENTER" contentDisplay="CENTER" layoutX="29.0" layoutY="393.0" prefHeight="35.0" prefWidth="402.0" text="." textFill="#9e8e8e">
+            <Label fx:id="alert" alignment="CENTER" contentDisplay="CENTER" layoutX="29.0" layoutY="393.0" prefHeight="35.0" prefWidth="402.0" textFill="#9e8e8e">
                <font>
                   <Font size="24.0" />
                </font>

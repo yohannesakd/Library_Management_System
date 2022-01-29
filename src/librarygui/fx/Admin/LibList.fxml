@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" minWidth="700.0" prefHeight="833.0" prefWidth="1154.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxapplication109.FXMLDocumentController">
+<AnchorPane id="AnchorPane" minWidth="700.0" prefHeight="833.0" prefWidth="1154.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="librarygui.LibListController">
     <children>
         <Label fx:id="label" layoutX="126" layoutY="120" minHeight="16" minWidth="69" />
       <SplitPane dividerPositions="0.3078078078078078, 0.5" layoutX="26.0" layoutY="120.0" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -24,27 +24,27 @@
                <children>
                   <VBox layoutX="29.0" layoutY="50.0" prefHeight="771.0" prefWidth="180.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="50.0">
                      <children>
-                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="191.0" text="Home">
+                        <Button fx:id="home" mnemonicParsing="false" onAction="#homePage" prefHeight="25.0" prefWidth="191.0" text="Home">
                            <VBox.margin>
                               <Insets top="10.0" />
                            </VBox.margin>
                         </Button>
-                        <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Books">
+                        <Button fx:id="book" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#bookPage" text="Books">
                            <VBox.margin>
                               <Insets top="10.0" />
                            </VBox.margin>
                         </Button>
-                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="185.0" text="Issues">
+                        <Button fx:id="issue" mnemonicParsing="false" prefHeight="25.0" prefWidth="185.0" text="Issues">
                            <VBox.margin>
                               <Insets top="10.0" />
                            </VBox.margin>
                         </Button>
-                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="186.0" text="Customers">
+                        <Button fx:id="cust" mnemonicParsing="false" onAction="#custPage" prefHeight="25.0" prefWidth="186.0" text="Customers">
                            <VBox.margin>
                               <Insets top="10.0" />
                            </VBox.margin>
                         </Button>
-                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="186.0" style="-fx-background-color: grey;" text="Librarians" textFill="WHITE">
+                        <Button fx:id="lib" defaultButton="true" mnemonicParsing="false" onAction="#libPage" prefHeight="25.0" prefWidth="186.0" style="-fx-background-color: grey;" text="Librarians" textFill="WHITE">
                            <VBox.margin>
                               <Insets top="10.0" />
                            </VBox.margin>
@@ -54,7 +54,7 @@
                               <Insets top="20.0" />
                            </VBox.margin>
                         </StackPane>
-                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="183.0" text="Administrators">
+                        <Button fx:id="admin" mnemonicParsing="false" onAction="#adminPage" prefHeight="25.0" prefWidth="183.0" text="Administrators">
                            <VBox.margin>
                               <Insets bottom="10.0" top="10.0" />
                            </VBox.margin>
@@ -156,7 +156,7 @@
                            </font>
                         </Label>
                         <TextField fx:id="addressField" alignment="CENTER" prefHeight="25.0" prefWidth="316.0" />
-                        <Button fx:id="addLibBtn" alignment="CENTER" mnemonicParsing="false" onAction="#register" prefHeight="40.0" prefWidth="414.0" text="Register" />
+                        <Button fx:id="addLibBtn" alignment="CENTER" mnemonicParsing="false" onAction="#registerLib" prefHeight="40.0" prefWidth="414.0" text="Register" />
                         <Label fx:id="response" alignment="CENTER" contentDisplay="CENTER" prefHeight="36.0" prefWidth="354.0" textAlignment="CENTER">
                            <font>
                               <Font size="13.0" />

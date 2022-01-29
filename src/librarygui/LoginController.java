@@ -56,10 +56,12 @@ public class LoginController implements Initializable {
         System.out.println("at least this executes");
         alert.setText("Login Successfull");
         Stage stage = (Stage) login.getScene().getWindow();
-        // stage.close();
-        // stage = new Stage();
+        stage.close();
+        stage = new Stage();
+        stage.setMinWidth(700);
+        stage.setMinHeight(700);
         Parent root = FXMLLoader.load(
-          getClass().getResource("fx/FirstPage.fxml")
+          getClass().getResource("fx/admin/Home.fxml")
         );
         Scene scene = new Scene(root);
         stage.setScene(scene);
