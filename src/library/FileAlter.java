@@ -21,14 +21,13 @@ public class FileAlter {
   public static String deleteBook(int id) throws FileNotFoundException {
     boolean deletion = false;
     ArrayList<Book> booklist = FileAlter.retrieveAllbookFile();
-    
-    if (new File("Books.txt").delete()) {
-    } else {
-        return "FILE NOT DELETED";
-      }
- 
+
+    if (new File("Books.txt").delete()) {} else {
+      return "FILE NOT DELETED";
+    }
+
     for (Book booklist1 : booklist) {
-      if (booklist1.getBook_id() != id) Admin.addBook(booklist1);else {
+      if (booklist1.getBook_id() != id) Admin.addBook(booklist1); else {
         deletion = true;
       }
     }
@@ -56,7 +55,6 @@ public class FileAlter {
         booklist.add(bk);
       }
     }
-
     return booklist;
   }
 

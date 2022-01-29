@@ -79,7 +79,7 @@
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="544.0" prefWidth="520.0">
                <children>
-                  <TableView layoutX="65.0" layoutY="80.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+                  <TableView fx:id="tableEmployee" layoutX="65.0" layoutY="80.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
                     <columns>
                         <TableColumn fx:id="id" prefWidth="34.0" text="id" />
                         <TableColumn fx:id="fullName" prefWidth="187.0" text="Full Name" />
@@ -98,73 +98,90 @@
                <children>
                   <VBox layoutX="-65.0" layoutY="26.0" prefHeight="771.0" prefWidth="255.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="50.0">
                      <children>
-                        <Button mnemonicParsing="false" text="Add Librarian" textAlignment="CENTER">
+                        <TextField fx:id="searchBar" prefHeight="25.0" prefWidth="125.0" promptText="Enter Search Text" />
+                        <Button fx:id="add" mnemonicParsing="false" onAction="#showForm" text="Add Librarian" textAlignment="CENTER">
                            <VBox.margin>
                               <Insets bottom="20.0" left="20.0" top="20.0" />
                            </VBox.margin>
                         </Button>
-                        <Button mnemonicParsing="false" text="Remove Librarian" textAlignment="CENTER">
+                        <Button fx:id="remove" mnemonicParsing="false" onAction="#showRemoveId" text="Remove Librarian" textAlignment="CENTER">
                            <VBox.margin>
                               <Insets left="20.0" top="10.0" />
                            </VBox.margin>
                         </Button>
                         <HBox prefHeight="32.0" prefWidth="338.0">
                            <children>
-                              <TextField prefHeight="25.0" prefWidth="125.0">
+                              <TextField fx:id="removeId" prefHeight="25.0" prefWidth="125.0" visible="false">
                                  <HBox.margin>
                                     <Insets left="20.0" top="10.0" />
                                  </HBox.margin>
                               </TextField>
-                              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="35.0" prefWidth="193.0" />
+                              <Label fx:id="removeAlert" alignment="CENTER" contentDisplay="CENTER" prefHeight="35.0" prefWidth="193.0" />
                            </children>
                         </HBox>
-                        <StackPane maxWidth="1.7976931348623157E308" prefHeight="65.0" prefWidth="338.0" />
-                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="36.0" prefWidth="412.0" text="Register Librarian">
-                           <font>
-                              <Font name="Calibri" size="27.0" />
-                           </font>
-                        </Label>
-                        <Label alignment="CENTER" prefHeight="36.0" prefWidth="427.0" text="ID" />
-                        <TextField fx:id="libIdField" alignment="CENTER" prefHeight="25.0" prefWidth="87.0" />
-                        <Label alignment="CENTER" prefHeight="36.0" prefWidth="388.0" text="Full Name">
-                           <font>
-                              <Font size="13.0" />
-                           </font>
-                        </Label>
-                        <TextField fx:id="fullNameField" alignment="CENTER" prefHeight="25.0" prefWidth="316.0" promptText="Enter Full Name" />
-                        <Label alignment="CENTER" prefHeight="36.0" prefWidth="348.0" text="Username">
-                           <font>
-                              <Font size="13.0" />
-                           </font>
-                        </Label>
-                        <TextField fx:id="usernameField" alignment="CENTER" prefHeight="25.0" prefWidth="316.0" />
-                        <Label alignment="CENTER" prefHeight="36.0" prefWidth="387.0" text="Phone Number">
-                           <font>
-                              <Font size="13.0" />
-                           </font>
-                        </Label>
-                        <TextField fx:id="phoneField" alignment="CENTER" prefHeight="25.0" prefWidth="316.0" />
-                        <Label alignment="CENTER" prefHeight="36.0" prefWidth="367.0" text="Email">
-                           <font>
-                              <Font size="13.0" />
-                           </font>
-                        </Label>
-                        <TextField fx:id="emailField" alignment="CENTER" prefHeight="25.0" prefWidth="316.0" />
-                        <Label alignment="CENTER" prefHeight="36.0" prefWidth="394.0" text="Address">
-                           <font>
-                              <Font size="13.0" />
-                           </font>
-                        </Label>
-                        <TextField fx:id="addressField" alignment="CENTER" prefHeight="25.0" prefWidth="316.0" />
-                        <Button fx:id="addLibBtn" alignment="CENTER" mnemonicParsing="false" onAction="#registerLib" prefHeight="40.0" prefWidth="414.0" text="Register" />
-                        <Label fx:id="response" alignment="CENTER" contentDisplay="CENTER" prefHeight="36.0" prefWidth="354.0" textAlignment="CENTER">
-                           <font>
-                              <Font size="13.0" />
-                           </font>
-                        </Label>
+                        <StackPane maxWidth="1.7976931348623157E308" prefHeight="34.0" prefWidth="338.0" />
+                        <VBox fx:id="formContainer" prefHeight="577.0" prefWidth="338.0" visible="false">
+                           <children>
+                              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="36.0" prefWidth="412.0" text="Register Librarian">
+                                 <font>
+                                    <Font name="Calibri" size="27.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER" prefHeight="36.0" prefWidth="427.0" text="ID" />
+                              <TextField fx:id="libIdField" alignment="CENTER" prefHeight="25.0" prefWidth="87.0" />
+                              <Label alignment="CENTER" prefHeight="36.0" prefWidth="388.0" text="Full Name">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="fullNameField" alignment="CENTER" prefHeight="25.0" prefWidth="316.0" promptText="Enter Full Name" />
+                              <Label alignment="CENTER" prefHeight="36.0" prefWidth="348.0" text="Username">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="usernameField" alignment="CENTER" prefHeight="25.0" prefWidth="316.0" />
+                              <Label alignment="CENTER" prefHeight="36.0" prefWidth="387.0" text="Phone Number">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="phoneField" alignment="CENTER" prefHeight="25.0" prefWidth="316.0" />
+                              <Label alignment="CENTER" prefHeight="36.0" prefWidth="367.0" text="Email">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="emailField" alignment="CENTER" prefHeight="25.0" prefWidth="316.0" />
+                              <Label alignment="CENTER" prefHeight="36.0" prefWidth="394.0" text="Address">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="addressField" alignment="CENTER" prefHeight="25.0" prefWidth="316.0" />
+                              <Button fx:id="register" alignment="CENTER" mnemonicParsing="false" onAction="#registerLib" prefHeight="40.0" prefWidth="414.0" text="Register">
+                                 <VBox.margin>
+                                    <Insets top="20.0" />
+                                 </VBox.margin>
+                              </Button>
+                              <Button fx:id="backBtn" mnemonicParsing="false" onAction="#goBack" prefHeight="34.0" prefWidth="338.0" text="Back">
+                                 <VBox.margin>
+                                    <Insets top="20.0" />
+                                 </VBox.margin>
+                              </Button>
+                              <Label fx:id="response" alignment="CENTER" contentDisplay="CENTER" prefHeight="42.0" prefWidth="338.0" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets top="10.0" />
+                                 </VBox.margin>
+                              </Label>
+                           </children>
+                        </VBox>
                      </children>
                   </VBox>
-                  <MenuButton layoutX="10.0" layoutY="14.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="338.0" text="MenuButton">
+                  <MenuButton layoutX="8.0" layoutY="3.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="338.0" text="MenuButton">
                     <items>
                       <MenuItem mnemonicParsing="false" text="Edit Profile" />
                       <MenuItem mnemonicParsing="false" text="Log Out" />

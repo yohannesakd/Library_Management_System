@@ -99,7 +99,7 @@
                      <children>
                         <TextField fx:id="searchBar" promptText="Enter Search Text">
                            <VBox.margin>
-                              <Insets top="20.0" />
+                              <Insets bottom="10.0" top="20.0" />
                            </VBox.margin>
                            <padding>
                               <Insets bottom="5.0" left="5.0" top="5.0" />
@@ -132,7 +132,7 @@
                         </Button>
                         <HBox prefHeight="32.0" prefWidth="338.0">
                            <children>
-                              <TextField fx:id="removeId" prefHeight="25.0" prefWidth="125.0" promptText="Enter the ID" visible="false">
+                              <TextField fx:id="removeId" onAction="#removeBook" prefHeight="25.0" prefWidth="125.0" promptText="Enter the ID" visible="false">
                                  <HBox.margin>
                                     <Insets left="20.0" top="10.0" />
                                  </HBox.margin>

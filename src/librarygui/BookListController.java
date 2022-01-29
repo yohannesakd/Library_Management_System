@@ -122,6 +122,12 @@ public class BookListController implements Initializable {
   private TextField searchBar;
 
   @FXML
+  private Label removeAlert;
+
+  @FXML
+  private Label editAlert;
+
+  @FXML
   public void goBack(ActionEvent event) throws IOException {
     Stage stage = (Stage) book.getScene().getWindow();
     Parent root = FXMLLoader.load(
@@ -241,6 +247,26 @@ public class BookListController implements Initializable {
     removeId.setVisible(false);
     formContainer.setVisible(true);
     saveAdd.setVisible(false);
+  }
+
+  @FXML
+  public void removeBook(ActionEvent event) throws IOException {
+    try {
+      removeAlert.setText(
+        FileAlter.deleteBook(Integer.parseInt(removeId.getText()))
+      );
+      System.out.println("Something");
+    } catch (NumberFormatException n) {
+      removeAlert.setText("Invalid ID");
+    }
+    Stage stage = (Stage) removeAlert.getScene().getWindow();
+    Parent root = FXMLLoader.load(
+      getClass().getResource("fx/admin/BookList.fxml")
+    );
+
+    Scene scene = new Scene(root);
+    stage.setScene(scene);
+    stage.show();
   }
 
   @FXML

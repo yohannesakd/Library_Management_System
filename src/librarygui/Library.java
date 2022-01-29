@@ -14,10 +14,10 @@ public class Library extends Application {
 
     Scene scene = new Scene(root);
 
-    // stage.setMinWidth(460);
-    // stage.setMinHeight(570);
-    // stage.setMinWidth(470);
-    // stage.setMinHeight(580);
+    stage.setMinWidth(460);
+    stage.setMinHeight(570);
+    stage.setMinWidth(470);
+    stage.setMinHeight(580);
     stage.setScene(scene);
     stage.show();
   }
