@@ -157,17 +157,6 @@ public class LibListController implements Initializable {
   }
 
   @FXML
-  public void libPage(ActionEvent event) throws IOException {
-    Stage stage = (Stage) book.getScene().getWindow();
-    Parent root = FXMLLoader.load(
-      getClass().getResource("fx/admin/LibList.fxml")
-    );
-    Scene scene = new Scene(root);
-    stage.setScene(scene);
-    stage.show();
-  }
-
-  @FXML
   public void adminPage(ActionEvent event) throws IOException {
     Stage stage = (Stage) book.getScene().getWindow();
     Parent root = FXMLLoader.load(

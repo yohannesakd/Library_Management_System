@@ -88,17 +88,6 @@ public class AdminListController implements Initializable {
     stage.show();
   }
 
-  @FXML
-  public void adminPage(ActionEvent event) throws IOException {
-    Stage stage = (Stage) book.getScene().getWindow();
-    Parent root = FXMLLoader.load(
-      getClass().getResource("fx/admin/AdminList.fxml")
-    );
-    Scene scene = new Scene(root);
-    stage.setScene(scene);
-    stage.show();
-  }
-
   @Override
   public void initialize(URL url, ResourceBundle rb) {}
 }
