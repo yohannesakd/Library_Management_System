@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" minWidth="700.0" prefHeight="833.0" prefWidth="1154.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxapplication109.FXMLDocumentController">
+    <children>
+        <Label fx:id="label" layoutX="126" layoutY="120" minHeight="16" minWidth="69" />
+      <SplitPane dividerPositions="0.3078078078078078, 0.5" layoutX="26.0" layoutY="120.0" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <items>
+          <AnchorPane maxWidth="200.0" minHeight="0.0" minWidth="200.0" prefHeight="160.0" prefWidth="200.0">
+               <children>
+                  <VBox layoutX="29.0" layoutY="50.0" prefHeight="771.0" prefWidth="180.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="50.0">
+                     <children>
+                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="191.0" text="Home">
+                           <VBox.margin>
+                              <Insets top="10.0" />
+                           </VBox.margin>
+                        </Button>
+                        <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Books">
+                           <VBox.margin>
+                              <Insets top="10.0" />
+                           </VBox.margin>
+                        </Button>
+                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="185.0" text="Issues">
+                           <VBox.margin>
+                              <Insets top="10.0" />
+                           </VBox.margin>
+                        </Button>
+                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="186.0" text="Customers">
+                           <VBox.margin>
+                              <Insets top="10.0" />
+                           </VBox.margin>
+                        </Button>
+                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="186.0" text="Librarians">
+                           <VBox.margin>
+                              <Insets top="10.0" />
+                           </VBox.margin>
+                        </Button>
+                        <StackPane prefHeight="596.0" prefWidth="180.0" VBox.vgrow="ALWAYS">
+                           <VBox.margin>
+                              <Insets top="20.0" />
+                           </VBox.margin>
+                        </StackPane>
+                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="183.0" style="-fx-background-color: grey;" text="Administrators" textFill="WHITE">
+                           <VBox.margin>
+                              <Insets bottom="10.0" top="10.0" />
+                           </VBox.margin>
+                        </Button>
+                        <StackPane maxWidth="1.7976931348623157E308">
+                           <children>
+                              <Label text="Library Management">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </StackPane>
+                     </children>
+                  </VBox>
+                  <Label alignment="CENTER" layoutX="44.0" layoutY="15.0" prefHeight="40.0" prefWidth="118.0" text="Manage">
+                     <font>
+                        <Font size="23.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="544.0" prefWidth="520.0">
+               <children>
+                  <TableView layoutX="65.0" layoutY="80.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+                    <columns>
+                        <TableColumn fx:id="id" prefWidth="34.0" text="id" />
+                        <TableColumn fx:id="fullName" prefWidth="187.0" text="Full Name" />
+                        <TableColumn fx:id="username" prefWidth="142.0" text="Username" />
+                        <TableColumn fx:id="phoneNo" prefWidth="131.0" text="Phone" />
+                        <TableColumn fx:id="email" prefWidth="236.0" text="Email" />
+                        <TableColumn fx:id="address" prefWidth="163.0" text="Address" />
+                    </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                  </TableView>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="10.0" layoutY="10.0" maxWidth="358.0" minHeight="0.0" minWidth="200.0" prefHeight="831.0" prefWidth="358.0" SplitPane.resizableWithParent="false">
+               <children>
+                  <VBox layoutX="-65.0" layoutY="26.0" prefHeight="771.0" prefWidth="255.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="50.0">
+                     <children>
+                        <Button mnemonicParsing="false" text="Add Administrator" textAlignment="CENTER">
+                           <VBox.margin>
+                              <Insets bottom="20.0" left="20.0" top="20.0" />
+                           </VBox.margin>
+                        </Button>
+                        <Button mnemonicParsing="false" text="Demote Administrator" textAlignment="CENTER">
+                           <VBox.margin>
+                              <Insets left="20.0" top="10.0" />
+                           </VBox.margin>
+                        </Button>
+                        <HBox prefHeight="32.0" prefWidth="338.0">
+                           <children>
+                              <TextField prefHeight="25.0" prefWidth="125.0">
+                                 <HBox.margin>
+                                    <Insets left="20.0" top="10.0" />
+                                 </HBox.margin>
+                              </TextField>
+                              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="35.0" prefWidth="193.0" />
+                           </children>
+                        </HBox>
+                        <Button mnemonicParsing="false" text="Remove Administrator" textAlignment="CENTER">
+                           <VBox.margin>
+                              <Insets left="20.0" top="10.0" />
+                           </VBox.margin>
+                        </Button>
+                        <HBox prefHeight="32.0" prefWidth="338.0">
+                           <children>
+                              <TextField prefHeight="25.0" prefWidth="125.0">
+                                 <HBox.margin>
+                                    <Insets left="20.0" top="10.0" />
+                                 </HBox.margin>
+                              </TextField>
+                              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="35.0" prefWidth="193.0" />
+                           </children>
+                        </HBox>
+                        <StackPane maxWidth="1.7976931348623157E308" prefHeight="34.0" prefWidth="338.0" />
+                        <Label fx:id="response" alignment="CENTER" contentDisplay="CENTER" prefHeight="36.0" prefWidth="354.0" textAlignment="CENTER">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <MenuButton layoutX="10.0" layoutY="14.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="338.0" text="MenuButton">
+                    <items>
+                      <MenuItem mnemonicParsing="false" text="Edit Profile" />
+                      <MenuItem mnemonicParsing="false" text="Log Out" />
+                        <MenuItem mnemonicParsing="false" text="Exit" />
+                    </items>
+                  </MenuButton>
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+    </children>
+</AnchorPane>

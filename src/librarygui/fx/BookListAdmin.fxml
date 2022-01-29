@@ -26,6 +26,9 @@
             <TableColumn fx:id="pages" prefWidth="74.0" text="Pages" />
             <TableColumn fx:id="shelf" prefWidth="77.0" text="Shelf No" />
         </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
       </TableView>
       <Button fx:id="add" layoutX="427.0" layoutY="68.0" mnemonicParsing="false" onAction="#addBook" text="Add Book" />
       <Button fx:id="remove" layoutX="520.0" layoutY="68.0" mnemonicParsing="false" onAction="#showRemove" text="Remove Book" />
