@@ -8,8 +8,9 @@ public class Admin extends Librarian {
 
   public Admin() {}
 
-  public Admin(String username, String password, int id) {
+  public Admin(int id, String username, String password, String fullName, int phoneNo, String email, String address) {
     // super(username, password, id);
+    super(id, username, password, fullName, phoneNo, email, address);
   }
 
   //just for the demonstration lets make it static
@@ -41,7 +42,30 @@ public class Admin extends Librarian {
   
   public void removeBook(Book book) {}
 
-  public void addAdmin(Admin admin) {}
+  public String addAdmin(Admin admin) {
+    String empInput =
+      admin.getId() +
+      "|" +
+      admin.getUsername() +
+      "|" +
+      admin.getPassword() +
+      "|" +
+      admin.getFullName() +
+      "|" +
+      admin.getPhoneNo() +
+      "|" +
+      admin.getEmail() +
+      "|" +
+      admin.getAddress();
+
+    try {
+      System.out.println(empInput);
+      saveToFile("Admins.txt", empInput, true);
+    } catch (IOException ex) {
+      return "UNSUCCESSFUL";
+    }
+    return "SUCCESSFUL";
+  }
 
   public void removeAdmin() {}
 

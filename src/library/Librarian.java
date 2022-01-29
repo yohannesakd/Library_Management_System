@@ -26,34 +26,6 @@ public class Librarian extends Person {
     super.email = email;
   }
 
-  public void setFullName(String fullName){
-    super.fullName = fullName;
-  }
-  public void setPhoneNo(int phoneNo){
-    super.phoneNo = phoneNo;
-  }
-  public void setEmail(String email){
-    super.email = email;
-  }
-  public void setAddress(String address){
-    super.address = address;
-  }
-  public String getFullName() {
-    return super.fullName;
-  }
-
-  public int getPhoneNo() {
-    return super.phoneNo;
-  }
-
-  public String getEmail() {
-    return super.email;
-  }
-
-  public String getAddress() {
-    return super.address;
-  }
-
   public String getUsername() {
     return this.username;
   }

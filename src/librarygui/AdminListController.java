@@ -1,9 +1,14 @@
 package librarygui;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.lang.System.Logger;
+import java.lang.System.Logger.Level;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.*;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,7 +17,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import library.Admin;
 
 public class AdminListController implements Initializable {
 
@@ -36,6 +43,27 @@ public class AdminListController implements Initializable {
 
   @FXML
   private Button backBtn;
+
+  @FXML
+  private TableView<Admin> tableAdmin;
+
+  @FXML
+  private TableColumn<Admin, String> id;
+
+  @FXML
+  private TableColumn<Admin, String> fullName;
+
+  @FXML
+  private TableColumn<Admin, String> username;
+
+  @FXML
+  private TableColumn<Admin, String> phoneNo;
+
+  @FXML
+  private TableColumn<Admin, String> email;
+
+  @FXML
+  private TableColumn<Admin, String> address;
 
   @FXML
   public void goBack(ActionEvent event) throws IOException {
@@ -89,5 +117,41 @@ public class AdminListController implements Initializable {
   }
 
   @Override
-  public void initialize(URL url, ResourceBundle rb) {}
+  public void initialize(URL url, ResourceBundle rb) {
+    id.setCellValueFactory(new PropertyValueFactory<>("id"));
+    fullName.setCellValueFactory(new PropertyValueFactory<>("fullName"));
+    username.setCellValueFactory(new PropertyValueFactory<>("username"));
+    phoneNo.setCellValueFactory(new PropertyValueFactory<>("phoneNo"));
+    email.setCellValueFactory(new PropertyValueFactory<>("email"));
+    address.setCellValueFactory(new PropertyValueFactory<>("address"));
+
+    try {
+      tableAdmin.setItems(giveAdmins());
+    } catch (FileNotFoundException ex) {
+      System.out.println("FileNotFound");
+    }
+
+    
+
+      SortedList<Admin> sortedSearch;
+      try {
+        sortedSearch = new SortedList<>(giveAdmins());
+        sortedSearch
+        .comparatorProperty()
+        .bind(tableAdmin.comparatorProperty());
+
+      tableAdmin.setItems(sortedSearch);
+      } catch (FileNotFoundException e) {
+        System.out.println("File not Found.");
+      }
+      
+  }
+
+  public ObservableList<Admin> giveAdmins()
+    throws FileNotFoundException {
+    ObservableList<Admin> admins = FXCollections.observableArrayList(
+      library.FileAlter.retrieveAllAdminFile()
+    );
+    return admins;
+  }
 }
