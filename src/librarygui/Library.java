@@ -13,17 +13,17 @@ public class Library extends Application {
 
   @Override
   public void start(Stage stage) throws Exception {
-    Parent root = FXMLLoader.load(getClass().getResource("fx/admin/Home.fxml"));
+    Parent root = FXMLLoader.load(getClass().getResource("fx/Login.fxml"));
 
     Scene scene = new Scene(root);
 
-    Screen screen = Screen.getPrimary();
-    Rectangle2D bounds = screen.getVisualBounds();
+    // Screen screen = Screen.getPrimary();
+    // Rectangle2D bounds = screen.getVisualBounds();
 
-    stage.setX(bounds.getMinX());
-    stage.setY(bounds.getMinY());
-    stage.setWidth(bounds.getWidth());
-    stage.setHeight(bounds.getHeight());
+    // stage.setX(bounds.getMinX());
+    // stage.setY(bounds.getMinY());
+    // stage.setWidth(bounds.getWidth());
+    // stage.setHeight(bounds.getHeight());
 
     stage.setMinWidth(460);
     stage.setMinHeight(570);

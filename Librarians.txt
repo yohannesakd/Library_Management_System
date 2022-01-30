@@ -1,3 +1,2 @@
 1|yohannesakd|12345|Yohannes Assefa|912233434|yohannes@mail.com|AASTU Campus
-2|fantish|123|Yohannes Fantahun|912211221|fantish@mail.com|Bole
 6|nani4848|null|Tsion Moges|987654345|nani@gmail.com|saris

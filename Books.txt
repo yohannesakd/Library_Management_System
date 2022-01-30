@@ -1,1 +1,1 @@
-1|book|author|edition|1|1234|20|10|0
+2|Percy Jackson|Rick Riordan|1|250|123456789|9|10|0
