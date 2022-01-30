@@ -31,8 +31,6 @@ public class BookListController implements Initializable {
   @FXML
   private Button book;
 
-  @FXML
-  private Button issue;
 
   @FXML
   private Button cust;
@@ -43,8 +41,6 @@ public class BookListController implements Initializable {
   @FXML
   private Button admin;
 
-  @FXML
-  private Button backBtn;
 
   @FXML
   private Button add;
@@ -88,6 +84,11 @@ public class BookListController implements Initializable {
   private TextField bookIdField;
 
   @FXML
+  private TextField noOfBookCopyField;
+
+
+  
+  @FXML
   private Label response;
 
   @FXML
@@ -113,6 +114,11 @@ public class BookListController implements Initializable {
 
   @FXML
   private TableColumn<Book, String> shelf;
+  
+  @FXML
+  private TableColumn<Book, String> copies;
+  @FXML
+  private TableColumn<Book, String> availablity;
 
   @FXML
   private TextField searchBar;
@@ -151,6 +157,8 @@ private void handleBookDelete(ActionEvent event) throws IOException{
       pagesField.setText(Integer.toString(book.getPages()));
       ISBNField.setText(Long.toString(book.getIsbn()));      
       shelfNoField.setText(book.getShelfNo());
+      noOfBookCopyField.setText(Integer.toString(book.getNoOfBookCopy()));
+      
 }
   
   @FXML
@@ -179,6 +187,8 @@ private void handleBookDelete(ActionEvent event) throws IOException{
     inpbook.setPages(Integer.parseInt(pagesField.getText()));
     inpbook.setIsbn(Long.parseLong(ISBNField.getText()));
     inpbook.setShelfNo(shelfNoField.getText());
+    inpbook.setNoOfBookCopy(Integer.parseInt(noOfBookCopyField.getText()));
+
     
     FileAlter.editBook(inpbook);
     
@@ -254,8 +264,6 @@ private void handleBookDelete(ActionEvent event) throws IOException{
     saveEdit.setVisible(false);
   }
 
-
-
   @FXML
   private void completeAddBook(ActionEvent event) throws IOException {
     Book inpbook = new Book();
@@ -266,6 +274,7 @@ private void handleBookDelete(ActionEvent event) throws IOException{
     inpbook.setPages(Integer.parseInt(pagesField.getText()));
     inpbook.setIsbn(Long.parseLong(ISBNField.getText()));
     inpbook.setShelfNo(shelfNoField.getText());
+    inpbook.setNoOfBookCopy(Integer.parseInt(noOfBookCopyField.getText()));
 
     String str = Admin.addBook(inpbook);
     System.out.println(str);
@@ -280,14 +289,12 @@ private void handleBookDelete(ActionEvent event) throws IOException{
     stage.show();
   }
 
-  @FXML
   public void showEditForm(ActionEvent event) throws IOException {
     formContainer.setVisible(true);
     saveAdd.setVisible(false);
   }
 
 
-  @FXML
   @Override
   public void initialize(URL url, ResourceBundle rb) {
     bookid.setCellValueFactory(new PropertyValueFactory<>("book_id"));
@@ -297,6 +304,10 @@ private void handleBookDelete(ActionEvent event) throws IOException{
     isbn.setCellValueFactory(new PropertyValueFactory<>("isbn"));
     pages.setCellValueFactory(new PropertyValueFactory<>("pages"));
     shelf.setCellValueFactory(new PropertyValueFactory<>("shelfNo"));
+    copies.setCellValueFactory(new PropertyValueFactory<>("noOfBookCopy"));
+    availablity.setCellValueFactory(new PropertyValueFactory<>("isAvailable"));
+
+
 
     try {
       tableBook.setItems(giveBooks());

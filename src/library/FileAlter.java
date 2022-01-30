@@ -87,7 +87,9 @@ public class FileAlter {
           values[3],
           Long.parseLong(values[4]),
           Integer.parseInt(values[5]),
-          values[6]
+          values[6],
+          Integer.parseInt(values[7]),
+          Integer.parseInt(values[8])
         );
         booklist.add(bk);
       }

@@ -11,7 +11,9 @@ public class Book {
   private int pages;
   private boolean isAvailable = true;
   private String shelfNo;
-
+  private int noOfBookCopy;
+  private int noOfBookIssued = 0;
+  
   //Constructor
   public Book(
     int book_id,
@@ -20,7 +22,9 @@ public class Book {
     String edition,
     long isbn,
     int pages,
-    String shelfNo
+    String shelfNo,
+    int noOfBookCopy,
+    int noOfBookIssued
   ) {
     this.book_id = book_id;
     this.title = title;
@@ -29,12 +33,31 @@ public class Book {
     this.isbn = isbn;
     this.pages = pages;
     this.shelfNo = shelfNo;
+    this.noOfBookCopy = noOfBookCopy;
+    this.noOfBookIssued = noOfBookIssued;
+
   }
 
   public Book() {}
 
   //Setup accessors
   //Get
+    public int getNoOfBookCopy() {
+        return noOfBookCopy;
+    }
+
+    public void setNoOfBookCopy(int noOfBookCopy) {
+        this.noOfBookCopy = noOfBookCopy;
+    }
+
+    public int getNoOfBookIssued() {
+        return noOfBookIssued;
+    }
+
+    public void setNoOfBookIssued(int noOfBookIssued) {
+        this.noOfBookIssued = noOfBookIssued;
+    }
+  
   public int getBook_id() {
     return book_id;
   }
@@ -99,41 +122,9 @@ public class Book {
   public void setTitle(String title) {
     this.title = title;
   }
+  
+    public void setIsAvailable() {
+        this.isAvailable = this.noOfBookCopy != this.noOfBookIssued;
+    }
 
-  //Primary Methods
-  @Override
-  public String toString() {
-    return (
-      "{" +
-      " book_id='" +
-      getBook_id() +
-      "'" +
-      ", title='" +
-      getTitle() +
-      "'" +
-      ", author='" +
-      getAuthor() +
-      "'" +
-      ", edition='" +
-      getEdition() +
-      "'" +
-      ", isbn='" +
-      getIsbn() +
-      "'" +
-      ", pages='" +
-      getPages() +
-      "'" +
-      ", available='" +
-      getIsAvailable() +
-      "'" +
-      ", shelfNo='" +
-      getShelfNo() +
-      "'" +
-      "}"
-    );
-  }
-
-  public void displayBook() {
-    System.out.println(this.toString());
-  }
 }
