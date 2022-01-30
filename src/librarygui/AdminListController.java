@@ -131,24 +131,18 @@ public class AdminListController implements Initializable {
       System.out.println("FileNotFound");
     }
 
-    
-
-      SortedList<Admin> sortedSearch;
-      try {
-        sortedSearch = new SortedList<>(giveAdmins());
-        sortedSearch
-        .comparatorProperty()
-        .bind(tableAdmin.comparatorProperty());
+    SortedList<Admin> sortedSearch;
+    try {
+      sortedSearch = new SortedList<>(giveAdmins());
+      sortedSearch.comparatorProperty().bind(tableAdmin.comparatorProperty());
 
       tableAdmin.setItems(sortedSearch);
-      } catch (FileNotFoundException e) {
-        System.out.println("File not Found.");
-      }
-      
+    } catch (FileNotFoundException e) {
+      System.out.println("File not Found.");
+    }
   }
 
-  public ObservableList<Admin> giveAdmins()
-    throws FileNotFoundException {
+  public ObservableList<Admin> giveAdmins() throws FileNotFoundException {
     ObservableList<Admin> admins = FXCollections.observableArrayList(
       library.FileAlter.retrieveAllAdminFile()
     );
