@@ -41,7 +41,7 @@
                </font>
             </Label>
             <TextField fx:id="addressField" layoutX="142.0" layoutY="206.0" prefHeight="25.0" prefWidth="316.0" promptText="Home Address" />
-            <Button fx:id="registerBtn" layoutX="201.0" layoutY="247.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="85.0" text="Register" />
+            <Button fx:id="registerBtn" layoutX="201.0" layoutY="247.0" mnemonicParsing="false" onAction="#handleRegister" prefHeight="40.0" prefWidth="85.0" text="Register" />
             <Label fx:id="response" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="286.0" layoutY="249.0" prefHeight="36.0" prefWidth="189.0" textAlignment="CENTER">
                <font>
                   <Font size="13.0" />

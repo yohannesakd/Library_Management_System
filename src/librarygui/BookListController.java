@@ -21,6 +21,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.util.converter.IntegerStringConverter;
 import library.*;
 
 public class BookListController implements Initializable {
@@ -31,7 +32,6 @@ public class BookListController implements Initializable {
   @FXML
   private Button book;
 
-
   @FXML
   private Button cust;
 
@@ -40,7 +40,6 @@ public class BookListController implements Initializable {
 
   @FXML
   private Button admin;
-
 
   @FXML
   private Button add;
@@ -84,11 +83,6 @@ public class BookListController implements Initializable {
   @FXML
   private TextField noOfBookCopyField;
 
-
-  
-  @FXML
-  private Label response;
-
   @FXML
   private TableView<Book> tableBook;
 
@@ -112,9 +106,10 @@ public class BookListController implements Initializable {
 
   @FXML
   private TableColumn<Book, String> shelf;
-  
+
   @FXML
   private TableColumn<Book, String> copies;
+
   @FXML
   private TableColumn<Book, String> availablity;
 
@@ -155,6 +150,7 @@ public class BookListController implements Initializable {
     pagesField.setText(Integer.toString(book.getPages()));
     ISBNField.setText(Long.toString(book.getIsbn()));
     shelfNoField.setText(book.getShelfNo());
+    noOfBookCopyField.setText(Integer.toString(book.getNoOfBookCopy()));
   }
 
   @FXML
@@ -181,6 +177,7 @@ public class BookListController implements Initializable {
     inpbook.setPages(Integer.parseInt(pagesField.getText()));
     inpbook.setIsbn(Long.parseLong(ISBNField.getText()));
     inpbook.setShelfNo(shelfNoField.getText());
+    inpbook.setNoOfBookCopy(Integer.parseInt(noOfBookCopyField.getText()));
     FileAlter.editBook(inpbook);
 
     Stage stage = (Stage) add.getScene().getWindow();
@@ -277,7 +274,6 @@ public class BookListController implements Initializable {
 
     String str = Admin.addBook(inpbook);
     System.out.println(str);
-    response.setText(str);
 
     Stage stage = (Stage) add.getScene().getWindow();
     Parent root = FXMLLoader.load(
@@ -296,8 +292,6 @@ public class BookListController implements Initializable {
   @FXML
   @Override
   public void initialize(URL url, ResourceBundle rb) {
-    book.requestFocus();
-
     bookid.setCellValueFactory(new PropertyValueFactory<>("book_id"));
     title.setCellValueFactory(new PropertyValueFactory<>("title"));
     author.setCellValueFactory(new PropertyValueFactory<>("author"));
@@ -307,8 +301,6 @@ public class BookListController implements Initializable {
     shelf.setCellValueFactory(new PropertyValueFactory<>("shelfNo"));
     copies.setCellValueFactory(new PropertyValueFactory<>("noOfBookCopy"));
     availablity.setCellValueFactory(new PropertyValueFactory<>("isAvailable"));
-
-
 
     try {
       tableBook.setItems(giveBooks());

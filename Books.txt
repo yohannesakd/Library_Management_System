@@ -1,1 +1,1 @@
-1|book|author|edition|123|1|4|9|0
+1|book|author|edition|1|1234|20|10|0

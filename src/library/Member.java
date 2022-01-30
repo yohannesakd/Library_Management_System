@@ -3,7 +3,7 @@ package library;
 public class Member extends Person {
 
   private int member_id;
-  private int noOfBookIssued;
+  private int noOfBookIssued = 0;
 
   // private String department;
 

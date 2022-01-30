@@ -6,6 +6,7 @@
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
@@ -14,7 +15,7 @@
 <AnchorPane id="AnchorPane" minWidth="700.0" prefHeight="833.0" prefWidth="1154.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="librarygui.MemberListController">
     <children>
         <Label fx:id="label" layoutX="126" layoutY="120" minHeight="16" minWidth="69" />
-      <SplitPane dividerPositions="0.3078078078078078" layoutX="26.0" layoutY="120.0" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <SplitPane dividerPositions="0.1762152777777778, 0.7673611111111112" layoutX="26.0" layoutY="120.0" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
           <AnchorPane maxWidth="200.0" minHeight="0.0" minWidth="200.0" prefHeight="160.0" prefWidth="200.0">
                <children>
@@ -73,14 +74,13 @@
                   </Label>
                </children>
             </AnchorPane>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="544.0" prefWidth="520.0">
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="831.0" prefWidth="739.0">
                <children>
-                  <TableView layoutX="65.0" layoutY="80.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+                  <TableView fx:id="tableMember" layoutX="65.0" layoutY="80.0" prefHeight="811.0" prefWidth="613.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
                     <columns>
-                        <TableColumn fx:id="bookid" prefWidth="34.0" text="Member ID" />
+                        <TableColumn fx:id="member_id" prefWidth="34.0" text="Member ID" />
                         <TableColumn fx:id="fullName" prefWidth="187.0" text="Full Name" />
-                        <TableColumn fx:id="fullName1" prefWidth="187.0" text="Department" />
-                        <TableColumn fx:id="username" prefWidth="142.0" text="Books Issued" />
+                        <TableColumn fx:id="booksIssued" prefWidth="142.0" text="Books Issued" />
                         <TableColumn fx:id="phoneNo" prefWidth="131.0" text="Phone" />
                         <TableColumn fx:id="email" prefWidth="236.0" text="Email" />
                         <TableColumn fx:id="address" prefWidth="163.0" text="Address" />
@@ -89,6 +89,25 @@
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                      </columnResizePolicy>
                   </TableView>
+               </children>
+            </AnchorPane>
+            <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="831.0" prefWidth="265.0">
+               <children>
+                  <VBox layoutX="4.0" prefHeight="821.0" prefWidth="256.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <TextField fx:id="searchBar" prefHeight="43.0" prefWidth="273.0" promptText="Enter Search Text">
+                           <VBox.margin>
+                              <Insets bottom="10.0" top="20.0" />
+                           </VBox.margin>
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" top="5.0" />
+                           </padding>
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </TextField>
+                     </children>
+                  </VBox>
                </children>
             </AnchorPane>
         </items>

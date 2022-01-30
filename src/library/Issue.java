@@ -3,31 +3,39 @@ package library;
 public class Issue {
 
   //Setup Attributes
-  private int issue_id;
+  private int issue_id = 1;
   private int member_id;
   private int book_id;
-  private Object issueDate;
-  private Object dueDate;
-  private String title;
+  private String issueDate;
+  private String dueDate;
   private String name;
+  private String bookTitle;
 
   //Constructor
   public Issue(
     int member_id,
     int book_id,
-    Object issueDate,
-    Object dueDate,
-    String title,
+    int issue_id,
+    String issueDate,
+    String dueDate,
     String name,
-    int issue_id
+    String bookTitle
   ) {
     this.member_id = member_id;
     this.book_id = book_id;
     this.issueDate = issueDate;
     this.dueDate = dueDate;
-    this.title = title;
     this.name = name;
     this.issue_id = issue_id;
+    this.bookTitle = bookTitle;
+  }
+
+  public void setBookTitle(String bookTitle) {
+    this.bookTitle = bookTitle;
+  }
+
+  public String getBookTitle() {
+    return bookTitle;
   }
 
   public void setIssue_id(int issue_id) {
@@ -42,11 +50,11 @@ public class Issue {
     this.book_id = book_id;
   }
 
-  public void setDueDate(Object dueDate) {
+  public void setDueDate(String dueDate) {
     this.dueDate = dueDate;
   }
 
-  public void setIssueDate(Object issueDate) {
+  public void setIssueDate(String issueDate) {
     this.issueDate = issueDate;
   }
 
@@ -54,28 +62,20 @@ public class Issue {
     this.member_id = member_id;
   }
 
-  public void setTitle(String title) {
-    this.title = title;
-  }
-
   public int getBook_id() {
     return book_id;
   }
 
-  public Object getDueDate() {
+  public String getDueDate() {
     return dueDate;
   }
 
-  public Object getIssueDate() {
+  public String getIssueDate() {
     return issueDate;
   }
 
   public int getMember_id() {
     return member_id;
-  }
-
-  public String getTitle() {
-    return title;
   }
 
   public String getName() {

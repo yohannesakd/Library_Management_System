@@ -143,7 +143,7 @@
                            </children>
                         </HBox>
                         <StackPane maxWidth="1.7976931348623157E308" prefHeight="20.0" prefWidth="338.0" />
-                        <VBox fx:id="formContainer" prefHeight="602.0" prefWidth="338.0" visible="false">
+                        <VBox fx:id="formContainer" prefHeight="602.0" prefWidth="338.0">
                            <children>
                               <Label fx:id="addLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="21.0" prefWidth="338.0" text="Add/Edit Book">
                                  <font>

@@ -14,9 +14,9 @@ public class Library extends Application {
   @Override
   public void start(Stage stage) throws Exception {
     Parent root = FXMLLoader.load(getClass().getResource("fx/admin/Home.fxml"));
-    
+
     Scene scene = new Scene(root);
-    
+
     Screen screen = Screen.getPrimary();
     Rectangle2D bounds = screen.getVisualBounds();
 
@@ -24,11 +24,11 @@ public class Library extends Application {
     stage.setY(bounds.getMinY());
     stage.setWidth(bounds.getWidth());
     stage.setHeight(bounds.getHeight());
-    
+
     stage.setMinWidth(460);
     stage.setMinHeight(570);
-//    stage.setMaxWidth(470);
-//    stage.setMaxHeight(580);
+    //    stage.setMaxWidth(470);
+    //    stage.setMaxHeight(580);
     Image icon = new Image(getClass().getResourceAsStream("icon.png"));
     stage.getIcons().add(icon);
     stage.setTitle("Shewe Library Management System");

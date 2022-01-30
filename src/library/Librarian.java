@@ -1,5 +1,9 @@
 package library;
 
+import static library.FileAlter.saveToFile;
+
+import java.io.IOException;
+
 public class Librarian extends Person {
 
   protected String username;
@@ -57,4 +61,25 @@ public class Librarian extends Person {
   void changePassword(String oldPass, String newPass) {}
 
   void changeUsername(String oldUsername, String newUsername) {}
+
+  public static String addMember(Member member) throws IOException {
+    String memInput =
+      member.getFullName() +
+      "|" +
+      member.getPhoneNo() +
+      "|" +
+      member.getEmail() +
+      "|" +
+      member.getAddress() +
+      "|" +
+      member.getMember_id() +
+      "|" +
+      member.getNoOfBookIssued();
+    try {
+      saveToFile("Members.txt", memInput, true);
+    } catch (IOException e) {
+      return "UNSUCCESSFUL";
+    }
+    return "SUCCESSFUL";
+  }
 }
