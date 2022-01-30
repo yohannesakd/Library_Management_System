@@ -54,15 +54,11 @@ public class HomeController implements Initializable {
     Parent root = FXMLLoader.load(
       getClass().getResource("fx/admin/BookList.fxml")
     );
-    
+
     Scene scene = new Scene(root);
-    
-    
     stage.setScene(scene);
-    
     stage.show();
   }
-
 
   @FXML
   public void custPage(ActionEvent event) throws IOException {
@@ -70,7 +66,7 @@ public class HomeController implements Initializable {
     Parent root = FXMLLoader.load(
       getClass().getResource("fx/admin/MemberList.fxml")
     );
-    
+
     Scene scene = new Scene(root);
     stage.setScene(scene);
     stage.show();
@@ -100,7 +96,5 @@ public class HomeController implements Initializable {
   }
 
   @Override
-  public void initialize(URL url, ResourceBundle rb) {
-    
-  }
+  public void initialize(URL url, ResourceBundle rb) {}
 }
