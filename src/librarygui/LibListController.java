@@ -54,7 +54,6 @@ public class LibListController implements Initializable {
   @FXML
   private Button add;
 
-
   @FXML
   private Label removeAlert;
 
@@ -109,26 +108,27 @@ public class LibListController implements Initializable {
   @FXML
   private Label response;
 
-@FXML
-private void handleRemoveLibrarian(ActionEvent event) throws FileNotFoundException, IOException{
-        Librarian libToDelete = tableEmployee.getSelectionModel().getSelectedItem();
-        
-        if(libToDelete == null){
-            removeAlert.setText("PLEASE SELECT A ROW IN THE TABLE.");
-            return;
-        }
-        
-        removeAlert.setText(FileAlter.deleteLibrarian(libToDelete.getId()));
-        
-        Stage stage = (Stage)removeAlert.getScene().getWindow();
-        Parent root = FXMLLoader.load(
-            getClass().getResource("fx/admin/LibList.fxml")
-        );
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-}
-  
+  @FXML
+  private void handleRemoveLibrarian(ActionEvent event)
+    throws FileNotFoundException, IOException {
+    Librarian libToDelete = tableEmployee.getSelectionModel().getSelectedItem();
+
+    if (libToDelete == null) {
+      removeAlert.setText("PLEASE SELECT A ROW IN THE TABLE.");
+      return;
+    }
+
+    removeAlert.setText(FileAlter.deleteLibrarian(libToDelete.getId()));
+
+    Stage stage = (Stage) removeAlert.getScene().getWindow();
+    Parent root = FXMLLoader.load(
+      getClass().getResource("fx/admin/LibList.fxml")
+    );
+    Scene scene = new Scene(root);
+    stage.setScene(scene);
+    stage.show();
+  }
+
   @FXML
   public void goBack(ActionEvent event) throws IOException {
     Stage stage = (Stage) book.getScene().getWindow();
@@ -145,6 +145,17 @@ private void handleRemoveLibrarian(ActionEvent event) throws FileNotFoundExcepti
     Stage stage = (Stage) book.getScene().getWindow();
     Parent root = FXMLLoader.load(
       getClass().getResource("fx/admin/BookList.fxml")
+    );
+    Scene scene = new Scene(root);
+    stage.setScene(scene);
+    stage.show();
+  }
+
+  @FXML
+  public void issuePage(ActionEvent event) throws IOException {
+    Stage stage = (Stage) book.getScene().getWindow();
+    Parent root = FXMLLoader.load(
+      getClass().getResource("fx/admin/IssueList.fxml")
     );
     Scene scene = new Scene(root);
     stage.setScene(scene);
@@ -187,8 +198,6 @@ private void handleRemoveLibrarian(ActionEvent event) throws FileNotFoundExcepti
     formContainer.setVisible(true);
     libIdField.requestFocus();
   }
-
-
 
   @FXML
   private void registerLib(ActionEvent event) throws IOException {
@@ -286,5 +295,4 @@ private void handleRemoveLibrarian(ActionEvent event) throws FileNotFoundExcepti
     );
     return librarians;
   }
-
 }

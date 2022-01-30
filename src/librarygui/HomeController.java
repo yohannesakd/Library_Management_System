@@ -61,6 +61,17 @@ public class HomeController implements Initializable {
   }
 
   @FXML
+  public void issuePage(ActionEvent event) throws IOException {
+    Stage stage = (Stage) book.getScene().getWindow();
+    Parent root = FXMLLoader.load(
+      getClass().getResource("fx/admin/IssueList.fxml")
+    );
+    Scene scene = new Scene(root);
+    stage.setScene(scene);
+    stage.show();
+  }
+
+  @FXML
   public void custPage(ActionEvent event) throws IOException {
     Stage stage = (Stage) book.getScene().getWindow();
     Parent root = FXMLLoader.load(

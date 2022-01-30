@@ -7,6 +7,14 @@ public class Person {
   protected String email;
   protected String address;
 
+  public Person() {}
+
+  public Person(String fullName, int phoneNo, String email, String address) {
+    this.fullName = fullName;
+    this.phoneNo = phoneNo;
+    this.email = email;
+    this.address = address;
+  }
 
   public String getFullName() {
     return this.fullName;
@@ -39,7 +47,6 @@ public class Person {
   public void setAddress(String address) {
     this.address = address;
   }
-  
 
   static void searchBook(String key) {}
 }

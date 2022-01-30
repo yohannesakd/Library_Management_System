@@ -1,9 +1,16 @@
 package librarygui;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,9 +18,18 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javax.swing.Action;
+import library.*;
 
-public class MemberListController implements Initializable {
+public class IssueListController implements Initializable {
 
   @FXML
   private Button home;
@@ -34,10 +50,10 @@ public class MemberListController implements Initializable {
   private Button admin;
 
   @FXML
-  private Button backBtn;
+  private Button newMemberBtn;
 
   @FXML
-  public void goBack(ActionEvent event) throws IOException {
+  public void homePage(ActionEvent event) throws IOException {
     Stage stage = (Stage) book.getScene().getWindow();
     Parent root = FXMLLoader.load(getClass().getResource("fx/admin/Home.fxml"));
     Scene scene = new Scene(root);
@@ -51,26 +67,7 @@ public class MemberListController implements Initializable {
     Parent root = FXMLLoader.load(
       getClass().getResource("fx/admin/BookList.fxml")
     );
-    Scene scene = new Scene(root);
-    stage.setScene(scene);
-    stage.show();
-  }
 
-  @FXML
-  public void homePage(ActionEvent event) throws IOException {
-    Stage stage = (Stage) book.getScene().getWindow();
-    Parent root = FXMLLoader.load(getClass().getResource("fx/admin/Home.fxml"));
-    Scene scene = new Scene(root);
-    stage.setScene(scene);
-    stage.show();
-  }
-
-  @FXML
-  public void issuePage(ActionEvent event) throws IOException {
-    Stage stage = (Stage) book.getScene().getWindow();
-    Parent root = FXMLLoader.load(
-      getClass().getResource("fx/admin/IssueList.fxml")
-    );
     Scene scene = new Scene(root);
     stage.setScene(scene);
     stage.show();
@@ -82,6 +79,7 @@ public class MemberListController implements Initializable {
     Parent root = FXMLLoader.load(
       getClass().getResource("fx/admin/MemberList.fxml")
     );
+
     Scene scene = new Scene(root);
     stage.setScene(scene);
     stage.show();
@@ -106,9 +104,20 @@ public class MemberListController implements Initializable {
     );
     Scene scene = new Scene(root);
     stage.setScene(scene);
+
     stage.show();
   }
 
-  @Override
+  @FXML
+  private void addMemberWindow(ActionEvent event) throws IOException {
+    Stage stage = new Stage();
+    Parent root = FXMLLoader.load(
+      getClass().getResource("fx/admin/addMember.fxml")
+    );
+    Scene scene = new Scene(root);
+    stage.setScene(scene);
+    stage.show();
+  }
+
   public void initialize(URL url, ResourceBundle rb) {}
 }
