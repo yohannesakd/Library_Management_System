@@ -28,7 +28,11 @@ public class Admin extends Librarian {
       "|" +
       book.getIsbn() +
       "|" +
-      book.getShelfNo();
+      book.getShelfNo() + 
+      "|" +
+      book.getNoOfBookCopy() + 
+      "|" +
+      book.getNoOfBookIssued();
     try {
       // System.out.println(bookinput);
       saveToFile("Books.txt", bookinput, true);

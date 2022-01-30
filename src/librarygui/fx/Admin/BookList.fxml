@@ -88,6 +88,8 @@
                         <TableColumn fx:id="isbn" prefWidth="90.0" text="ISBN" />
                         <TableColumn fx:id="pages" prefWidth="70.0" text="Pages" />
                         <TableColumn fx:id="shelf" prefWidth="54.0" text="Shelf No" />
+                        <TableColumn fx:id="copies" prefWidth="75.0" text="Copies" />
+                        <TableColumn fx:id="availablity" prefWidth="75.0" text="Availablity" />
                     </columns>
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -158,7 +160,7 @@
                               </Label>
                               <TextField fx:id="bookIdField" prefHeight="25.0" prefWidth="258.0">
                                  <VBox.margin>
-                                    <Insets bottom="5.0" />
+                                    <Insets />
                                  </VBox.margin>
                               </TextField>
                               <Label alignment="CENTER" prefHeight="16.0" prefWidth="338.0" text="Title">
@@ -166,12 +168,12 @@
                                     <Font size="13.0" />
                                  </font>
                                  <VBox.margin>
-                                    <Insets bottom="5.0" />
+                                    <Insets />
                                  </VBox.margin>
                               </Label>
                               <TextField fx:id="titleField" prefHeight="25.0" prefWidth="316.0">
                                  <VBox.margin>
-                                    <Insets bottom="5.0" />
+                                    <Insets />
                                  </VBox.margin>
                               </TextField>
                               <Label alignment="CENTER" prefHeight="17.0" prefWidth="338.0" text="Author">
@@ -179,12 +181,12 @@
                                     <Font size="13.0" />
                                  </font>
                                  <VBox.margin>
-                                    <Insets bottom="5.0" />
+                                    <Insets />
                                  </VBox.margin>
                               </Label>
                               <TextField fx:id="authorField" prefHeight="25.0" prefWidth="316.0">
                                  <VBox.margin>
-                                    <Insets bottom="5.0" />
+                                    <Insets />
                                  </VBox.margin>
                               </TextField>
                               <Label alignment="CENTER" prefHeight="28.0" prefWidth="357.0" text="Edition">
@@ -192,12 +194,12 @@
                                     <Font size="13.0" />
                                  </font>
                                  <VBox.margin>
-                                    <Insets bottom="5.0" />
+                                    <Insets />
                                  </VBox.margin>
                               </Label>
                               <TextField fx:id="editionField" prefHeight="25.0" prefWidth="105.0">
                                  <VBox.margin>
-                                    <Insets bottom="5.0" />
+                                    <Insets />
                                  </VBox.margin>
                               </TextField>
                               <Label alignment="CENTER" prefHeight="28.0" prefWidth="384.0" text="Pages">
@@ -205,12 +207,12 @@
                                     <Font size="13.0" />
                                  </font>
                                  <VBox.margin>
-                                    <Insets bottom="5.0" />
+                                    <Insets />
                                  </VBox.margin>
                               </Label>
                               <TextField fx:id="pagesField" prefHeight="25.0" prefWidth="125.0">
                                  <VBox.margin>
-                                    <Insets bottom="5.0" />
+                                    <Insets />
                                  </VBox.margin>
                               </TextField>
                               <Label alignment="CENTER" prefHeight="28.0" prefWidth="372.0" text="ISBN">
@@ -218,12 +220,12 @@
                                     <Font size="13.0" />
                                  </font>
                                  <VBox.margin>
-                                    <Insets bottom="5.0" />
+                                    <Insets />
                                  </VBox.margin>
                               </Label>
                               <TextField fx:id="ISBNField" prefHeight="25.0" prefWidth="316.0">
                                  <VBox.margin>
-                                    <Insets bottom="5.0" />
+                                    <Insets />
                                  </VBox.margin>
                               </TextField>
                               <Label alignment="CENTER" prefHeight="28.0" prefWidth="350.0" text="Shelf No">
@@ -231,14 +233,23 @@
                                     <Font size="13.0" />
                                  </font>
                                  <VBox.margin>
-                                    <Insets bottom="5.0" />
+                                    <Insets />
                                  </VBox.margin>
                               </Label>
                               <TextField fx:id="shelfNoField" prefHeight="25.0" prefWidth="316.0">
                                  <VBox.margin>
-                                    <Insets bottom="5.0" />
+                                    <Insets />
                                  </VBox.margin>
                               </TextField>
+                              <Label alignment="CENTER" prefHeight="28.0" prefWidth="350.0" text="No of Copy">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                              </Label>
+                              <TextField fx:id="noOfBookCopyField" prefHeight="25.0" prefWidth="316.0" />
                               <StackPane>
                                  <VBox.margin>
                                     <Insets bottom="10.0" top="10.0" />
@@ -253,11 +264,6 @@
                                     <Insets bottom="5.0" />
                                  </VBox.margin>
                               </Button>
-                              <Label fx:id="response" alignment="CENTER" prefHeight="36.0" prefWidth="361.0">
-                                 <font>
-                                    <Font size="13.0" />
-                                 </font>
-                              </Label>
                            </children>
                         </VBox>
                      </children>

@@ -31,8 +31,6 @@ public class BookListController implements Initializable {
   @FXML
   private Button book;
 
-  @FXML
-  private Button issue;
 
   @FXML
   private Button cust;
@@ -43,8 +41,6 @@ public class BookListController implements Initializable {
   @FXML
   private Button admin;
 
-  @FXML
-  private Button backBtn;
 
   @FXML
   private Button add;
@@ -86,6 +82,11 @@ public class BookListController implements Initializable {
   private TextField bookIdField;
 
   @FXML
+  private TextField noOfBookCopyField;
+
+
+  
+  @FXML
   private Label response;
 
   @FXML
@@ -111,6 +112,11 @@ public class BookListController implements Initializable {
 
   @FXML
   private TableColumn<Book, String> shelf;
+  
+  @FXML
+  private TableColumn<Book, String> copies;
+  @FXML
+  private TableColumn<Book, String> availablity;
 
   @FXML
   private TextField searchBar;
@@ -175,7 +181,6 @@ public class BookListController implements Initializable {
     inpbook.setPages(Integer.parseInt(pagesField.getText()));
     inpbook.setIsbn(Long.parseLong(ISBNField.getText()));
     inpbook.setShelfNo(shelfNoField.getText());
-
     FileAlter.editBook(inpbook);
 
     Stage stage = (Stage) add.getScene().getWindow();
@@ -268,6 +273,7 @@ public class BookListController implements Initializable {
     inpbook.setPages(Integer.parseInt(pagesField.getText()));
     inpbook.setIsbn(Long.parseLong(ISBNField.getText()));
     inpbook.setShelfNo(shelfNoField.getText());
+    inpbook.setNoOfBookCopy(Integer.parseInt(noOfBookCopyField.getText()));
 
     String str = Admin.addBook(inpbook);
     System.out.println(str);
@@ -282,7 +288,6 @@ public class BookListController implements Initializable {
     stage.show();
   }
 
-  @FXML
   public void showEditForm(ActionEvent event) throws IOException {
     formContainer.setVisible(true);
     saveAdd.setVisible(false);
@@ -300,6 +305,10 @@ public class BookListController implements Initializable {
     isbn.setCellValueFactory(new PropertyValueFactory<>("isbn"));
     pages.setCellValueFactory(new PropertyValueFactory<>("pages"));
     shelf.setCellValueFactory(new PropertyValueFactory<>("shelfNo"));
+    copies.setCellValueFactory(new PropertyValueFactory<>("noOfBookCopy"));
+    availablity.setCellValueFactory(new PropertyValueFactory<>("isAvailable"));
+
+
 
     try {
       tableBook.setItems(giveBooks());
