@@ -3,18 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/JOHN/Documents/New%20folder/LibraryGUI/src/LibraryReferal/BookListGUIController.java</file>
-            <file>file:/C:/Users/JOHN/Documents/New%20folder/LibraryGUI/src/LibraryReferal/Implementation.java</file>
-            <file>file:/C:/Users/JOHN/Documents/New%20folder/LibraryGUI/src/library/FileAlter.java</file>
-            <file>file:/C:/Users/JOHN/Documents/New%20folder/LibraryGUI/src/librarygui/FirstPageController.java</file>
-            <file>file:/C:/Users/JOHN/Documents/New%20folder/LibraryGUI/src/library/Issue.java</file>
-            <file>file:/C:/Users/JOHN/Documents/New%20folder/LibraryGUI/src/librarygui/FirstPage.fxml</file>
-            <file>file:/C:/Users/JOHN/Documents/New%20folder/LibraryGUI/src/library/Librarian.java</file>
-            <file>file:/C:/Users/JOHN/Documents/New%20folder/LibraryGUI/src/librarygui/LoginController.java</file>
-            <file>file:/C:/Users/JOHN/Documents/New%20folder/LibraryGUI/src/library/Book.java</file>
-            <file>file:/C:/Users/JOHN/Documents/New%20folder/LibraryGUI/src/librarygui/LibraryGUI.java</file>
-            <file>file:/C:/Users/JOHN/Documents/New%20folder/LibraryGUI/src/librarygui/AddBookGUIController.java</file>
-            <file>file:/C:/Users/JOHN/Documents/New%20folder/LibraryGUI/src/library/Admin.java</file>
+            <file>file:/C:/Users/JOHN/Documents/GitHub/Library_Management_System/src/librarygui/BookListController.java</file>
+            <file>file:/C:/Users/JOHN/Documents/GitHub/Library_Management_System/src/library/Admin.java</file>
+            <file>file:/C:/Users/JOHN/Documents/GitHub/Library_Management_System/src/librarygui/Library.java</file>
+            <file>file:/C:/Users/JOHN/Documents/GitHub/Library_Management_System/src/library/FileAlter.java</file>
+            <file>file:/C:/Users/JOHN/Documents/GitHub/Library_Management_System/src/librarygui/LibListController.java</file>
+            <file>file:/C:/Users/JOHN/Documents/GitHub/Library_Management_System/src/library/Librarian.java</file>
+            <file>file:/C:/Users/JOHN/Documents/GitHub/Library_Management_System/src/library/Book.java</file>
         </group>
     </open-files>
 </project-private>

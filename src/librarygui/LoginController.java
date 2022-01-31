@@ -13,9 +13,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 /**
@@ -58,6 +60,15 @@ public class LoginController implements Initializable {
         Stage stage = (Stage) login.getScene().getWindow();
         stage.close();
         stage = new Stage();
+
+        Screen screen = Screen.getPrimary();
+        Rectangle2D bounds = screen.getVisualBounds();
+
+        stage.setX(bounds.getMinX());
+        stage.setY(bounds.getMinY());
+        stage.setWidth(bounds.getWidth());
+        stage.setHeight(bounds.getHeight());
+
         stage.setMinWidth(700);
         stage.setMinHeight(700);
         Parent root = FXMLLoader.load(
@@ -71,9 +82,31 @@ public class LoginController implements Initializable {
       if (
         userName.getText().equals("librarian") &&
         passWord.getText().equals("pass")
-      ) alert.setText("Login Successfull"); else alert.setText(
-        "Incorrect Username or Password."
-      );
+      ) {
+        Stage stage = (Stage) login.getScene().getWindow();
+        stage.close();
+        stage = new Stage();
+
+        Screen screen = Screen.getPrimary();
+        Rectangle2D bounds = screen.getVisualBounds();
+
+        stage.setX(bounds.getMinX());
+        stage.setY(bounds.getMinY());
+        stage.setWidth(bounds.getWidth());
+        stage.setHeight(bounds.getHeight());
+
+        stage.setMinWidth(700);
+        stage.setMinHeight(700);
+        Parent root = FXMLLoader.load(
+          getClass().getResource("librarian/Home.fxml")
+        );
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+        alert.setText("Login Successfull");
+      } else {
+        alert.setText("Incorrect Username or Password.");
+      }
     }
   }
 

@@ -1,4 +1,4 @@
-package librarygui;
+package librarygui.librarian;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -45,45 +45,6 @@ public class BookListController implements Initializable {
   private Button add;
 
   @FXML
-  private VBox formContainer;
-
-  @FXML
-  private Button saveEdit;
-
-  @FXML
-  private Button saveAdd;
-
-  @FXML
-  private Button edit;
-
-  @FXML
-  private Button remove;
-
-  @FXML
-  private TextField titleField;
-
-  @FXML
-  private TextField authorField;
-
-  @FXML
-  private TextField editionField;
-
-  @FXML
-  private TextField pagesField;
-
-  @FXML
-  private TextField ISBNField;
-
-  @FXML
-  private TextField shelfNoField;
-
-  @FXML
-  private TextField bookIdField;
-
-  @FXML
-  private TextField noOfBookCopyField;
-
-  @FXML
   private TableView<Book> tableBook;
 
   @FXML
@@ -117,84 +78,9 @@ public class BookListController implements Initializable {
   private TextField searchBar;
 
   @FXML
-  private Label removeAlert;
-
-  @FXML
-  private Label editAlert;
-
-  @FXML
-  private void handleBookDelete(ActionEvent event) throws IOException {
-    Book toBeDeleted = tableBook.getSelectionModel().getSelectedItem();
-
-    if (toBeDeleted == null) {
-      removeAlert.setText("PLEASE SELECT A ROW TO DELETE.");
-      return;
-    }
-
-    removeAlert.setText(FileAlter.deleteBook(toBeDeleted.getBook_id()));
-
-    Stage stage = (Stage) removeAlert.getScene().getWindow();
-    Parent root = FXMLLoader.load(
-      getClass().getResource("fx/Admin/BookList.fxml")
-    );
-    Scene scene = new Scene(root);
-    stage.setScene(scene);
-    stage.show();
-  }
-
-  public void editBook(Book book) {
-    bookIdField.setText(Integer.toString(book.getBook_id()));
-    titleField.setText(book.getTitle());
-    authorField.setText(book.getAuthor());
-    editionField.setText(book.getEdition());
-    pagesField.setText(Integer.toString(book.getPages()));
-    ISBNField.setText(Long.toString(book.getIsbn()));
-    shelfNoField.setText(book.getShelfNo());
-    noOfBookCopyField.setText(Integer.toString(book.getNoOfBookCopy()));
-  }
-
-  @FXML
-  private void handleBookEdit(ActionEvent event) throws IOException {
-    Book toBeEdited = tableBook.getSelectionModel().getSelectedItem();
-    if (toBeEdited == null) {
-      editAlert.setText("PLEASE SELECT THE ROW TO EDIT");
-      return;
-    }
-    editBook(toBeEdited);
-    formContainer.setVisible(true);
-    bookIdField.requestFocus();
-    saveAdd.setVisible(false);
-    saveEdit.setVisible(true);
-  }
-
-  @FXML
-  private void bookEdit(ActionEvent event) throws IOException {
-    Book inpbook = new Book();
-    inpbook.setBook_id(Integer.parseInt(bookIdField.getText()));
-    inpbook.setTitle(titleField.getText());
-    inpbook.setAuthor(authorField.getText());
-    inpbook.setEdition(editionField.getText());
-    inpbook.setPages(Integer.parseInt(pagesField.getText()));
-    inpbook.setIsbn(Long.parseLong(ISBNField.getText()));
-    inpbook.setShelfNo(shelfNoField.getText());
-    inpbook.setNoOfBookCopy(Integer.parseInt(noOfBookCopyField.getText()));
-    FileAlter.editBook(inpbook);
-
-    Stage stage = (Stage) add.getScene().getWindow();
-    Parent root = FXMLLoader.load(
-      getClass().getResource("fx/admin/BookList.fxml")
-    );
-    Scene scene = new Scene(root);
-    stage.setScene(scene);
-    stage.show();
-  }
-
-  @FXML
   public void goBack(ActionEvent event) throws IOException {
     Stage stage = (Stage) book.getScene().getWindow();
-    Parent root = FXMLLoader.load(
-      getClass().getResource("fx/admin/BookList.fxml")
-    );
+    Parent root = FXMLLoader.load(getClass().getResource("BookList.fxml"));
     Scene scene = new Scene(root);
     stage.setScene(scene);
     stage.show();
@@ -203,7 +89,7 @@ public class BookListController implements Initializable {
   @FXML
   public void homePage(ActionEvent event) throws IOException {
     Stage stage = (Stage) book.getScene().getWindow();
-    Parent root = FXMLLoader.load(getClass().getResource("fx/admin/Home.fxml"));
+    Parent root = FXMLLoader.load(getClass().getResource("Home.fxml"));
     Scene scene = new Scene(root);
     stage.setScene(scene);
     stage.show();
@@ -212,9 +98,7 @@ public class BookListController implements Initializable {
   @FXML
   public void custPage(ActionEvent event) throws IOException {
     Stage stage = (Stage) book.getScene().getWindow();
-    Parent root = FXMLLoader.load(
-      getClass().getResource("fx/admin/MemberList.fxml")
-    );
+    Parent root = FXMLLoader.load(getClass().getResource("MemberList.fxml"));
     Scene scene = new Scene(root);
     stage.setScene(scene);
     stage.show();
@@ -223,70 +107,10 @@ public class BookListController implements Initializable {
   @FXML
   public void issuePage(ActionEvent event) throws IOException {
     Stage stage = (Stage) book.getScene().getWindow();
-    Parent root = FXMLLoader.load(
-      getClass().getResource("fx/admin/IssueList.fxml")
-    );
+    Parent root = FXMLLoader.load(getClass().getResource("IssueList.fxml"));
     Scene scene = new Scene(root);
     stage.setScene(scene);
     stage.show();
-  }
-
-  @FXML
-  public void libPage(ActionEvent event) throws IOException {
-    Stage stage = (Stage) book.getScene().getWindow();
-    Parent root = FXMLLoader.load(
-      getClass().getResource("fx/admin/LibList.fxml")
-    );
-    Scene scene = new Scene(root);
-    stage.setScene(scene);
-    stage.show();
-  }
-
-  @FXML
-  public void adminPage(ActionEvent event) throws IOException {
-    Stage stage = (Stage) book.getScene().getWindow();
-    Parent root = FXMLLoader.load(
-      getClass().getResource("fx/admin/AdminList.fxml")
-    );
-    Scene scene = new Scene(root);
-    stage.setScene(scene);
-    stage.show();
-  }
-
-  @FXML
-  public void showForm(ActionEvent event) throws IOException {
-    formContainer.setVisible(true);
-    bookIdField.requestFocus();
-    saveEdit.setVisible(false);
-  }
-
-  @FXML
-  private void completeAddBook(ActionEvent event) throws IOException {
-    Book inpbook = new Book();
-    inpbook.setBook_id(Integer.parseInt(bookIdField.getText()));
-    inpbook.setTitle(titleField.getText());
-    inpbook.setAuthor(authorField.getText());
-    inpbook.setEdition(editionField.getText());
-    inpbook.setPages(Integer.parseInt(pagesField.getText()));
-    inpbook.setIsbn(Long.parseLong(ISBNField.getText()));
-    inpbook.setShelfNo(shelfNoField.getText());
-    inpbook.setNoOfBookCopy(Integer.parseInt(noOfBookCopyField.getText()));
-
-    String str = Admin.addBook(inpbook);
-    System.out.println(str);
-
-    Stage stage = (Stage) add.getScene().getWindow();
-    Parent root = FXMLLoader.load(
-      getClass().getResource("fx/admin/BookList.fxml")
-    );
-    Scene scene = new Scene(root);
-    stage.setScene(scene);
-    stage.show();
-  }
-
-  public void showEditForm(ActionEvent event) throws IOException {
-    formContainer.setVisible(true);
-    saveAdd.setVisible(false);
   }
 
   @FXML

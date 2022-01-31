@@ -2,12 +2,9 @@ package librarygui;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.lang.System.Logger;
-import java.lang.System.Logger.Level;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.*;
-import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -95,6 +92,17 @@ public class AdminListController implements Initializable {
   }
 
   @FXML
+  public void issuePage(ActionEvent event) throws IOException {
+    Stage stage = (Stage) book.getScene().getWindow();
+    Parent root = FXMLLoader.load(
+      getClass().getResource("fx/admin/IssueList.fxml")
+    );
+    Scene scene = new Scene(root);
+    stage.setScene(scene);
+    stage.show();
+  }
+
+  @FXML
   public void custPage(ActionEvent event) throws IOException {
     Stage stage = (Stage) book.getScene().getWindow();
     Parent root = FXMLLoader.load(
@@ -131,24 +139,18 @@ public class AdminListController implements Initializable {
       System.out.println("FileNotFound");
     }
 
-    
-
-      SortedList<Admin> sortedSearch;
-      try {
-        sortedSearch = new SortedList<>(giveAdmins());
-        sortedSearch
-        .comparatorProperty()
-        .bind(tableAdmin.comparatorProperty());
+    SortedList<Admin> sortedSearch;
+    try {
+      sortedSearch = new SortedList<>(giveAdmins());
+      sortedSearch.comparatorProperty().bind(tableAdmin.comparatorProperty());
 
       tableAdmin.setItems(sortedSearch);
-      } catch (FileNotFoundException e) {
-        System.out.println("File not Found.");
-      }
-      
+    } catch (FileNotFoundException e) {
+      System.out.println("File not Found.");
+    }
   }
 
-  public ObservableList<Admin> giveAdmins()
-    throws FileNotFoundException {
+  public ObservableList<Admin> giveAdmins() throws FileNotFoundException {
     ObservableList<Admin> admins = FXCollections.observableArrayList(
       library.FileAlter.retrieveAllAdminFile()
     );

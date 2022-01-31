@@ -8,7 +8,15 @@ public class Admin extends Librarian {
 
   public Admin() {}
 
-  public Admin(int id, String username, String password, String fullName, int phoneNo, String email, String address) {
+  public Admin(
+    int id,
+    String username,
+    String password,
+    String fullName,
+    int phoneNo,
+    String email,
+    String address
+  ) {
     // super(username, password, id);
     super(id, username, password, fullName, phoneNo, email, address);
   }
@@ -24,11 +32,15 @@ public class Admin extends Librarian {
       "|" +
       book.getEdition() +
       "|" +
-      book.getPages() +
-      "|" +
       book.getIsbn() +
       "|" +
-      book.getShelfNo();
+      book.getPages() +
+      "|" +
+      book.getShelfNo() +
+      "|" +
+      book.getNoOfBookCopy() +
+      "|" +
+      book.getNoOfBookIssued();
     try {
       // System.out.println(bookinput);
       saveToFile("Books.txt", bookinput, true);
@@ -38,8 +50,8 @@ public class Admin extends Librarian {
     return "SUCESSFULL";
   }
 
-  public void editBook(Book book){}
-  
+  public void editBook(Book book) {}
+
   public void removeBook(Book book) {}
 
   public String addAdmin(Admin admin) {

@@ -6,7 +6,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.collections.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -22,7 +21,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import library.*;
 
-public class MemberListController implements Initializable {
+public class IssueListController implements Initializable {
 
   @FXML
   private Button home;
@@ -43,34 +42,37 @@ public class MemberListController implements Initializable {
   private Button admin;
 
   @FXML
-  private Button backBtn;
+  private Button newMemberBtn;
 
   @FXML
-  private TableView<Member> tableMember;
+  private TableView<Issue> tableIssue;
 
   @FXML
-  private TableColumn<Member, String> member_id;
+  private TableColumn<Issue, String> issue_id;
 
   @FXML
-  private TableColumn<Member, String> fullName;
+  private TableColumn<Issue, String> name;
 
   @FXML
-  private TableColumn<Member, String> booksIssued;
+  private TableColumn<Issue, String> title;
 
   @FXML
-  private TableColumn<Member, String> phoneNo;
+  private TableColumn<Issue, String> member_id;
 
   @FXML
-  private TableColumn<Member, String> email;
+  private TableColumn<Issue, String> book_id;
 
   @FXML
-  private TableColumn<Member, String> address;
+  private TableColumn<Issue, String> issue_date;
+
+  @FXML
+  private TableColumn<Issue, String> due_date;
 
   @FXML
   private TextField searchBar;
 
   @FXML
-  public void goBack(ActionEvent event) throws IOException {
+  public void homePage(ActionEvent event) throws IOException {
     Stage stage = (Stage) book.getScene().getWindow();
     Parent root = FXMLLoader.load(getClass().getResource("fx/admin/Home.fxml"));
     Scene scene = new Scene(root);
@@ -84,26 +86,7 @@ public class MemberListController implements Initializable {
     Parent root = FXMLLoader.load(
       getClass().getResource("fx/admin/BookList.fxml")
     );
-    Scene scene = new Scene(root);
-    stage.setScene(scene);
-    stage.show();
-  }
 
-  @FXML
-  public void homePage(ActionEvent event) throws IOException {
-    Stage stage = (Stage) book.getScene().getWindow();
-    Parent root = FXMLLoader.load(getClass().getResource("fx/admin/Home.fxml"));
-    Scene scene = new Scene(root);
-    stage.setScene(scene);
-    stage.show();
-  }
-
-  @FXML
-  public void issuePage(ActionEvent event) throws IOException {
-    Stage stage = (Stage) book.getScene().getWindow();
-    Parent root = FXMLLoader.load(
-      getClass().getResource("fx/admin/IssueList.fxml")
-    );
     Scene scene = new Scene(root);
     stage.setScene(scene);
     stage.show();
@@ -115,6 +98,7 @@ public class MemberListController implements Initializable {
     Parent root = FXMLLoader.load(
       getClass().getResource("fx/admin/MemberList.fxml")
     );
+
     Scene scene = new Scene(root);
     stage.setScene(scene);
     stage.show();
@@ -139,85 +123,99 @@ public class MemberListController implements Initializable {
     );
     Scene scene = new Scene(root);
     stage.setScene(scene);
+
     stage.show();
   }
 
-  @Override
-  public void initialize(URL url, ResourceBundle rb) {
-    member_id.setCellValueFactory(new PropertyValueFactory<>("member_id"));
-    fullName.setCellValueFactory(new PropertyValueFactory<>("fullName"));
-    booksIssued.setCellValueFactory(
-      new PropertyValueFactory<>("noOfBookIssued")
+  @FXML
+  private void addMemberWindow(ActionEvent event) throws IOException {
+    Stage stage = (Stage) book.getScene().getWindow();
+    stage.close();
+    stage = new Stage();
+    Parent root = FXMLLoader.load(
+      getClass().getResource("fx/admin/addMember.fxml")
     );
-    phoneNo.setCellValueFactory(new PropertyValueFactory<>("phoneNo"));
-    email.setCellValueFactory(new PropertyValueFactory<>("email"));
-    address.setCellValueFactory(new PropertyValueFactory<>("address"));
+    Scene scene = new Scene(root);
+    stage.setScene(scene);
+    stage.show();
+  }
+
+  public void initialize(URL url, ResourceBundle rb) {
+    issue_id.setCellValueFactory(new PropertyValueFactory<>("issue_id"));
+    name.setCellValueFactory(new PropertyValueFactory<>("name"));
+    member_id.setCellValueFactory(new PropertyValueFactory<>("member_id"));
+    book_id.setCellValueFactory(new PropertyValueFactory<>("book_id"));
+    issue_date.setCellValueFactory(new PropertyValueFactory<>("issueDate"));
+    due_date.setCellValueFactory(new PropertyValueFactory<>("dueDate"));
+    title.setCellValueFactory(new PropertyValueFactory<>("bookTitle"));
 
     try {
-      tableMember.setItems(giveMembers());
+      tableIssue.setItems(giveIssues());
     } catch (FileNotFoundException ex) {
       System.out.println("FIle Not Found");
     }
 
-    FilteredList<Member> searchFilter;
+    FilteredList<Issue> searchFilter;
     try {
-      searchFilter = new FilteredList<>(giveMembers(), b -> true);
-      //set the filter whenever the searchBar changes value
+      searchFilter = new FilteredList<>(giveIssues());
       searchBar
         .textProperty()
         .addListener((observable, oldvalue, newvalue) -> {
-          searchFilter.setPredicate(member -> {
-            //if the search bar is empty then return the orginal table
+          searchFilter.setPredicate(issue -> {
             if (newvalue == null || newvalue.isEmpty()) {
               return true;
             }
             if (
               Integer
-                .toString(member.getPhoneNo())
+                .toString(issue.getIssue_id())
                 .contains(searchBar.getText())
             ) return true; else if (
               Integer
-                .toString(member.getMember_id())
+                .toString(issue.getMember_id())
                 .contains(searchBar.getText())
             ) return true; else if (
-              Integer
-                .toString(member.getNoOfBookIssued())
-                .contains(searchBar.getText())
+              Integer.toString(issue.getBook_id()).contains(searchBar.getText())
             ) return true; else if (
-              member
-                .getFullName()
+              issue
+                .getIssueDate()
                 .toLowerCase()
                 .contains(searchBar.getText().toLowerCase())
             ) return true; else if (
-              member
-                .getEmail()
+              issue
+                .getDueDate()
                 .toLowerCase()
                 .contains(searchBar.getText().toLowerCase())
             ) return true; else if (
-              member
-                .getAddress()
+              issue
+                .getBookTitle()
+                .toLowerCase()
+                .contains(searchBar.getText().toLowerCase())
+            ) return true; else if (
+              issue
+                .getName()
                 .toLowerCase()
                 .contains(searchBar.getText().toLowerCase())
             ) return true;
+
             return false;
           });
         });
 
-      SortedList<Member> sortedSearch = new SortedList<>(searchFilter);
-      sortedSearch.comparatorProperty().bind(tableMember.comparatorProperty());
+      SortedList<Issue> sortedSearch = new SortedList<>(searchFilter);
+      sortedSearch.comparatorProperty().bind(tableIssue.comparatorProperty());
 
-      tableMember.setItems(sortedSearch);
+      tableIssue.setItems(sortedSearch);
     } catch (FileNotFoundException ex) {
       Logger
-        .getLogger(LibListController.class.getName())
+        .getLogger(BookListController.class.getName())
         .log(Level.SEVERE, null, ex);
     }
   }
 
-  public ObservableList<Member> giveMembers() throws FileNotFoundException {
-    ObservableList<Member> members = FXCollections.observableArrayList(
-      library.FileAlter.retrieveAllMemberFile()
+  public ObservableList<Issue> giveIssues() throws FileNotFoundException {
+    ObservableList<Issue> issues = FXCollections.observableArrayList(
+      library.FileAlter.retrieveAllIssueFile()
     );
-    return members;
+    return issues;
   }
 }

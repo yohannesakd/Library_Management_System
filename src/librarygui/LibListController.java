@@ -55,12 +55,6 @@ public class LibListController implements Initializable {
   private Button add;
 
   @FXML
-  private Button remove;
-
-  @FXML
-  private TextField removeId;
-
-  @FXML
   private Label removeAlert;
 
   @FXML
@@ -115,6 +109,27 @@ public class LibListController implements Initializable {
   private Label response;
 
   @FXML
+  private void handleRemoveLibrarian(ActionEvent event)
+    throws FileNotFoundException, IOException {
+    Librarian libToDelete = tableEmployee.getSelectionModel().getSelectedItem();
+
+    if (libToDelete == null) {
+      removeAlert.setText("PLEASE SELECT A ROW IN THE TABLE.");
+      return;
+    }
+
+    removeAlert.setText(FileAlter.deleteLibrarian(libToDelete.getId()));
+
+    Stage stage = (Stage) removeAlert.getScene().getWindow();
+    Parent root = FXMLLoader.load(
+      getClass().getResource("fx/admin/LibList.fxml")
+    );
+    Scene scene = new Scene(root);
+    stage.setScene(scene);
+    stage.show();
+  }
+
+  @FXML
   public void goBack(ActionEvent event) throws IOException {
     Stage stage = (Stage) book.getScene().getWindow();
     Parent root = FXMLLoader.load(
@@ -130,6 +145,17 @@ public class LibListController implements Initializable {
     Stage stage = (Stage) book.getScene().getWindow();
     Parent root = FXMLLoader.load(
       getClass().getResource("fx/admin/BookList.fxml")
+    );
+    Scene scene = new Scene(root);
+    stage.setScene(scene);
+    stage.show();
+  }
+
+  @FXML
+  public void issuePage(ActionEvent event) throws IOException {
+    Stage stage = (Stage) book.getScene().getWindow();
+    Parent root = FXMLLoader.load(
+      getClass().getResource("fx/admin/IssueList.fxml")
     );
     Scene scene = new Scene(root);
     stage.setScene(scene);
@@ -169,16 +195,8 @@ public class LibListController implements Initializable {
 
   @FXML
   public void showForm(ActionEvent event) throws IOException {
-    removeId.setVisible(false);
     formContainer.setVisible(true);
     libIdField.requestFocus();
-  }
-
-  @FXML
-  public void showRemoveId(ActionEvent event) {
-    formContainer.setVisible(false);
-    removeId.setVisible(true);
-    removeId.requestFocus();
   }
 
   @FXML
@@ -188,6 +206,7 @@ public class LibListController implements Initializable {
     inpLib.setFullName(fullNameField.getText());
     inpLib.setId(Integer.parseInt(libIdField.getText()));
     inpLib.setPhoneNo(Integer.parseInt(phoneField.getText()));
+    inpLib.setUsername(usernameField.getText());
     inpLib.setEmail(emailField.getText());
     inpLib.setAddress(addressField.getText());
 
@@ -196,8 +215,6 @@ public class LibListController implements Initializable {
     response.setText(str);
 
     Stage stage = (Stage) response.getScene().getWindow();
-    stage.close();
-    stage = new Stage();
     Parent root = FXMLLoader.load(
       getClass().getResource("fx/admin/LibList.fxml")
     );
