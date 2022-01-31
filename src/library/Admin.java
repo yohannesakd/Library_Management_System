@@ -32,9 +32,9 @@ public class Admin extends Librarian {
       "|" +
       book.getEdition() +
       "|" +
-      book.getPages() +
-      "|" +
       book.getIsbn() +
+      "|" +
+      book.getPages() +
       "|" +
       book.getShelfNo() +
       "|" +
