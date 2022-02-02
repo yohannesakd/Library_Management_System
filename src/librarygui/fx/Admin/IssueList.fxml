@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" minWidth="700.0" prefHeight="833.0" prefWidth="1154.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="librarygui.IssueListController">
+<AnchorPane id="AnchorPane" minWidth="700.0" prefHeight="833.0" prefWidth="1154.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="librarygui.IssueListController">
     <children>
         <Label fx:id="label" layoutX="126" layoutY="120" minHeight="16" minWidth="69" />
       <SplitPane dividerPositions="0.3078078078078078, 0.5" layoutX="26.0" layoutY="120.0" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -115,7 +115,7 @@
                               <Font size="17.0" />
                            </font>
                         </TextField>
-                        <Button fx:id="addIssue" mnemonicParsing="false" prefHeight="31.0" prefWidth="338.0" text="New Issue">
+                        <Button fx:id="addIssue" mnemonicParsing="false" onAction="#showIssueForm" prefHeight="31.0" prefWidth="338.0" text="New Issue">
                            <VBox.margin>
                               <Insets bottom="10.0" top="10.0" />
                            </VBox.margin>
@@ -126,7 +126,7 @@
                            </VBox.margin>
                         </Button>
                         <StackPane prefHeight="67.0" prefWidth="338.0" />
-                        <VBox fx:id="issueInfo">
+                        <VBox fx:id="issueInfo" visible="false">
                            <children>
                               <Label alignment="CENTER" prefHeight="32.0" prefWidth="338.0" text="Insert Issue Information">
                                  <font>
@@ -172,7 +172,7 @@
                                           <Insets bottom="10.0" top="10.0" />
                                        </HBox.margin>
                                     </Label>
-                                    <DatePicker fx:id="selectDate" />
+                                    <DatePicker fx:id="selectDate" onAction="#getDueDate" />
                                  </children>
                               </HBox>
                               <HBox>
@@ -192,7 +192,7 @@
                                     </Label>
                                  </children>
                               </HBox>
-                              <Button fx:id="confirmBtn" mnemonicParsing="false" prefHeight="46.0" prefWidth="338.0" text="Confirm Issue">
+                              <Button fx:id="confirmBtn" mnemonicParsing="false" onAction="#issueBook" prefHeight="46.0" prefWidth="338.0" text="Confirm Issue">
                                  <font>
                                     <Font size="15.0" />
                                  </font>

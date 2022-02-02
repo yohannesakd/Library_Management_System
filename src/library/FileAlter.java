@@ -71,6 +71,26 @@ public class FileAlter {
     return "SUCCESSFULL";
   }
 
+
+
+public static String retrieveBookTitle(int bookId) throws IOException{
+
+ArrayList<Book> bookList = new ArrayList<>();
+bookList = retrieveAllbookFile();
+      for(int i=0; i<bookList.size(); i++){
+        if(bookList.get(i).getBook_id()==bookId){
+
+          return bookList.get(i).getTitle();
+        }
+         }
+  return "";
+        }
+      
+    
+
+    
+  
+
   public static ArrayList<Book> retrieveAllbookFile()
     throws FileNotFoundException {
     ArrayList<Book> booklist = new ArrayList<>();
@@ -142,6 +162,16 @@ public class FileAlter {
     return adminList;
   }
 
+public static Issue retrieveSingleIssue(int memberId, int bookId) throws FileNotFoundException{
+  ArrayList<Issue> issueList  = retrieveAllIssueFile();
+  for(int i=0; i<issueList.size(); i++){
+    if(issueList.get(i).getBook_id() == bookId && issueList.get(i).getMember_id()==memberId){
+      return issueList.get(i);
+    }
+  }
+  return  new Issue();
+}
+
   public static ArrayList<Issue> retrieveAllIssueFile()
     throws FileNotFoundException {
     ArrayList<Issue> issueList = new ArrayList<>();
@@ -149,7 +179,7 @@ public class FileAlter {
       while (s.hasNextLine()) {
         String line = s.nextLine();
         String[] values = line.split("\\|");
-
+        System.out.println(values);
         Issue lb = new Issue(
           Integer.parseInt(values[0]),
           Integer.parseInt(values[1]),
@@ -164,6 +194,23 @@ public class FileAlter {
     }
     return issueList;
   }
+
+  public static String retrieveMemberName(int memberId) 
+  throws FileNotFoundException{
+      ArrayList<Member> memberList = new ArrayList<>();
+      memberList = retrieveAllMemberFile();
+
+        for(int i=0; i<memberList.size(); i++){
+          if(memberList.get(i).getMember_id() == memberId){
+            return memberList.get(i).getFullName();
+            
+          }
+        }
+        return "";
+      
+     
+    }
+  
 
   public static ArrayList<Member> retrieveAllMemberFile()
     throws FileNotFoundException {

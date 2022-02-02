@@ -1,5 +1,7 @@
 package library;
 
+import java.time.LocalDate;
+
 public class Issue {
 
   //Setup Attributes
@@ -10,6 +12,8 @@ public class Issue {
   private String dueDate;
   private String name;
   private String bookTitle;
+
+public Issue(){}
 
   //Constructor
   public Issue(
@@ -99,4 +103,10 @@ public class Issue {
   public void renewIssue() {}
 
   public void checkOverdue() {}
+
+public LocalDate getDateNow(){
+  LocalDate today = LocalDate.now();
+  return today;
+}
+
 }

@@ -82,4 +82,28 @@ public class Librarian extends Person {
     }
     return "SUCCESSFUL";
   }
+
+  public static String addIssue(Issue issue) throws IOException {
+    String issueInput =
+    issue.getMember_id() +
+    "|" +
+    issue.getBook_id() +
+    "|" +
+    issue.getIssue_id() +
+    "|" +
+      issue.getIssueDate() +
+      "|" +
+      issue.getDueDate() +
+      "|" +
+      issue.getName() +
+      "|" +
+      issue.getBookTitle();
+    try {
+      saveToFile("Issues.txt", issueInput, true);
+    } catch (IOException e) {
+      return "UNSUCCESSFUL";
+    }
+    return "SUCCESSFUL";
+  }
+
 }
