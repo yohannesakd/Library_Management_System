@@ -24,6 +24,7 @@ import javafx.stage.Stage;
 import library.*;
 import static library.FileAlter.retrieveBookTitle;
 import static library.FileAlter.retrieveMemberName;
+import static library.FileAlter.retrieveSingleIssue;
 
 public class IssueListController implements Initializable {
 
@@ -101,6 +102,83 @@ public class IssueListController implements Initializable {
 
   @FXML
   private Button confirmBtn;
+
+  @FXML
+  private VBox returnForm;
+
+  @FXML
+  private TextField memberId1;
+
+  @FXML
+  private TextField bookId1;
+
+  @FXML
+  private Button checkBookInfo;
+
+  @FXML
+  private VBox returnInfo;
+
+  @FXML
+  private Label issueId;
+
+  @FXML
+  private Label bookTitle;
+
+  @FXML
+  private Label issuedDate;
+
+  @FXML
+  private Label dueDate;
+
+  @FXML
+  private Label totalDate;
+
+  @FXML
+  private Label penalty;
+
+  @FXML
+  private Button confirmReturn;
+
+
+  @FXML
+public void showReturnForm(ActionEvent event) throws IOException{
+  returnForm.setVisible(true); 
+}
+
+@FXML
+public void showReturnInfo(ActionEvent event) throws IOException{
+  int memberId, bookId;
+  memberId = Integer.parseInt(memberId1.getText());
+  bookId = Integer.parseInt(bookId1.getText());
+  Issue issueInfo = retrieveSingleIssue(memberId, bookId);
+
+  returnInfo.setVisible(true);
+  if(issueInfo.getBookTitle() == ""){
+    issueId.setText("No Issue Found"); 
+  }
+  else{
+  issueId.setText(String.valueOf(issueInfo.getIssue_id())); 
+  bookTitle.setText(issueInfo.getBookTitle()); 
+  issuedDate.setText(issueInfo.getIssueDate()); 
+  dueDate.setText(issueInfo.getDueDate()); 
+  totalDate.setText(String.valueOf((LocalDate.parse(issueInfo.getIssueDate())).until(LocalDate.now()).getDays()) + " Days"); 
+  int dateTaken = LocalDate.now().until(LocalDate.parse(issueInfo.getDueDate())).getDays();
+  int penalDate = LocalDate.parse(issueInfo.getDueDate()).until(LocalDate.now()).getDays();
+  if(dateTaken >=0){
+    penalty.setText("No Penalty"); 
+  }
+  else{
+    penalty.setText("Penalty!! Taken for Extra "+ penalDate+" Days."); 
+  }
+  
+} 
+
+}
+
+@FXML
+public void returnBook(ActionEvent event){
+
+}
 
   @FXML 
   public void issueBook(ActionEvent event) throws IOException {

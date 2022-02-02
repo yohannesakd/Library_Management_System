@@ -162,8 +162,16 @@ public void showReturnInfo(ActionEvent event) throws IOException{
   bookTitle.setText(issueInfo.getBookTitle()); 
   issuedDate.setText(issueInfo.getIssueDate()); 
   dueDate.setText(issueInfo.getDueDate()); 
-  totalDate.setText(String.valueOf(issueInfo.getIssue_id())); 
-  penalty.setText(String.valueOf(issueInfo.getIssue_id())); 
+  totalDate.setText(String.valueOf((LocalDate.parse(issueInfo.getIssueDate())).until(LocalDate.now()).getDays()) + " Days"); 
+  int dateTaken = LocalDate.now().until(LocalDate.parse(issueInfo.getDueDate())).getDays();
+  int penalDate = LocalDate.parse(issueInfo.getDueDate()).until(LocalDate.now()).getDays();
+  if(dateTaken >=0){
+    penalty.setText("No Penalty"); 
+  }
+  else{
+    penalty.setText("Penalty!! Taken for Extra "+ penalDate+" Days."); 
+  }
+  
 }
 }
 
