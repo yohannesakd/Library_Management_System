@@ -1,6 +1,0 @@
-1|yohannesakd|12345|Yohannes Assefa|0912233434|yohannes@mail.com|AASTU Campus
-2|fantish|123|Yohannes Fantahun|0912211221|fantish@mail.com|Bole
-3|TheShele|shele123|Yohannes Teshome|9876543|null|Saris
-4|shewe|12345|Yohannes Mesganaw|9876543|null|Akaki
-5|yohannes463|0000|Yohannes Abebe|9900990|entna@gmail.com|Lebu
-7|entna|123|Entna Entna|90909090|mail@mail.com|somewhere

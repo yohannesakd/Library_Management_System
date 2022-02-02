@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -201,6 +202,13 @@ public void returnBook(ActionEvent event) throws IOException{
   @FXML 
   public void issueBook(ActionEvent event) throws IOException {
     Issue inpIssue = new Issue();
+    
+    ArrayList<Issue> issueList = new ArrayList<>();
+        try{
+        issueList = FileAlter.retrieveAllIssueFile();            
+        }catch(java.io.FileNotFoundException e){
+        }    
+    
     inpIssue.setMember_id(Integer.parseInt(memberId.getText()));
     inpIssue.setBook_id(Integer.parseInt(bookId.getText()));
     inpIssue.setBookTitle(retrieveBookTitle(Integer.parseInt(bookId.getText())));

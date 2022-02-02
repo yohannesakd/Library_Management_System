@@ -2,6 +2,7 @@ package librarygui;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.collections.*;
 import javafx.fxml.FXML;
@@ -38,7 +39,12 @@ public class AddMemberController implements Initializable {
   @FXML
   private void handleRegister() throws IOException {
     Member mem = new Member();
-    mem.setMember_id(1);
+    
+    ArrayList<Member> memberlist =  FileAlter.retrieveAllMemberFile();
+    if(!memberlist.isEmpty())
+        mem.setMember_id(memberlist.get(memberlist.size()-1).getMember_id()+1);
+
+
     mem.setFullName(fullNameField.getText());
     mem.setAddress(addressField.getText());
     mem.setEmail(emailField.getText());

@@ -2,7 +2,7 @@ package library;
 
 public class Member extends Person {
 
-  private int member_id;
+  private int member_id = 1000;
   private int noOfBookIssued = 0;
 
   // private String department;

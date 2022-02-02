@@ -3,7 +3,7 @@ package library;
 public class Book {
 
   //Define Class Attributes
-  private int book_id;
+  private int book_id = 1000;
   private String title;
   private String author;
   private String edition;

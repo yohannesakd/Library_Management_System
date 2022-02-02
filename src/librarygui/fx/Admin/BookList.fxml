@@ -153,16 +153,6 @@
                                     <Insets bottom="5.0" />
                                  </VBox.margin>
                               </Label>
-                              <Label alignment="CENTER" prefHeight="20.0" prefWidth="338.0" text="BookId">
-                                 <VBox.margin>
-                                    <Insets bottom="5.0" />
-                                 </VBox.margin>
-                              </Label>
-                              <TextField fx:id="bookIdField" prefHeight="25.0" prefWidth="258.0">
-                                 <VBox.margin>
-                                    <Insets />
-                                 </VBox.margin>
-                              </TextField>
                               <Label alignment="CENTER" prefHeight="16.0" prefWidth="338.0" text="Title">
                                  <font>
                                     <Font size="13.0" />

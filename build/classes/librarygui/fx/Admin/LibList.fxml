@@ -130,8 +130,6 @@
                                     <Font name="Calibri" size="27.0" />
                                  </font>
                               </Label>
-                              <Label alignment="CENTER" prefHeight="36.0" prefWidth="427.0" text="ID" />
-                              <TextField fx:id="libIdField" alignment="CENTER" prefHeight="25.0" prefWidth="87.0" />
                               <Label alignment="CENTER" prefHeight="36.0" prefWidth="388.0" text="Full Name">
                                  <font>
                                     <Font size="13.0" />

@@ -8,7 +8,7 @@ public class Librarian extends Person {
 
   protected String username;
   protected String password;
-  protected int id;
+  protected int id = 1000;
 
   public Librarian() {}
 

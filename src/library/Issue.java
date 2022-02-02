@@ -5,7 +5,7 @@ import java.time.LocalDate;
 public class Issue {
 
   //Setup Attributes
-  private int issue_id = 1;
+  private int issue_id = 1000;
   private int member_id;
   private int book_id;
   private String issueDate;

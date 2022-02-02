@@ -3,6 +3,7 @@ package librarygui;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -84,8 +85,6 @@ public class LibListController implements Initializable {
   @FXML
   private TextField searchBar;
 
-  @FXML
-  private TextField libIdField;
 
   @FXML
   private TextField usernameField;
@@ -196,15 +195,20 @@ public class LibListController implements Initializable {
   @FXML
   public void showForm(ActionEvent event) throws IOException {
     formContainer.setVisible(true);
-    libIdField.requestFocus();
+    usernameField.requestFocus();
   }
 
   @FXML
   private void registerLib(ActionEvent event) throws IOException {
     Librarian inpLib = new Librarian();
-
+    
+    ArrayList<Librarian> liblist =  FileAlter.retrieveAllemployeeFile();
+    if(!liblist.isEmpty())
+        inpLib.setId(liblist.get(liblist.size()-1).getId()+1);
+    
+    
     inpLib.setFullName(fullNameField.getText());
-    inpLib.setId(Integer.parseInt(libIdField.getText()));
+    
     inpLib.setPhoneNo(Integer.parseInt(phoneField.getText()));
     inpLib.setUsername(usernameField.getText());
     inpLib.setEmail(emailField.getText());
