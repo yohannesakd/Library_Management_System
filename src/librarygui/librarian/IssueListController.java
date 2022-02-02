@@ -176,8 +176,25 @@ public void showReturnInfo(ActionEvent event) throws IOException{
 }
 
 @FXML
-public void returnBook(ActionEvent event){
+public void returnBook(ActionEvent event) throws IOException{
+  int memberId, bookId;
+  memberId = Integer.parseInt(memberId1.getText());
+  bookId = Integer.parseInt(bookId1.getText());
+  Issue issueInfo = retrieveSingleIssue(memberId, bookId);
 
+  returnInfo.setVisible(true);
+  if(issueInfo.getBookTitle() == ""){
+    issueId.setText("No Issue Found"); 
+  }
+  else{
+    issueInfo.setIsActive(false);
+    Stage stage = (Stage) book.getScene().getWindow();
+    Parent root = FXMLLoader.load(getClass().getResource("IssueList.fxml"));
+
+    Scene scene = new Scene(root);
+    stage.setScene(scene);
+    stage.show();
+  }
 }
   @FXML 
   public void issueBook(ActionEvent event) throws IOException {

@@ -97,7 +97,9 @@ public class Librarian extends Person {
       "|" +
       issue.getName() +
       "|" +
-      issue.getBookTitle();
+      issue.getBookTitle()+
+      "|" +
+      issue.getIsActive();
     try {
       saveToFile("Issues.txt", issueInput, true);
     } catch (IOException e) {

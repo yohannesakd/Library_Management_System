@@ -187,7 +187,8 @@ public static Issue retrieveSingleIssue(int memberId, int bookId) throws FileNot
           values[3],
           values[4],
           values[5],
-          values[6]
+          values[6],
+          Boolean.parseBoolean(values[7])
         );
         issueList.add(lb);
       }

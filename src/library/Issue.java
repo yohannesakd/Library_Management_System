@@ -12,6 +12,7 @@ public class Issue {
   private String dueDate;
   private String name;
   private String bookTitle;
+  private boolean isActive = true;
 
 public Issue(){}
 
@@ -23,7 +24,8 @@ public Issue(){}
     String issueDate,
     String dueDate,
     String name,
-    String bookTitle
+    String bookTitle, 
+    boolean isActive
   ) {
     this.member_id = member_id;
     this.book_id = book_id;
@@ -32,6 +34,7 @@ public Issue(){}
     this.name = name;
     this.issue_id = issue_id;
     this.bookTitle = bookTitle;
+    this.isActive = isActive;
   }
 
   public void setBookTitle(String bookTitle) {
@@ -90,6 +93,13 @@ public Issue(){}
     this.name = name;
   }
 
+  public void setIsActive(boolean active){
+    this.isActive = active;
+  }
+
+  public boolean getIsActive(){
+    return isActive;
+  }
   //primary methods
   @Override
   public String toString() {
