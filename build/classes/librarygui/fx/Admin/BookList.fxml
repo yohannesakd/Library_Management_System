@@ -34,7 +34,7 @@
                               <Insets top="10.0" />
                            </VBox.margin>
                         </Button>
-                        <Button fx:id="issues" mnemonicParsing="false" prefHeight="25.0" prefWidth="185.0" text="Issues">
+                        <Button fx:id="issues" mnemonicParsing="false" onAction="#issuePage" prefHeight="25.0" prefWidth="185.0" text="Issues">
                            <VBox.margin>
                               <Insets top="10.0" />
                            </VBox.margin>

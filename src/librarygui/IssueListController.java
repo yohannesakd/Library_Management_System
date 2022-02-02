@@ -176,8 +176,26 @@ public void showReturnInfo(ActionEvent event) throws IOException{
 }
 
 @FXML
-public void returnBook(ActionEvent event){
+public void returnBook(ActionEvent event) throws IOException{
+  int memberId, bookId;
+  memberId = Integer.parseInt(memberId1.getText());
+  bookId = Integer.parseInt(bookId1.getText());
+  Issue issueInfo = retrieveSingleIssue(memberId, bookId);
 
+  returnInfo.setVisible(true);
+  if(issueInfo.getBookTitle() == ""){
+    issueId.setText("No Issue Found"); 
+  }
+  else{
+    issueInfo.setIsActive(false);
+    FileAlter.editIssueState(issueInfo);
+    Stage stage = (Stage) book.getScene().getWindow();
+    Parent root = FXMLLoader.load(getClass().getResource("fx/Admin/IssueList.fxml"));
+
+    Scene scene = new Scene(root);
+    stage.setScene(scene);
+    stage.show();
+  }
 }
 
   @FXML 
@@ -350,6 +368,12 @@ public LocalDate getDueDate(ActionEvent event){
           });
         });
 
+      searchFilter.setPredicate((issue) ->{
+            if(issue.getIsActive() == false)
+                return false;
+            return true;
+      });      
+      
       SortedList<Issue> sortedSearch = new SortedList<>(searchFilter);
       sortedSearch.comparatorProperty().bind(tableIssue.comparatorProperty());
 

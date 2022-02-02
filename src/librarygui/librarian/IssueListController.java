@@ -188,6 +188,7 @@ public void returnBook(ActionEvent event) throws IOException{
   }
   else{
     issueInfo.setIsActive(false);
+    FileAlter.editIssueState(issueInfo);
     Stage stage = (Stage) book.getScene().getWindow();
     Parent root = FXMLLoader.load(getClass().getResource("IssueList.fxml"));
 
@@ -282,16 +283,19 @@ public LocalDate getDueDate(ActionEvent event){
     }
 
     FilteredList<Issue> searchFilter;
+
     try {
       searchFilter = new FilteredList<>(giveIssues());
       searchBar
         .textProperty()
         .addListener((observable, oldvalue, newvalue) -> {
           searchFilter.setPredicate(issue -> {
+            
             if (newvalue == null || newvalue.isEmpty()) {
               return true;
             }
-            if (
+
+             if (
               Integer
                 .toString(issue.getIssue_id())
                 .contains(searchBar.getText())
@@ -327,6 +331,12 @@ public LocalDate getDueDate(ActionEvent event){
           });
         });
 
+      searchFilter.setPredicate((issue) ->{
+            if(issue.getIsActive() == false)
+                return false;
+            return true;
+      });
+      
       SortedList<Issue> sortedSearch = new SortedList<>(searchFilter);
       sortedSearch.comparatorProperty().bind(tableIssue.comparatorProperty());
 

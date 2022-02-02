@@ -70,6 +70,25 @@ public class FileAlter {
     if (!alter) return "NO FILE ALTERED";
     return "SUCCESSFULL";
   }
+  
+  
+    public static String editIssueState(Issue editedIssue) throws FileNotFoundException, IOException {
+    ArrayList<Issue> issueList = FileAlter.retrieveAllIssueFile();
+    boolean alter = false;
+    if (new File("Issues.txt").delete()) {} else {
+      return "FILE NOT DELETED";
+    }
+
+    for (Issue issue : issueList) {
+      if (issue.getIssue_id() != editedIssue.getIssue_id())Librarian.addIssue(issue);
+      else {
+        alter = true;
+        Librarian.addIssue(editedIssue);
+      }
+    }
+    if (!alter) return "NO FILE ALTERED";
+    return "SUCCESSFULL";
+  }
 
 
 

@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" minWidth="700.0" prefHeight="833.0" prefWidth="1154.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="librarygui.HomeController">
+<AnchorPane id="AnchorPane" minWidth="700.0" prefHeight="833.0" prefWidth="1154.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="librarygui.librarian.HomeController">
     <children>
         <Label fx:id="label" layoutX="126" layoutY="120" minHeight="16" minWidth="69" />
       <SplitPane dividerPositions="0.3078078078078078, 0.5" layoutX="26.0" layoutY="120.0" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -23,7 +23,7 @@
                <children>
                   <VBox layoutX="29.0" layoutY="50.0" prefHeight="771.0" prefWidth="180.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="50.0">
                      <children>
-                        <Button fx:id="home" defaultButton="true" mnemonicParsing="false" onAction="#homePage" prefHeight="25.0" prefWidth="191.0" style="-fx-background-color: grey;" text="Home" textFill="WHITE">
+                        <Button fx:id="home" defaultButton="true" mnemonicParsing="false" prefHeight="25.0" prefWidth="191.0" style="-fx-background-color: grey;" text="Home" textFill="WHITE">
                            <VBox.margin>
                               <Insets top="10.0" />
                            </VBox.margin>
@@ -33,7 +33,7 @@
                               <Insets top="10.0" />
                            </VBox.margin>
                         </Button>
-                        <Button fx:id="issue" mnemonicParsing="false" prefHeight="25.0" prefWidth="185.0" text="Issues">
+                        <Button fx:id="issue" mnemonicParsing="false" onAction="#issuePage" prefHeight="25.0" prefWidth="185.0" text="Issues">
                            <VBox.margin>
                               <Insets top="10.0" />
                            </VBox.margin>
