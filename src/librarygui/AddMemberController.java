@@ -57,6 +57,7 @@ public class AddMemberController implements Initializable {
     Stage stage = (Stage) registerBtn.getScene().getWindow();
     stage.close();
 
+
     Screen screen = Screen.getPrimary();
     Rectangle2D bounds = screen.getVisualBounds();
 
@@ -71,6 +72,8 @@ public class AddMemberController implements Initializable {
     stage.setScene(scene);
     stage.show();
   }
+
+ 
 
   public void initialize(URL url, ResourceBundle rb) {}
 }

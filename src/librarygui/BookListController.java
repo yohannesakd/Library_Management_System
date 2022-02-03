@@ -177,7 +177,7 @@ public class BookListController implements Initializable {
     @FXML
     private void bookEdit(ActionEvent event) throws IOException {
         Book inpbook = new Book();
-        
+        try{
         inpbook.setBook_id(CurrentBookId);
         inpbook.setTitle(titleField.getText());
         inpbook.setAuthor(authorField.getText());
@@ -195,6 +195,10 @@ public class BookListController implements Initializable {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+      }
+      catch (NumberFormatException e){
+        checkInput.setText("INVALID INPUT! REVIEW YOUR INPUTS!");
+      }
     }
 
     @FXML

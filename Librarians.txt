@@ -1,3 +1,2 @@
 1001|fantish|admin|Yohannes Fantahun|911122112|fantish@mail.com|Bole1001
-1002|qwerty|null|qwertyu|234567|qwertyui|qwerty
 1003|qwertyu|null|qwertyui|1234567|qwerty|qwerty
