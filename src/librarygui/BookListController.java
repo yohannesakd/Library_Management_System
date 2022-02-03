@@ -26,6 +26,8 @@ import javafx.util.converter.IntegerStringConverter;
 import library.*;
 
 public class BookListController implements Initializable {
+    
+    public static int CurrentBookId;
 
     @FXML
     private Button home;
@@ -154,7 +156,10 @@ public class BookListController implements Initializable {
 
     @FXML
     private void handleBookEdit(ActionEvent event) throws IOException {
+        
         Book toBeEdited = tableBook.getSelectionModel().getSelectedItem();
+        CurrentBookId = toBeEdited.getBook_id();
+        
         if (toBeEdited == null) {
             editAlert.setText("PLEASE SELECT THE ROW TO EDIT");
             return;
@@ -170,6 +175,7 @@ public class BookListController implements Initializable {
     private void bookEdit(ActionEvent event) throws IOException {
         Book inpbook = new Book();
         
+        inpbook.setBook_id(CurrentBookId);
         inpbook.setTitle(titleField.getText());
         inpbook.setAuthor(authorField.getText());
         inpbook.setEdition(editionField.getText());
