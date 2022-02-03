@@ -3,6 +3,7 @@ package librarygui;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.collections.*;
 import javafx.collections.transformation.SortedList;
@@ -179,8 +180,18 @@ public class AdminListController implements Initializable {
       demoteAlert.setText("Please Select a Field");
       return;
     }
+    int tbd = toBeDemoted.getId();
 
     Librarian newLib = new Librarian();
+
+    ArrayList<Librarian> emplist = new ArrayList<>();
+    try {
+      emplist = FileAlter.retrieveAllemployeeFile();
+    } catch (java.io.FileNotFoundException e) {}
+
+    if (!emplist.isEmpty()) newLib.setId(
+      emplist.get(emplist.size() - 1).getId() + 1
+    );
 
     newLib.setAddress(toBeDemoted.getAddress());
     newLib.setEmail(toBeDemoted.getEmail());
@@ -190,7 +201,7 @@ public class AdminListController implements Initializable {
     newLib.setPhoneNo(toBeDemoted.getPhoneNo());
     newLib.setUsername(toBeDemoted.getUsername());
     Admin.addLibrarian(newLib);
-    String status = FileAlter.deleteAdmin(newLib.getId());
+    String status = FileAlter.deleteAdmin(tbd);
     if (status == "cant") {
       demoteAlert.setText("Can not Remove Admin!");
     } else {
@@ -216,17 +227,27 @@ public class AdminListController implements Initializable {
       return;
     }
 
+    int tbd = lib.getId();
+
     Admin newAdmin = new Admin();
+
+    ArrayList<Admin> admlist = new ArrayList<>();
+    try {
+      admlist = FileAlter.retrieveAllAdminFile();
+    } catch (java.io.FileNotFoundException e) {}
+
+    if (!admlist.isEmpty()) newAdmin.setId(
+      admlist.get(admlist.size() - 1).getId() + 1
+    );
 
     newAdmin.setAddress(lib.getAddress());
     newAdmin.setEmail(lib.getEmail());
     newAdmin.setFullName(lib.getFullName());
-    newAdmin.setId(lib.getId());
     newAdmin.setPassword(lib.getPassword());
     newAdmin.setPhoneNo(lib.getPhoneNo());
     newAdmin.setUsername(lib.getUsername());
     Admin.addAdmin(newAdmin);
-    FileAlter.deleteLibrarian(newAdmin.getId());
+    FileAlter.deleteLibrarian(tbd);
 
     Stage stage = (Stage) book.getScene().getWindow();
     Parent root = FXMLLoader.load(
