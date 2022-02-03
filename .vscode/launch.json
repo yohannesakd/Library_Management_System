@@ -6,38 +6,6 @@
   "configurations": [
     {
       "type": "java",
-      "name": "Launch Library",
-      "request": "launch",
-      "mainClass": "librarygui.Library",
-      "projectName": "Library_Management_System_556bd65d",
-      "vmArgs": "--module-path \"C:\\javafx-sdk-17.0.2\\lib\" --add-modules javafx.controls,javafx.fxml"
-    },
-    {
-      "type": "java",
-      "name": "Launch Library",
-      "request": "launch",
-      "mainClass": "librarygui.Library",
-      "projectName": "LibraryGUI_2b523a3c",
-      "vmArgs": "--module-path \"C:Java\\javafx-sdk-17.0.2\\lib\" --add-modules javafx.controls,javafx.fxml"
-    },
-    {
-      "type": "java",
-      "name": "Launch LibraryGUI",
-      "request": "launch",
-      "mainClass": "librarygui.LibraryGUI",
-      "projectName": "LibraryGUI_2b523a3c",
-      "vmArgs": "--module-path \"C:\\Program Files\\Java\\javafx-sdk-17.0.2\\lib\" --add-modules javafx.controls,javafx.fxml"
-    },
-    {
-      "type": "java",
-      "name": "Launch Implementation",
-      "request": "launch",
-      "mainClass": "LibraryReferal.Implementation",
-      "projectName": "LibraryGUI_2b523a3c",
-      "vmArgs": "--module-path \"C:\\Program Files\\Java\\javafx-sdk-17.0.2\\lib\" --add-modules javafx.controls,javafx.fxml"
-    },
-    {
-      "type": "java",
       "name": "Launch Current File",
       "request": "launch",
       "mainClass": "${file}",
@@ -45,24 +13,11 @@
     },
     {
       "type": "java",
-      "name": "Launch Implementation",
+      "name": "Launch Library",
       "request": "launch",
-      "mainClass": "LibraryReferal.Implementation",
-      "projectName": "LibraryGUI_5f6cddb4"
-    },
-    {
-      "type": "java",
-      "name": "Launch PersonDemo",
-      "request": "launch",
-      "mainClass": "library.PersonDemo",
-      "projectName": "LibraryGUI_5f6cddb4"
-    },
-    {
-      "type": "java",
-      "name": "Launch LibraryGUI",
-      "request": "launch",
-      "mainClass": "librarygui.LibraryGUI",
-      "projectName": "LibraryGUI_5f6cddb4"
+      "mainClass": "librarygui.Library",
+      "projectName": "LibraryGUI_2b523a3c",
+      "vmArgs": "--module-path \"C:\\Program Files\\Java\\javafx-sdk-17.0.2\\lib\" --add-modules javafx.controls,javafx.fxml"
     }
   ]
 }

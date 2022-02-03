@@ -102,6 +102,7 @@
                         <TableColumn fx:id="bookid" prefWidth="34.0" text="id" />
                         <TableColumn fx:id="title" prefWidth="176.0" text="Title" />
                         <TableColumn fx:id="author" prefWidth="146.0" text="Author" />
+                        <TableColumn fx:id="category" prefWidth="75.0" text="Category" />
                         <TableColumn fx:id="edition" prefWidth="82.0" text="Edition" />
                         <TableColumn fx:id="isbn" prefWidth="90.0" text="ISBN" />
                         <TableColumn fx:id="pages" prefWidth="70.0" text="Pages" />
@@ -161,7 +162,7 @@
                            </children>
                         </HBox>
                         <StackPane maxWidth="1.7976931348623157E308" prefHeight="20.0" prefWidth="338.0" />
-                        <VBox fx:id="formContainer" prefHeight="602.0" prefWidth="338.0" visible="false">
+                        <VBox fx:id="formContainer" prefHeight="602.0" prefWidth="338.0">
                            <children>
                               <Label fx:id="addLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="21.0" prefWidth="338.0" text="Add/Edit Book">
                                  <font>
@@ -197,6 +198,12 @@
                                     <Insets />
                                  </VBox.margin>
                               </TextField>
+                              <Label alignment="CENTER" prefHeight="17.0" prefWidth="338.0" text="Category">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="categoryField" prefHeight="25.0" prefWidth="316.0" />
                               <Label alignment="CENTER" prefHeight="28.0" prefWidth="357.0" text="Edition">
                                  <font>
                                     <Font size="13.0" />
@@ -267,6 +274,11 @@
                                     <Button fx:id="saveAdd" mnemonicParsing="false" onAction="#completeAddBook" prefHeight="36.0" prefWidth="407.0" text="Add Book" />
                                  </children>
                               </StackPane>
+                              <Label fx:id="checkInput" prefHeight="35.0" prefWidth="335.0">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
                               <Button fx:id="backbtn" mnemonicParsing="false" onAction="#goBack" prefHeight="36.0" prefWidth="410.0" text="Back">
                                  <VBox.margin>
                                     <Insets bottom="5.0" />

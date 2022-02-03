@@ -97,33 +97,46 @@ public class LoginController implements Initializable {
         alert.setText("Incorrect Username or Password");
       }
     } else {
-      if (
-        userName.getText().equals("librarian") &&
-        passWord.getText().equals("pass")
-      ) {
-        Stage stage = (Stage) login.getScene().getWindow();
-        stage.close();
-        stage = new Stage();
+      if (loger.getValue().equals("Librarian")) {
+        ArrayList<Librarian> liblist = FileAlter.retrieveAllemployeeFile();
+        boolean found = false;
+        for (int i = 0; i < liblist.size(); i++) {
+          System.out.println(liblist.get(i).getUsername());
+          System.out.println(liblist.get(i).getPassword());
+          if (
+            userName.getText().equals(liblist.get(i).getUsername()) &&
+            passWord.getText().equals(liblist.get(i).getPassword())
+          ) {
+            found = true;
+            userType = loger.getValue();
+            currentUser = liblist.get(i).getId();
+            System.out.println("at least this executes");
+            alert.setText("Login Successfull");
+            Stage stage = (Stage) login.getScene().getWindow();
+            stage.close();
+            stage = new Stage();
 
-        Screen screen = Screen.getPrimary();
-        Rectangle2D bounds = screen.getVisualBounds();
+            Screen screen = Screen.getPrimary();
+            Rectangle2D bounds = screen.getVisualBounds();
 
-        stage.setX(bounds.getMinX());
-        stage.setY(bounds.getMinY());
-        stage.setWidth(bounds.getWidth());
-        stage.setHeight(bounds.getHeight());
+            stage.setX(bounds.getMinX());
+            stage.setY(bounds.getMinY());
+            stage.setWidth(bounds.getWidth());
+            stage.setHeight(bounds.getHeight());
 
-        stage.setMinWidth(700);
-        stage.setMinHeight(700);
-        Parent root = FXMLLoader.load(
-          getClass().getResource("librarian/Home.fxml")
-        );
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-        alert.setText("Login Successfull");
-      } else {
-        alert.setText("Incorrect Username or Password.");
+            stage.setMinWidth(700);
+            stage.setMinHeight(700);
+            Parent root = FXMLLoader.load(
+              getClass().getResource("librarian/Home.fxml")
+            );
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+          }
+        }
+        if (!found) {
+          alert.setText("Incorrect Username or Password");
+        }
       }
     }
   }

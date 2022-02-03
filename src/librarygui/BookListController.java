@@ -100,6 +100,9 @@ public class BookListController implements Initializable {
     private TableColumn<Book, String> edition;
 
     @FXML
+    private TableColumn<Book, String> category;
+    
+    @FXML
     private TableColumn<Book, String> isbn;
 
     @FXML
@@ -127,6 +130,9 @@ public class BookListController implements Initializable {
     private Label checkInput;
 
     @FXML
+    private TextField categoryField;
+
+    @FXML
     private void handleBookDelete(ActionEvent event) throws IOException {
         Book toBeDeleted = tableBook.getSelectionModel().getSelectedItem();
 
@@ -151,6 +157,7 @@ public class BookListController implements Initializable {
         titleField.setText(book.getTitle());
         authorField.setText(book.getAuthor());
         editionField.setText(book.getEdition());
+        categoryField.setText(book.getCategory());
         pagesField.setText(Integer.toString(book.getPages()));
         ISBNField.setText(Long.toString(book.getIsbn()));
         shelfNoField.setText(book.getShelfNo());
@@ -181,6 +188,7 @@ public class BookListController implements Initializable {
         inpbook.setBook_id(CurrentBookId);
         inpbook.setTitle(titleField.getText());
         inpbook.setAuthor(authorField.getText());
+        inpbook.setCategory(categoryField.getText());
         inpbook.setEdition(editionField.getText());
         inpbook.setPages(Integer.parseInt(pagesField.getText()));
         inpbook.setIsbn(Long.parseLong(ISBNField.getText()));
@@ -288,6 +296,7 @@ public class BookListController implements Initializable {
         try{
         inpbook.setTitle(titleField.getText());
         inpbook.setAuthor(authorField.getText());
+        inpbook.setCategory(categoryField.getText());
         inpbook.setEdition(editionField.getText());
         inpbook.setPages(Integer.parseInt(pagesField.getText()));
         inpbook.setIsbn(Long.parseLong(ISBNField.getText()));
@@ -316,12 +325,12 @@ public class BookListController implements Initializable {
         saveAdd.setVisible(false);
     }
 
-    @FXML
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         bookid.setCellValueFactory(new PropertyValueFactory<>("book_id"));
         title.setCellValueFactory(new PropertyValueFactory<>("title"));
         author.setCellValueFactory(new PropertyValueFactory<>("author"));
+        category.setCellValueFactory(new PropertyValueFactory<>("category"));
         edition.setCellValueFactory(new PropertyValueFactory<>("edition"));
         isbn.setCellValueFactory(new PropertyValueFactory<>("isbn"));
         pages.setCellValueFactory(new PropertyValueFactory<>("pages"));

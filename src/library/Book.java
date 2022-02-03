@@ -6,6 +6,7 @@ public class Book {
   private int book_id = 1000;
   private String title;
   private String author;
+  private String category;
   private String edition;
   private long isbn;
   private int pages;
@@ -19,6 +20,7 @@ public class Book {
     int book_id,
     String title,
     String author,
+    String category,
     String edition,
     long isbn,
     int pages,
@@ -29,6 +31,7 @@ public class Book {
     this.book_id = book_id;
     this.title = title;
     this.author = author;
+    this.category = category;
     this.edition = edition;
     this.isbn = isbn;
     this.pages = pages;
@@ -40,8 +43,17 @@ public class Book {
 
   public Book() {}
 
+
   //Setup accessors
-  //Get
+  //Get    
+  public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
     public int getNoOfBookCopy() {
         return noOfBookCopy;
     }

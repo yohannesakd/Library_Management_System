@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" minWidth="700.0" prefHeight="833.0" prefWidth="1154.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="librarygui.BookListController">
+<AnchorPane id="AnchorPane" minWidth="700.0" prefHeight="833.0" prefWidth="1154.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="librarygui.BookListController">
     <children>
       <MenuBar prefHeight="25.0" prefWidth="1154.0" AnchorPane.bottomAnchor="825.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <menus>
@@ -102,6 +102,7 @@
                         <TableColumn fx:id="bookid" prefWidth="34.0" text="id" />
                         <TableColumn fx:id="title" prefWidth="176.0" text="Title" />
                         <TableColumn fx:id="author" prefWidth="146.0" text="Author" />
+                        <TableColumn fx:id="category" prefWidth="75.0" text="Category" />
                         <TableColumn fx:id="edition" prefWidth="82.0" text="Edition" />
                         <TableColumn fx:id="isbn" prefWidth="90.0" text="ISBN" />
                         <TableColumn fx:id="pages" prefWidth="70.0" text="Pages" />
@@ -161,7 +162,7 @@
                            </children>
                         </HBox>
                         <StackPane maxWidth="1.7976931348623157E308" prefHeight="20.0" prefWidth="338.0" />
-                        <VBox fx:id="formContainer" prefHeight="602.0" prefWidth="338.0" visible="false">
+                        <VBox fx:id="formContainer" prefHeight="602.0" prefWidth="338.0">
                            <children>
                               <Label fx:id="addLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="21.0" prefWidth="338.0" text="Add/Edit Book">
                                  <font>
@@ -197,6 +198,12 @@
                                     <Insets />
                                  </VBox.margin>
                               </TextField>
+                              <Label alignment="CENTER" prefHeight="17.0" prefWidth="338.0" text="Category">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="categoryField" prefHeight="25.0" prefWidth="316.0" />
                               <Label alignment="CENTER" prefHeight="28.0" prefWidth="357.0" text="Edition">
                                  <font>
                                     <Font size="13.0" />
