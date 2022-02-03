@@ -69,6 +69,23 @@ public class FileAlter {
     return "SUCCESSFULL";
   }
 
+  public static String deleteAdmin(int id) throws FileNotFoundException {
+    boolean deletion = false;
+    ArrayList<Admin> adminList = retrieveAllAdminFile();
+
+    if (new File("Admins.txt").delete()) {} else {
+      return "FILE NOT DELETED";
+    }
+
+    for (Admin admin : adminList) {
+      if (admin.getId() != id) Admin.addAdmin(admin); else {
+        deletion = true;
+      }
+    }
+    if (!deletion) return "NO FILE DELETED";
+    return "SUCCESSFULL";
+  }
+
   public static String editBook(Book book) throws FileNotFoundException {
     ArrayList<Book> booklist = FileAlter.retrieveAllbookFile();
     boolean alter = false;
@@ -226,7 +243,7 @@ public class FileAlter {
         return empList.get(i);
       }
     }
-    return new Admin();
+    return new Librarian();
   }
 
   public static ArrayList<Issue> retrieveAllIssueFile()

@@ -15,8 +15,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import library.Admin;
+import library.FileAlter;
+import library.Librarian;
 
 public class AdminListController implements Initializable {
 
@@ -42,6 +45,33 @@ public class AdminListController implements Initializable {
   private Button backBtn;
 
   @FXML
+  private Button add;
+
+  @FXML
+  private Button confirmAdd;
+
+  @FXML
+  private TextField adminID;
+
+  @FXML
+  private HBox addInput;
+
+  @FXML
+  private Button demote;
+
+  @FXML
+  private Button remove;
+
+  @FXML
+  private Label promoteAlert;
+
+  @FXML
+  private Label demoteAlert;
+
+  @FXML
+  private Label removeAlert;
+
+  @FXML
   private TableView<Admin> tableAdmin;
 
   @FXML
@@ -63,9 +93,96 @@ public class AdminListController implements Initializable {
   private TableColumn<Admin, String> address;
 
   @FXML
+  public void showAdd(ActionEvent event) {
+    addInput.setVisible(true);
+  }
+
+  @FXML
   public void goBack(ActionEvent event) throws IOException {
     Stage stage = (Stage) book.getScene().getWindow();
     Parent root = FXMLLoader.load(getClass().getResource("fx/admin/Home.fxml"));
+    Scene scene = new Scene(root);
+    stage.setScene(scene);
+    stage.show();
+  }
+
+  @FXML
+  private void handleRemove(ActionEvent event) throws IOException {
+    Admin toBeDeleted = tableAdmin.getSelectionModel().getSelectedItem();
+
+    if (toBeDeleted == null) {
+      removeAlert.setText("PLEASE SELECT A ROW TO DELETE.");
+      return;
+    }
+
+    removeAlert.setText(FileAlter.deleteAdmin(toBeDeleted.getId()));
+
+    Stage stage = (Stage) removeAlert.getScene().getWindow();
+    Parent root = FXMLLoader.load(
+      getClass().getResource("fx/Admin/AdminList.fxml")
+    );
+    Scene scene = new Scene(root);
+    stage.setScene(scene);
+    stage.show();
+  }
+
+  @FXML
+  public void handleDemote(ActionEvent event) throws IOException {
+    Admin toBeDemoted = tableAdmin.getSelectionModel().getSelectedItem();
+
+    if (toBeDemoted == null) {
+      demoteAlert.setText("Please Select a Field");
+      return;
+    }
+
+    Librarian newLib = new Librarian();
+
+    newLib.setAddress(toBeDemoted.getAddress());
+    newLib.setEmail(toBeDemoted.getEmail());
+    newLib.setFullName(toBeDemoted.getFullName());
+    newLib.setId(toBeDemoted.getId());
+    newLib.setPassword(toBeDemoted.getPassword());
+    newLib.setPhoneNo(toBeDemoted.getPhoneNo());
+    newLib.setUsername(toBeDemoted.getUsername());
+    Admin.addLibrarian(newLib);
+    FileAlter.deleteAdmin(newLib.getId());
+    Stage stage = (Stage) book.getScene().getWindow();
+    Parent root = FXMLLoader.load(
+      getClass().getResource("fx/admin/AdminList.fxml")
+    );
+
+    Scene scene = new Scene(root);
+    stage.setScene(scene);
+    stage.show();
+  }
+
+  @FXML
+  public void handleAdminAdd(ActionEvent event) throws IOException {
+    Librarian lib = FileAlter.retrieveSingleEmployee(
+      Integer.parseInt(adminID.getText())
+    );
+    if (lib == null) {
+      promoteAlert.setText("Please Select a Valid ID");
+      return;
+    }
+
+    Admin newAdmin = new Admin();
+
+    newAdmin.setAddress(lib.getAddress());
+    newAdmin.setEmail(lib.getEmail());
+    newAdmin.setFullName(lib.getFullName());
+    newAdmin.setId(lib.getId());
+    newAdmin.setPassword(lib.getPassword());
+    newAdmin.setPhoneNo(lib.getPhoneNo());
+    newAdmin.setUsername(lib.getUsername());
+    Admin.addAdmin(newAdmin);
+    FileAlter.deleteLibrarian(newAdmin.getId());
+
+    Stage stage = (Stage) book.getScene().getWindow();
+    Parent root = FXMLLoader.load(
+      getClass().getResource("fx/admin/AdminList.fxml")
+    );
+
     Scene scene = new Scene(root);
     stage.setScene(scene);
     stage.show();

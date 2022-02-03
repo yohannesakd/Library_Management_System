@@ -7,6 +7,7 @@ package librarygui;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.collections.*;
 import javafx.event.ActionEvent;
@@ -19,6 +20,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import library.*;
 
 /**
  *
@@ -44,6 +46,9 @@ public class LoginController implements Initializable {
   @FXML
   private ComboBox<String> loger;
 
+  public static int currentUser;
+  public static String userType;
+
   ObservableList<String> list = FXCollections.observableArrayList(
     "Admin",
     "Librarian"
@@ -52,32 +57,45 @@ public class LoginController implements Initializable {
   @FXML
   private void handleButtonAction(ActionEvent event) throws IOException {
     if (loger.getValue().equals("Admin")) {
-      if (
-        userName.getText().equals("admin") && passWord.getText().equals("admin")
-      ) {
-        System.out.println("at least this executes");
-        alert.setText("Login Successfull");
-        Stage stage = (Stage) login.getScene().getWindow();
-        stage.close();
-        stage = new Stage();
+      ArrayList<Admin> adminList = FileAlter.retrieveAllAdminFile();
+      boolean found = false;
+      for (int i = 0; i < adminList.size(); i++) {
+        System.out.println(adminList.get(i).getUsername());
+        System.out.println(adminList.get(i).getPassword());
+        if (
+          userName.getText().equals(adminList.get(i).getUsername()) &&
+          passWord.getText().equals(adminList.get(i).getPassword())
+        ) {
+          found = true;
+          userType = loger.getValue();
+          currentUser = adminList.get(i).getId();
+          System.out.println("at least this executes");
+          alert.setText("Login Successfull");
+          Stage stage = (Stage) login.getScene().getWindow();
+          stage.close();
+          stage = new Stage();
 
-        Screen screen = Screen.getPrimary();
-        Rectangle2D bounds = screen.getVisualBounds();
+          Screen screen = Screen.getPrimary();
+          Rectangle2D bounds = screen.getVisualBounds();
 
-        stage.setX(bounds.getMinX());
-        stage.setY(bounds.getMinY());
-        stage.setWidth(bounds.getWidth());
-        stage.setHeight(bounds.getHeight());
+          stage.setX(bounds.getMinX());
+          stage.setY(bounds.getMinY());
+          stage.setWidth(bounds.getWidth());
+          stage.setHeight(bounds.getHeight());
 
-        stage.setMinWidth(700);
-        stage.setMinHeight(700);
-        Parent root = FXMLLoader.load(
-          getClass().getResource("fx/admin/Home.fxml")
-        );
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-      } else alert.setText("Incorrect Username or Password.");
+          stage.setMinWidth(700);
+          stage.setMinHeight(700);
+          Parent root = FXMLLoader.load(
+            getClass().getResource("fx/admin/Home.fxml")
+          );
+          Scene scene = new Scene(root);
+          stage.setScene(scene);
+          stage.show();
+        }
+      }
+      if (!found) {
+        alert.setText("Incorrect Username or Password");
+      }
     } else {
       if (
         userName.getText().equals("librarian") &&

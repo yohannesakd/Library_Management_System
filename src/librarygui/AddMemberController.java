@@ -39,11 +39,11 @@ public class AddMemberController implements Initializable {
   @FXML
   private void handleRegister() throws IOException {
     Member mem = new Member();
-    
-    ArrayList<Member> memberlist =  FileAlter.retrieveAllMemberFile();
-    if(!memberlist.isEmpty())
-        mem.setMember_id(memberlist.get(memberlist.size()-1).getMember_id()+1);
 
+    ArrayList<Member> memberlist = FileAlter.retrieveAllMemberFile();
+    if (!memberlist.isEmpty()) mem.setMember_id(
+      memberlist.get(memberlist.size() - 1).getMember_id() + 1
+    );
 
     mem.setFullName(fullNameField.getText());
     mem.setAddress(addressField.getText());

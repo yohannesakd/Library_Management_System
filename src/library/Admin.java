@@ -54,7 +54,7 @@ public class Admin extends Librarian {
 
   public void removeBook(Book book) {}
 
-  public String addAdmin(Admin admin) {
+  public static String addAdmin(Admin admin) {
     String empInput =
       admin.getId() +
       "|" +

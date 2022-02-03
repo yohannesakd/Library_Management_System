@@ -85,7 +85,6 @@ public class LibListController implements Initializable {
   @FXML
   private TextField searchBar;
 
-
   @FXML
   private TextField usernameField;
 
@@ -195,20 +194,20 @@ public class LibListController implements Initializable {
   @FXML
   public void showForm(ActionEvent event) throws IOException {
     formContainer.setVisible(true);
-    usernameField.requestFocus();
+    fullNameField.requestFocus();
   }
 
   @FXML
   private void registerLib(ActionEvent event) throws IOException {
     Librarian inpLib = new Librarian();
-    
-    ArrayList<Librarian> liblist =  FileAlter.retrieveAllemployeeFile();
-    if(!liblist.isEmpty())
-        inpLib.setId(liblist.get(liblist.size()-1).getId()+1);
-    
-    
+
+    ArrayList<Librarian> liblist = FileAlter.retrieveAllemployeeFile();
+    if (!liblist.isEmpty()) inpLib.setId(
+      liblist.get(liblist.size() - 1).getId() + 1
+    );
+
     inpLib.setFullName(fullNameField.getText());
-    
+
     inpLib.setPhoneNo(Integer.parseInt(phoneField.getText()));
     inpLib.setUsername(usernameField.getText());
     inpLib.setEmail(emailField.getText());
