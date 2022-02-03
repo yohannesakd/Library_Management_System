@@ -14,7 +14,6 @@ public class Library extends Application {
   @Override
   public void start(Stage stage) throws Exception {
     Parent root = FXMLLoader.load(getClass().getResource("fx/Login.fxml"));
-
     Scene scene = new Scene(root);
 
     // Screen screen = Screen.getPrimary();
@@ -37,6 +36,6 @@ public class Library extends Application {
   }
 
   public static void main(String[] args) {
-    launch(args);   
+    launch(args);
   }
 }
