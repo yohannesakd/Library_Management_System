@@ -3,3 +3,4 @@
 1001|1001|1000|2022-02-03|2022-02-24|Yohannes Teshome|the book|false
 1000|1004|1000|2022-02-03|2022-02-10|Yohannes Mesganaw|another one|false
 1001|1004|1000|2022-02-03|2022-02-08|Yohannes Teshome|another one|true
+1017|1000|1000|2022-02-03|2022-02-09|Kida|The Book|true

@@ -151,9 +151,10 @@ public class BookListController implements Initializable {
     Parent root = FXMLLoader.load(
       getClass().getResource("fx/admin/EditProfile.fxml")
     );
+    Scene scene = new Scene(root);
+    stage.setScene(scene);
+    stage.show();
   }
-
-
 
   @FXML
   void logOut(ActionEvent event) throws IOException {
@@ -207,18 +208,18 @@ public class BookListController implements Initializable {
 
   @FXML
   private void handleBookEdit(ActionEvent event) throws IOException {
-    Book toBeEdited = tableBook.getSelectionModel().getSelectedItem();
-    CurrentBookId = toBeEdited.getBook_id();
-
-    if (toBeEdited == null) {
+    try {
+      Book toBeEdited = tableBook.getSelectionModel().getSelectedItem();
+      CurrentBookId = toBeEdited.getBook_id();
+      editBook(toBeEdited);
+      formContainer.setVisible(true);
+      titleField.requestFocus();
+      saveAdd.setVisible(false);
+      saveEdit.setVisible(true);
+    } catch (NullPointerException e) {
       editAlert.setText("PLEASE SELECT THE ROW TO EDIT");
       return;
     }
-    editBook(toBeEdited);
-    formContainer.setVisible(true);
-    titleField.requestFocus();
-    saveAdd.setVisible(false);
-    saveEdit.setVisible(true);
   }
 
   @FXML
