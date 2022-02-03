@@ -27,6 +27,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import library.*;
+import static library.FileAlter.updateIssuedBook;
 
 public class IssueListController implements Initializable {
 
@@ -239,6 +240,10 @@ public class IssueListController implements Initializable {
       issueInfo.setIsActive(false);
       System.out.println(issueInfo);
       FileAlter.editIssueState(issueInfo);
+
+      FileAlter.updateIssuedBook(Integer.parseInt(bookId1.getText()), true);
+      FileAlter.updateIssueMember(memberId, true);
+      
       Stage stage = (Stage) book.getScene().getWindow();
       Parent root = FXMLLoader.load(
         getClass().getResource("fx/Admin/IssueList.fxml")
@@ -267,6 +272,9 @@ public class IssueListController implements Initializable {
     inpIssue.setName(retrieveMemberName(Integer.parseInt(memberId.getText())));
     inpIssue.setIssueDate(inpIssue.getDateNow().toString());
     inpIssue.setDueDate(getDueDate(event).toString());
+    
+    FileAlter.updateIssuedBook(Integer.parseInt(bookId.getText()), false);
+    FileAlter.updateIssueMember(Integer.parseInt(memberId.getText()), false);
 
     String str = Admin.addIssue(inpIssue);
     System.out.println(str);

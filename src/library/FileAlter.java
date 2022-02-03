@@ -219,7 +219,54 @@ public class FileAlter {
     return adminList;
   }
 
-  public static Issue retrieveSingleIssue(int memberId, int bookId)
+  
+  public static void updateIssuedBook(int book_id, boolean isReturning) throws FileNotFoundException{
+      ArrayList<Book> books = FileAlter.retrieveAllbookFile();
+      for(Book book : books){
+          if((book.getBook_id() == book_id) && isReturning){
+              book.setNoOfBookIssued(book.getNoOfBookIssued()-1);
+              FileAlter.editBook(book);
+              break;
+          }
+          else if((book.getBook_id() == book_id) && !isReturning){
+              book.setNoOfBookIssued(book.getNoOfBookIssued()+1);
+              FileAlter.editBook(book);
+              break;             
+          }
+      }  
+  }
+  
+  
+    public static String updateIssueMember(int member_id, boolean isReturning) throws FileNotFoundException{
+      ArrayList<Member> members = FileAlter.retrieveAllMemberFile();
+      for(Member member : members){
+          if((member.getMember_id() == member_id) && isReturning){
+              member.setNoOfBookIssued(0);
+              break;
+          }
+          else {
+              member.setNoOfBookIssued(1);
+              break;             
+          }
+      }
+      
+    boolean alter = false;
+    if (new File("Members.txt").delete()) {} else {
+      return "FILE NOT DELETED";
+    }
+
+    for (Member member : members) {
+      if (member.getMember_id() == member_id){
+          library.Librarian.addMember(member);
+    }
+  }
+    if (!alter) return "NO FILE ALTERED";
+    return "SUCCESSFULL";
+ }
+
+  
+  
+    public static Issue retrieveSingleIssue(int memberId, int bookId)
     throws FileNotFoundException {
     ArrayList<Issue> issueList = retrieveAllIssueFile();
     for (int i = 0; i < issueList.size(); i++) {

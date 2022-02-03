@@ -112,7 +112,10 @@ public class BookListController implements Initializable {
 
   @FXML
   private TableColumn<Book, String> copies;
-
+  
+  @FXML
+  private TableColumn<Book , String> issuesCol;
+  
   @FXML
   private TableColumn<Book, String> availablity;
 
@@ -139,7 +142,7 @@ public class BookListController implements Initializable {
 
   @FXML
   private MenuItem exit;
-
+  
   @FXML
   public void editWindow(ActionEvent event) throws IOException {
     Stage stage = (Stage) book.getScene().getWindow();
@@ -153,7 +156,6 @@ public class BookListController implements Initializable {
     stage.show();
   }
 
-  @FXML
   void logOut(ActionEvent event) throws IOException {
     Stage stage = (Stage) book.getScene().getWindow();
     stage.close();
@@ -165,7 +167,6 @@ public class BookListController implements Initializable {
     stage.show();
   }
 
-  @FXML
   void quit(ActionEvent event) throws IOException {
     Stage stage = (Stage) book.getScene().getWindow();
     stage.close();
@@ -214,7 +215,6 @@ public class BookListController implements Initializable {
       saveEdit.setVisible(true);
     } catch (NullPointerException e) {
       editAlert.setText("PLEASE SELECT THE ROW TO EDIT");
-      return;
     }
   }
 
@@ -366,6 +366,7 @@ public class BookListController implements Initializable {
     pages.setCellValueFactory(new PropertyValueFactory<>("pages"));
     shelf.setCellValueFactory(new PropertyValueFactory<>("shelfNo"));
     copies.setCellValueFactory(new PropertyValueFactory<>("noOfBookCopy"));
+    issuesCol.setCellValueFactory(new PropertyValueFactory<>("noOfBookIssued"));
     availablity.setCellValueFactory(new PropertyValueFactory<>("isAvailable"));
 
     try {

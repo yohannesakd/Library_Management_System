@@ -18,7 +18,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="librarygui.BookListController">
    <center>
       <SplitPane dividerPositions="0.3078078078078078, 0.5" prefHeight="825.0" prefWidth="1154.0">
@@ -93,6 +92,7 @@
                         <TableColumn fx:id="pages" prefWidth="70.0" text="Pages" />
                         <TableColumn fx:id="shelf" prefWidth="54.0" text="Shelf No" />
                         <TableColumn fx:id="copies" prefWidth="75.0" text="Copies" />
+                        <TableColumn fx:id="issuesCol" prefWidth="75.0" text="Issues" />
                         <TableColumn fx:id="availablity" prefWidth="75.0" text="Availablity" />
                      </columns>
                      <columnResizePolicy>

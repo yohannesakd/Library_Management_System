@@ -1,1 +1,1 @@
-1000|The Book|The Author|The Category|2|235342|123|3|1|0
+1000|the book|the author|the category|edition|453453|3423|2|3|1
