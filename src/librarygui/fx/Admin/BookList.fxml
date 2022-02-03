@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" minWidth="700.0" prefHeight="833.0" prefWidth="1154.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="librarygui.BookListController">
+<AnchorPane id="AnchorPane" minWidth="700.0" prefHeight="833.0" prefWidth="1154.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="librarygui.BookListController">
     <children>
       <MenuBar prefHeight="25.0" prefWidth="1154.0" AnchorPane.bottomAnchor="825.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <menus>
@@ -267,6 +267,11 @@
                                     <Button fx:id="saveAdd" mnemonicParsing="false" onAction="#completeAddBook" prefHeight="36.0" prefWidth="407.0" text="Add Book" />
                                  </children>
                               </StackPane>
+                              <Label fx:id="checkInput" prefHeight="35.0" prefWidth="335.0">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
                               <Button fx:id="backbtn" mnemonicParsing="false" onAction="#goBack" prefHeight="36.0" prefWidth="410.0" text="Back">
                                  <VBox.margin>
                                     <Insets bottom="5.0" />

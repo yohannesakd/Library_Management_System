@@ -114,8 +114,13 @@ public class AdminListController implements Initializable {
       removeAlert.setText("PLEASE SELECT A ROW TO DELETE.");
       return;
     }
-
-    removeAlert.setText(FileAlter.deleteAdmin(toBeDeleted.getId()));
+String status = FileAlter.deleteAdmin(toBeDeleted.getId());
+if(status=="cant"){
+  removeAlert.setText("Can Not Remove Admin!");
+}
+else{
+    removeAlert.setText(status);
+  }
 
     Stage stage = (Stage) removeAlert.getScene().getWindow();
     Parent root = FXMLLoader.load(
@@ -145,7 +150,13 @@ public class AdminListController implements Initializable {
     newLib.setPhoneNo(toBeDemoted.getPhoneNo());
     newLib.setUsername(toBeDemoted.getUsername());
     Admin.addLibrarian(newLib);
-    FileAlter.deleteAdmin(newLib.getId());
+    String status = FileAlter.deleteAdmin(newLib.getId());
+    if(status == "cant"){
+      demoteAlert.setText("Can not Remove Admin!");
+    }
+    else{
+      demoteAlert.setText(status);
+    }
     Stage stage = (Stage) book.getScene().getWindow();
     Parent root = FXMLLoader.load(
       getClass().getResource("fx/admin/AdminList.fxml")

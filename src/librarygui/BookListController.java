@@ -122,6 +122,9 @@ public class BookListController implements Initializable {
     private Label editAlert;
 
     @FXML
+    private Label checkInput;
+
+    @FXML
     private void handleBookDelete(ActionEvent event) throws IOException {
         Book toBeDeleted = tableBook.getSelectionModel().getSelectedItem();
 
@@ -272,7 +275,7 @@ public class BookListController implements Initializable {
             
     if(!booklist.isEmpty())
         inpbook.setBook_id(booklist.get(booklist.size()-1).getBook_id()+1);
-        
+        try{
         inpbook.setTitle(titleField.getText());
         inpbook.setAuthor(authorField.getText());
         inpbook.setEdition(editionField.getText());
@@ -280,6 +283,7 @@ public class BookListController implements Initializable {
         inpbook.setIsbn(Long.parseLong(ISBNField.getText()));
         inpbook.setShelfNo(shelfNoField.getText());
         inpbook.setNoOfBookCopy(Integer.parseInt(noOfBookCopyField.getText()));
+      
 
         String str = Admin.addBook(inpbook);
         System.out.println(str);
@@ -291,6 +295,10 @@ public class BookListController implements Initializable {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+      }
+      catch (NumberFormatException e){
+        checkInput.setText("INVALID INPUT! REVIEW YOUR INPUTS!");
+      }
     }
 
     public void showEditForm(ActionEvent event) throws IOException {

@@ -4,6 +4,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+
 public class FileAlter {
 
   public static void saveToFile(
@@ -73,15 +74,21 @@ public class FileAlter {
     boolean deletion = false;
     ArrayList<Admin> adminList = retrieveAllAdminFile();
 
-    if (new File("Admins.txt").delete()) {} else {
+    if(adminList.size() <= 1){
+      return "cant";
+    }
+    else if (new File("Admins.txt").delete()) {} else {
       return "FILE NOT DELETED";
     }
 
+    
+    
     for (Admin admin : adminList) {
       if (admin.getId() != id) Admin.addAdmin(admin); else {
         deletion = true;
       }
     }
+  
     if (!deletion) return "NO FILE DELETED";
     return "SUCCESSFULL";
   }
