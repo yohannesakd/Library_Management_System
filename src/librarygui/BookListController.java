@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import CustomException.NullFieldException;
 import javafx.collections.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -21,6 +23,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.converter.IntegerStringConverter;
 import library.*;
@@ -148,34 +151,9 @@ public class BookListController implements Initializable {
     Parent root = FXMLLoader.load(
       getClass().getResource("fx/admin/EditProfile.fxml")
     );
+  }
 
-    @FXML
-    private void bookEdit(ActionEvent event) throws IOException {
-        Book inpbook = new Book();
-        try{
-        inpbook.setBook_id(CurrentBookId);
-        inpbook.setTitle(titleField.getText());
-        inpbook.setAuthor(authorField.getText());
-        inpbook.setCategory(categoryField.getText());
-        inpbook.setEdition(editionField.getText());
-        inpbook.setPages(Integer.parseInt(pagesField.getText()));
-        inpbook.setIsbn(Long.parseLong(ISBNField.getText()));
-        inpbook.setShelfNo(shelfNoField.getText());
-        inpbook.setNoOfBookCopy(Integer.parseInt(noOfBookCopyField.getText()));
-        FileAlter.editBook(inpbook);
 
-        Stage stage = (Stage) add.getScene().getWindow();
-        Parent root = FXMLLoader.load(
-                getClass().getResource("fx/admin/BookList.fxml")
-        );
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-      }
-      catch (NumberFormatException e){
-        checkInput.setText("INVALID INPUT! REVIEW YOUR INPUTS!");
-      }
-    }
 
   @FXML
   void logOut(ActionEvent event) throws IOException {
@@ -216,6 +194,7 @@ public class BookListController implements Initializable {
   }
 
   public void editBook(Book book) {
+
     titleField.setText(book.getTitle());
     authorField.setText(book.getAuthor());
     editionField.setText(book.getEdition());
@@ -245,7 +224,11 @@ public class BookListController implements Initializable {
   @FXML
   private void bookEdit(ActionEvent event) throws IOException {
     Book inpbook = new Book();
-
+try{
+  if(titleField.getText().equals("") || authorField.getText().equals("") || categoryField.getText().equals("") || editionField.getText().equals("") || pagesField.getText().equals("") || ISBNField.getText().equals("") || shelfNoField.getText().equals("") || noOfBookCopyField.getText().equals("")){
+    throw new NullFieldException();
+  }
+ 
     inpbook.setBook_id(CurrentBookId);
     inpbook.setTitle(titleField.getText());
     inpbook.setAuthor(authorField.getText());
@@ -264,6 +247,16 @@ public class BookListController implements Initializable {
     Scene scene = new Scene(root);
     stage.setScene(scene);
     stage.show();
+}
+catch(NullFieldException nE){
+System.out.println(nE.getMessage());
+  checkInput.setText(nE.getMessage());
+  checkInput.setTextFill(Color.RED);
+}
+catch (NumberFormatException e) {
+  checkInput.setText("INVALID INPUT! REVIEW YOUR INPUTS!");
+  checkInput.setTextFill(Color.RED);
+}
   }
 
   @FXML
@@ -337,6 +330,9 @@ public class BookListController implements Initializable {
     saveEdit.setVisible(false);
   }
 
+
+
+  
   @FXML
   private void completeAddBook(ActionEvent event) throws IOException {
     Book inpbook = new Book();
@@ -350,6 +346,9 @@ public class BookListController implements Initializable {
       booklist.get(booklist.size() - 1).getBook_id() + 1
     );
     try {
+      if(titleField.getText().equals("") || authorField.getText().equals("") || categoryField.getText().equals("") || editionField.getText().equals("") || pagesField.getText().equals("") || ISBNField.getText().equals("") || shelfNoField.getText().equals("") || noOfBookCopyField.getText().equals("")){
+        throw new NullFieldException();
+      }
       inpbook.setTitle(titleField.getText());
       inpbook.setAuthor(authorField.getText());
       inpbook.setCategory(categoryField.getText());
@@ -371,7 +370,13 @@ public class BookListController implements Initializable {
       stage.show();
     } catch (NumberFormatException e) {
       checkInput.setText("INVALID INPUT! REVIEW YOUR INPUTS!");
+  checkInput.setTextFill(Color.RED);
     }
+    catch(NullFieldException nE){
+      System.out.println(nE.getMessage());
+        checkInput.setText(nE.getMessage());
+        checkInput.setTextFill(Color.RED);
+      }
   }
 
   public void showEditForm(ActionEvent event) throws IOException {

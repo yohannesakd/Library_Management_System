@@ -8,6 +8,11 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+
+import CustomException.ConfirmPasswordException;
+import CustomException.EmailException;
+import CustomException.NullFieldException;
+import CustomException.PhoneException;
 import javafx.collections.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,6 +23,7 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.paint.Color;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import library.*;
@@ -51,11 +57,27 @@ public class EditProfileController implements Initializable {
   @FXML
   private Label response;
 
+  @FXML 
+  private Label errorMsg;
+
   @FXML
   private void completeEdit(ActionEvent event) throws IOException {
     if (userType == "Admin") {
       Admin edited = new Admin();
+try{
+  if(fullNameField.getText().equals("") || usernameField.getText().equals("") || passwordField1.getText().equals("") || passwordField2.getText().equals("") || emailField.getText().equals("") || phoneField.getText().equals("") || addressField.getText().equals("") ){
+    throw new NullFieldException();
+  }
+  if(phoneField.getText().length() != 9){
+    throw new PhoneException();
+  }
+  if(!emailField.getText().contains("@")){
+    throw new EmailException();
+  }
 
+  if(!passwordField1.getText().equals(passwordField2.getText())){
+    throw new ConfirmPasswordException();
+  }
       edited.setAddress(addressField.getText());
       edited.setEmail(emailField.getText());
       edited.setPassword(passwordField1.getText());
@@ -83,9 +105,47 @@ public class EditProfileController implements Initializable {
       Scene scene = new Scene(root);
       stage.setScene(scene);
       stage.show();
+    }
+    catch(EmailException eE){
+      System.out.println(eE.getMessage());
+      emailField.setStyle("-fx-text-inner-color: #b50909;");
+      errorMsg.setText(eE.getMessage());
+      errorMsg.setTextFill(Color.RED);
+  }
+
+  catch(PhoneException pE){
+    System.out.println(pE.getMessage());
+      phoneField.setStyle("-fx-text-inner-color: #b50909;");
+      errorMsg.setText(pE.getMessage());
+      errorMsg.setTextFill(Color.RED);
+  }
+  catch(NullFieldException nE){
+    System.out.println(nE.getMessage());
+      errorMsg.setText(nE.getMessage());
+      errorMsg.setTextFill(Color.RED);
+  }
+  catch(ConfirmPasswordException cE){
+    System.out.println(cE.getMessage());
+      errorMsg.setText(cE.getMessage());
+      errorMsg.setTextFill(Color.RED);
+  }
+
     } else {
       Librarian edited = new Librarian();
-
+      try{
+        if(fullNameField.getText().equals("") || usernameField.getText().equals("") || passwordField1.getText().equals("") || passwordField2.getText().equals("") || emailField.getText().equals("") || phoneField.getText().equals("") || addressField.getText().equals("") ){
+          throw new NullFieldException();
+        }
+        if(phoneField.getText().length() != 9){
+          throw new PhoneException();
+        }
+        if(!emailField.getText().contains("@")){
+          throw new EmailException();
+        }
+      
+        if(!passwordField1.getText().equals(passwordField2.getText())){
+          throw new ConfirmPasswordException();
+        }
       edited.setAddress(addressField.getText());
       edited.setEmail(emailField.getText());
       edited.setPassword(passwordField1.getText());
@@ -104,6 +164,32 @@ public class EditProfileController implements Initializable {
       Scene scene = new Scene(root);
       stage.setScene(scene);
       stage.show();
+      }
+      catch(EmailException eE){
+        System.out.println(eE.getMessage());
+        emailField.setStyle("-fx-text-inner-color: #b50909;");
+        errorMsg.setText(eE.getMessage());
+        errorMsg.setTextFill(Color.RED);
+    }
+
+      catch(PhoneException pE){
+        System.out.println(pE.getMessage());
+          phoneField.setStyle("-fx-text-inner-color: #b50909;");
+          errorMsg.setText(pE.getMessage());
+          errorMsg.setTextFill(Color.RED);
+      }
+      catch(NullFieldException nE){
+        System.out.println(nE.getMessage());
+          errorMsg.setText(nE.getMessage());
+          errorMsg.setTextFill(Color.RED);
+      }
+      catch(ConfirmPasswordException cE){
+        System.out.println(cE.getMessage());
+          errorMsg.setText(cE.getMessage());
+          errorMsg.setTextFill(Color.RED);
+      }
+
+
     }
   }
 
