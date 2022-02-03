@@ -3,21 +3,25 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" minWidth="700.0" prefHeight="833.0" prefWidth="1154.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="librarygui.librarian.MemberListController">
-    <children>
-        <Label fx:id="label" layoutX="126" layoutY="120" minHeight="16" minWidth="69" />
-      <SplitPane dividerPositions="0.1762152777777778, 0.7873263888888888" layoutX="26.0" layoutY="120.0" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-        <items>
-          <AnchorPane maxWidth="200.0" minHeight="0.0" minWidth="200.0" prefHeight="160.0" prefWidth="200.0">
+
+<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="librarygui.librarian.MemberListController">
+   <center>
+      <SplitPane dividerPositions="0.1762152777777778, 0.7873263888888888" prefHeight="834.0" prefWidth="1154.0">
+         <items>
+            <AnchorPane maxWidth="200.0" minHeight="0.0" minWidth="200.0" prefHeight="160.0" prefWidth="200.0">
                <children>
                   <VBox layoutX="29.0" layoutY="50.0" prefHeight="771.0" prefWidth="180.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="50.0">
                      <children>
@@ -64,7 +68,7 @@
                   </Label>
                </children>
             </AnchorPane>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="544.0" prefWidth="520.0">
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="544.0" prefWidth="520.0">
                <children>
                   <TableView fx:id="tableMember" layoutX="7.0" layoutY="6.0" prefHeight="816.0" prefWidth="933.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="6.0">
                      <columns>
@@ -86,7 +90,26 @@
                   <TextField fx:id="searchBar" layoutX="8.0" layoutY="38.0" prefHeight="33.0" prefWidth="225.0" promptText="Enter Search Text" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="9.0" />
                </children>
             </AnchorPane>
-        </items>
+         </items>
       </SplitPane>
-    </children>
-</AnchorPane>
+   </center>
+   <top>
+      <MenuBar prefHeight="25.0" prefWidth="1154.0" BorderPane.alignment="CENTER">
+         <menus>
+            <Menu mnemonicParsing="false" text="Menu">
+               <items>
+                  <MenuItem fx:id="editProfile" mnemonicParsing="false" onAction="#editWindow" text="Edit Profile" />
+                  <MenuItem fx:id="logout" mnemonicParsing="false" text="Log Out" />
+                  <MenuItem fx:id="exit" mnemonicParsing="false" text="Exit" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Help">
+               <items>
+                  <MenuItem fx:id="about" mnemonicParsing="false" text="About" />
+                  <MenuItem mnemonicParsing="false" text="User Manual" />
+               </items>
+            </Menu>
+         </menus>
+      </MenuBar>
+   </top>
+</BorderPane>
