@@ -162,6 +162,12 @@ public class IssueListController implements Initializable {
     Scene scene = new Scene(root);
     stage.setScene(scene);
     stage.show();
+
+    Parent alert = FXMLLoader.load(getClass().getResource("fx/alertBox.fxml"));
+
+    Scene alertScene = new Scene(alert);
+    stage.setScene(alertScene);
+    stage.show();
   }
 
   @FXML
@@ -247,6 +253,13 @@ public class IssueListController implements Initializable {
       Scene scene = new Scene(root);
       stage.setScene(scene);
       stage.show();
+      Parent alert = FXMLLoader.load(
+        getClass().getResource("fx/alertBox.fxml")
+      );
+
+      Scene alertScene = new Scene(alert);
+      stage.setScene(alertScene);
+      stage.show();
     }
   }
 
@@ -259,8 +272,11 @@ public class IssueListController implements Initializable {
       issueList = FileAlter.retrieveAllIssueFile();
     } catch (java.io.FileNotFoundException e) {}
 
-    inpIssue.setMember_id(Integer.parseInt(memberId.getText()));
     inpIssue.setBook_id(Integer.parseInt(bookId.getText()));
+    if (!issueList.isEmpty()) inpIssue.setIssue_id(
+      issueList.get(issueList.size() - 1).getIssue_id() + 1
+    );
+    inpIssue.setMember_id(Integer.parseInt(memberId.getText()));
     inpIssue.setBookTitle(
       retrieveBookTitle(Integer.parseInt(bookId.getText()))
     );
@@ -278,6 +294,11 @@ public class IssueListController implements Initializable {
 
     Scene scene = new Scene(root);
     stage.setScene(scene);
+    stage.show();
+    Parent alert = FXMLLoader.load(getClass().getResource("fx/alertBox.fxml"));
+
+    Scene alertScene = new Scene(alert);
+    stage.setScene(alertScene);
     stage.show();
   }
 
