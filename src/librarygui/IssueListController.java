@@ -184,11 +184,12 @@ public void returnBook(ActionEvent event) throws IOException{
   Issue issueInfo = retrieveSingleIssue(memberId, bookId);
 
   returnInfo.setVisible(true);
-  if(issueInfo.getBookTitle() == ""){
+  if("".equals(issueInfo.getBookTitle())){
     issueId.setText("No Issue Found"); 
   }
   else{
     issueInfo.setIsActive(false);
+      System.out.println(issueInfo);
     FileAlter.editIssueState(issueInfo);
     Stage stage = (Stage) book.getScene().getWindow();
     Parent root = FXMLLoader.load(getClass().getResource("fx/Admin/IssueList.fxml"));

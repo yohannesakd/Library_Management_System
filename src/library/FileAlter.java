@@ -78,9 +78,12 @@ public class FileAlter {
     if (new File("Issues.txt").delete()) {} else {
       return "FILE NOT DELETED";
     }
-
-    for (Issue issue : issueList) {
-      if (issue.getIssue_id() != editedIssue.getIssue_id())Librarian.addIssue(issue);
+    
+    for(int i = 0; i < issueList.size(); i++){
+        System.out.println(issueList.get(i) );
+        System.out.println("lets see again");
+        
+      if (issueList.get(i).getBook_id()!= editedIssue.getBook_id() || issueList.get(i).getMember_id()!= editedIssue.getMember_id() )Librarian.addIssue(issueList.get(i));
       else {
         alter = true;
         Librarian.addIssue(editedIssue);
