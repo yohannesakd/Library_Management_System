@@ -160,11 +160,12 @@ public class FileAlter {
           values[1],
           values[2],
           values[3],
-          Long.parseLong(values[4]),
-          Integer.parseInt(values[5]),
-          values[6],
-          Integer.parseInt(values[7]),
-          Integer.parseInt(values[8])
+          values[4],
+          Long.parseLong(values[5]),
+          Integer.parseInt(values[6]),
+          values[7],
+          Integer.parseInt(values[8]),
+          Integer.parseInt(values[9])
         );
         booklist.add(bk);
       }
