@@ -142,6 +142,47 @@ public class IssueListController implements Initializable {
   private Button confirmReturn;
 
   @FXML
+  private MenuItem editProfile;
+
+  @FXML
+  private MenuItem logout;
+
+  @FXML
+  private MenuItem exit;
+
+  @FXML
+  public void editWindow(ActionEvent event) throws IOException {
+    Stage stage = (Stage) book.getScene().getWindow();
+    stage.close();
+    stage = new Stage();
+    Parent root = FXMLLoader.load(
+      getClass().getResource("fx/admin/EditProfile.fxml")
+    );
+
+    Scene scene = new Scene(root);
+    stage.setScene(scene);
+    stage.show();
+  }
+
+  @FXML
+  void logOut(ActionEvent event) throws IOException {
+    Stage stage = (Stage) book.getScene().getWindow();
+    stage.close();
+    stage = new Stage();
+    Parent root = FXMLLoader.load(getClass().getResource("fx/Login.fxml"));
+
+    Scene scene = new Scene(root);
+    stage.setScene(scene);
+    stage.show();
+  }
+
+  @FXML
+  void quit(ActionEvent event) throws IOException {
+    Stage stage = (Stage) book.getScene().getWindow();
+    stage.close();
+  }
+
+  @FXML
   public void showReturnForm(ActionEvent event) throws IOException {
     returnForm.setVisible(true);
   }

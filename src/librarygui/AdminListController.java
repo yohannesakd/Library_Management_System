@@ -93,6 +93,47 @@ public class AdminListController implements Initializable {
   private TableColumn<Admin, String> address;
 
   @FXML
+  private MenuItem editProfile;
+
+  @FXML
+  private MenuItem logout;
+
+  @FXML
+  private MenuItem exit;
+
+  @FXML
+  public void editWindow(ActionEvent event) throws IOException {
+    Stage stage = (Stage) book.getScene().getWindow();
+    stage.close();
+    stage = new Stage();
+    Parent root = FXMLLoader.load(
+      getClass().getResource("fx/admin/EditProfile.fxml")
+    );
+
+    Scene scene = new Scene(root);
+    stage.setScene(scene);
+    stage.show();
+  }
+
+  @FXML
+  void logOut(ActionEvent event) throws IOException {
+    Stage stage = (Stage) book.getScene().getWindow();
+    stage.close();
+    stage = new Stage();
+    Parent root = FXMLLoader.load(getClass().getResource("fx/Login.fxml"));
+
+    Scene scene = new Scene(root);
+    stage.setScene(scene);
+    stage.show();
+  }
+
+  @FXML
+  void quit(ActionEvent event) throws IOException {
+    Stage stage = (Stage) book.getScene().getWindow();
+    stage.close();
+  }
+
+  @FXML
   public void showAdd(ActionEvent event) {
     addInput.setVisible(true);
   }
@@ -114,13 +155,12 @@ public class AdminListController implements Initializable {
       removeAlert.setText("PLEASE SELECT A ROW TO DELETE.");
       return;
     }
-String status = FileAlter.deleteAdmin(toBeDeleted.getId());
-if(status=="cant"){
-  removeAlert.setText("Can Not Remove Admin!");
-}
-else{
-    removeAlert.setText(status);
-  }
+    String status = FileAlter.deleteAdmin(toBeDeleted.getId());
+    if (status == "cant") {
+      removeAlert.setText("Can Not Remove Admin!");
+    } else {
+      removeAlert.setText(status);
+    }
 
     Stage stage = (Stage) removeAlert.getScene().getWindow();
     Parent root = FXMLLoader.load(
@@ -151,10 +191,9 @@ else{
     newLib.setUsername(toBeDemoted.getUsername());
     Admin.addLibrarian(newLib);
     String status = FileAlter.deleteAdmin(newLib.getId());
-    if(status == "cant"){
+    if (status == "cant") {
       demoteAlert.setText("Can not Remove Admin!");
-    }
-    else{
+    } else {
       demoteAlert.setText(status);
     }
     Stage stage = (Stage) book.getScene().getWindow();
