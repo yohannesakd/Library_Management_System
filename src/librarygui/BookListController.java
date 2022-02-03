@@ -26,160 +26,128 @@ import javafx.util.converter.IntegerStringConverter;
 import library.*;
 
 public class BookListController implements Initializable {
-    
-    public static int CurrentBookId;
 
-    @FXML
-    private Button home;
+  public static int CurrentBookId;
 
-    @FXML
-    private Button book;
+  @FXML
+  private Button home;
 
-    @FXML
-    private Button cust;
+  @FXML
+  private Button book;
 
-    @FXML
-    private Button lib;
+  @FXML
+  private Button cust;
 
-    @FXML
-    private Button admin;
+  @FXML
+  private Button lib;
 
-    @FXML
-    private Button add;
+  @FXML
+  private Button admin;
 
-    @FXML
-    private VBox formContainer;
+  @FXML
+  private Button add;
 
-    @FXML
-    private Button saveEdit;
+  @FXML
+  private VBox formContainer;
 
-    @FXML
-    private Button saveAdd;
+  @FXML
+  private Button saveEdit;
 
-    @FXML
-    private Button edit;
+  @FXML
+  private Button saveAdd;
 
-    @FXML
-    private Button remove;
+  @FXML
+  private Button edit;
 
-    @FXML
-    private TextField titleField;
+  @FXML
+  private Button remove;
 
-    @FXML
-    private TextField authorField;
+  @FXML
+  private TextField titleField;
 
-    @FXML
-    private TextField editionField;
+  @FXML
+  private TextField authorField;
 
-    @FXML
-    private TextField pagesField;
+  @FXML
+  private TextField editionField;
 
-    @FXML
-    private TextField ISBNField;
+  @FXML
+  private TextField pagesField;
 
-    @FXML
-    private TextField shelfNoField;
+  @FXML
+  private TextField ISBNField;
 
-    
-    @FXML
-    private TextField noOfBookCopyField;
+  @FXML
+  private TextField shelfNoField;
 
-    @FXML
-    private TableView<Book> tableBook;
+  @FXML
+  private TextField noOfBookCopyField;
 
-    @FXML
-    private TableColumn<Book, String> bookid;
+  @FXML
+  private TableView<Book> tableBook;
 
-    @FXML
-    private TableColumn<Book, String> title;
+  @FXML
+  private TableColumn<Book, String> bookid;
 
-    @FXML
-    private TableColumn<Book, String> author;
+  @FXML
+  private TableColumn<Book, String> title;
 
-    @FXML
-    private TableColumn<Book, String> edition;
+  @FXML
+  private TableColumn<Book, String> author;
 
-    @FXML
-    private TableColumn<Book, String> category;
-    
-    @FXML
-    private TableColumn<Book, String> isbn;
+  @FXML
+  private TableColumn<Book, String> edition;
 
-    @FXML
-    private TableColumn<Book, String> pages;
+  @FXML
+  private TableColumn<Book, String> category;
 
-    @FXML
-    private TableColumn<Book, String> shelf;
+  @FXML
+  private TableColumn<Book, String> isbn;
 
-    @FXML
-    private TableColumn<Book, String> copies;
+  @FXML
+  private TableColumn<Book, String> pages;
 
-    @FXML
-    private TableColumn<Book, String> availablity;
+  @FXML
+  private TableColumn<Book, String> shelf;
 
-    @FXML
-    private TextField searchBar;
+  @FXML
+  private TableColumn<Book, String> copies;
 
-    @FXML
-    private Label removeAlert;
+  @FXML
+  private TableColumn<Book, String> availablity;
 
-    @FXML
-    private Label editAlert;
+  @FXML
+  private TextField searchBar;
 
-    @FXML
-    private Label checkInput;
+  @FXML
+  private Label removeAlert;
 
-    @FXML
-    private TextField categoryField;
+  @FXML
+  private Label editAlert;
 
-    @FXML
-    private void handleBookDelete(ActionEvent event) throws IOException {
-        Book toBeDeleted = tableBook.getSelectionModel().getSelectedItem();
+  @FXML
+  private Label checkInput;
 
-        if (toBeDeleted == null) {
-            removeAlert.setText("PLEASE SELECT A ROW TO DELETE.");
-            return;
-        }
+  @FXML
+  private TextField categoryField;
 
-        removeAlert.setText(FileAlter.deleteBook(toBeDeleted.getBook_id()));
+  @FXML
+  private MenuItem editProfile;
 
-        Stage stage = (Stage) removeAlert.getScene().getWindow();
-        Parent root = FXMLLoader.load(
-                getClass().getResource("fx/Admin/BookList.fxml")
-        );
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
+  @FXML
+  private MenuItem logout;
 
-    public void editBook(Book book) {
-        
-        titleField.setText(book.getTitle());
-        authorField.setText(book.getAuthor());
-        editionField.setText(book.getEdition());
-        categoryField.setText(book.getCategory());
-        pagesField.setText(Integer.toString(book.getPages()));
-        ISBNField.setText(Long.toString(book.getIsbn()));
-        shelfNoField.setText(book.getShelfNo());
-        noOfBookCopyField.setText(Integer.toString(book.getNoOfBookCopy()));
-    }
+  @FXML
+  private MenuItem exit;
 
-    @FXML
-    private void handleBookEdit(ActionEvent event) throws IOException {
-        
-        Book toBeEdited = tableBook.getSelectionModel().getSelectedItem();
-        CurrentBookId = toBeEdited.getBook_id();
-        
-        if (toBeEdited == null) {
-            editAlert.setText("PLEASE SELECT THE ROW TO EDIT");
-            return;
-        }
-        editBook(toBeEdited);
-        formContainer.setVisible(true);
-        titleField.requestFocus();
-        saveAdd.setVisible(false);
-        saveEdit.setVisible(true);
-    }
+  @FXML
+  public void editWindow(ActionEvent event) throws IOException {
+    Stage stage = (Stage) book.getScene().getWindow();
+    stage.close();
+    stage = new Stage();
+    Parent root = FXMLLoader.load(
+      getClass().getResource("fx/admin/EditProfile.fxml")
+    );
 
     @FXML
     private void bookEdit(ActionEvent event) throws IOException {
@@ -209,200 +177,300 @@ public class BookListController implements Initializable {
       }
     }
 
-    @FXML
-    public void goBack(ActionEvent event) throws IOException {
-        Stage stage = (Stage) book.getScene().getWindow();
-        Parent root = FXMLLoader.load(
-                getClass().getResource("fx/admin/BookList.fxml")
-        );
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+  @FXML
+  void logOut(ActionEvent event) throws IOException {
+    Stage stage = (Stage) book.getScene().getWindow();
+    stage.close();
+    stage = new Stage();
+    Parent root = FXMLLoader.load(getClass().getResource("fx/Login.fxml"));
+
+    Scene scene = new Scene(root);
+    stage.setScene(scene);
+    stage.show();
+  }
+
+  @FXML
+  void quit(ActionEvent event) throws IOException {
+    Stage stage = (Stage) book.getScene().getWindow();
+    stage.close();
+  }
+
+  @FXML
+  private void handleBookDelete(ActionEvent event) throws IOException {
+    Book toBeDeleted = tableBook.getSelectionModel().getSelectedItem();
+
+    if (toBeDeleted == null) {
+      removeAlert.setText("PLEASE SELECT A ROW TO DELETE.");
+      return;
     }
 
-    @FXML
-    public void homePage(ActionEvent event) throws IOException {
-        Stage stage = (Stage) book.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("fx/admin/Home.fxml"));
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+    removeAlert.setText(FileAlter.deleteBook(toBeDeleted.getBook_id()));
+
+    Stage stage = (Stage) removeAlert.getScene().getWindow();
+    Parent root = FXMLLoader.load(
+      getClass().getResource("fx/Admin/BookList.fxml")
+    );
+    Scene scene = new Scene(root);
+    stage.setScene(scene);
+    stage.show();
+  }
+
+  public void editBook(Book book) {
+    titleField.setText(book.getTitle());
+    authorField.setText(book.getAuthor());
+    editionField.setText(book.getEdition());
+    categoryField.setText(book.getCategory());
+    pagesField.setText(Integer.toString(book.getPages()));
+    ISBNField.setText(Long.toString(book.getIsbn()));
+    shelfNoField.setText(book.getShelfNo());
+    noOfBookCopyField.setText(Integer.toString(book.getNoOfBookCopy()));
+  }
+
+  @FXML
+  private void handleBookEdit(ActionEvent event) throws IOException {
+    Book toBeEdited = tableBook.getSelectionModel().getSelectedItem();
+    CurrentBookId = toBeEdited.getBook_id();
+
+    if (toBeEdited == null) {
+      editAlert.setText("PLEASE SELECT THE ROW TO EDIT");
+      return;
     }
+    editBook(toBeEdited);
+    formContainer.setVisible(true);
+    titleField.requestFocus();
+    saveAdd.setVisible(false);
+    saveEdit.setVisible(true);
+  }
 
-    @FXML
-    public void custPage(ActionEvent event) throws IOException {
-        Stage stage = (Stage) book.getScene().getWindow();
-        Parent root = FXMLLoader.load(
-                getClass().getResource("fx/admin/MemberList.fxml")
-        );
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+  @FXML
+  private void bookEdit(ActionEvent event) throws IOException {
+    Book inpbook = new Book();
+
+    inpbook.setBook_id(CurrentBookId);
+    inpbook.setTitle(titleField.getText());
+    inpbook.setAuthor(authorField.getText());
+    inpbook.setCategory(categoryField.getText());
+    inpbook.setEdition(editionField.getText());
+    inpbook.setPages(Integer.parseInt(pagesField.getText()));
+    inpbook.setIsbn(Long.parseLong(ISBNField.getText()));
+    inpbook.setShelfNo(shelfNoField.getText());
+    inpbook.setNoOfBookCopy(Integer.parseInt(noOfBookCopyField.getText()));
+    FileAlter.editBook(inpbook);
+
+    Stage stage = (Stage) add.getScene().getWindow();
+    Parent root = FXMLLoader.load(
+      getClass().getResource("fx/admin/BookList.fxml")
+    );
+    Scene scene = new Scene(root);
+    stage.setScene(scene);
+    stage.show();
+  }
+
+  @FXML
+  public void goBack(ActionEvent event) throws IOException {
+    Stage stage = (Stage) book.getScene().getWindow();
+    Parent root = FXMLLoader.load(
+      getClass().getResource("fx/admin/BookList.fxml")
+    );
+    Scene scene = new Scene(root);
+    stage.setScene(scene);
+    stage.show();
+  }
+
+  @FXML
+  public void homePage(ActionEvent event) throws IOException {
+    Stage stage = (Stage) book.getScene().getWindow();
+    Parent root = FXMLLoader.load(getClass().getResource("fx/admin/Home.fxml"));
+    Scene scene = new Scene(root);
+    stage.setScene(scene);
+    stage.show();
+  }
+
+  @FXML
+  public void custPage(ActionEvent event) throws IOException {
+    Stage stage = (Stage) book.getScene().getWindow();
+    Parent root = FXMLLoader.load(
+      getClass().getResource("fx/admin/MemberList.fxml")
+    );
+    Scene scene = new Scene(root);
+    stage.setScene(scene);
+    stage.show();
+  }
+
+  @FXML
+  public void issuePage(ActionEvent event) throws IOException {
+    Stage stage = (Stage) book.getScene().getWindow();
+    Parent root = FXMLLoader.load(
+      getClass().getResource("fx/admin/IssueList.fxml")
+    );
+    Scene scene = new Scene(root);
+    stage.setScene(scene);
+    stage.show();
+  }
+
+  @FXML
+  public void libPage(ActionEvent event) throws IOException {
+    Stage stage = (Stage) book.getScene().getWindow();
+    Parent root = FXMLLoader.load(
+      getClass().getResource("fx/admin/LibList.fxml")
+    );
+    Scene scene = new Scene(root);
+    stage.setScene(scene);
+    stage.show();
+  }
+
+  @FXML
+  public void adminPage(ActionEvent event) throws IOException {
+    Stage stage = (Stage) book.getScene().getWindow();
+    Parent root = FXMLLoader.load(
+      getClass().getResource("fx/admin/AdminList.fxml")
+    );
+    Scene scene = new Scene(root);
+    stage.setScene(scene);
+    stage.show();
+  }
+
+  @FXML
+  public void showForm(ActionEvent event) throws IOException {
+    formContainer.setVisible(true);
+    titleField.requestFocus();
+    saveEdit.setVisible(false);
+  }
+
+  @FXML
+  private void completeAddBook(ActionEvent event) throws IOException {
+    Book inpbook = new Book();
+
+    ArrayList<Book> booklist = new ArrayList<>();
+    try {
+      booklist = FileAlter.retrieveAllbookFile();
+    } catch (java.io.FileNotFoundException e) {}
+
+    if (!booklist.isEmpty()) inpbook.setBook_id(
+      booklist.get(booklist.size() - 1).getBook_id() + 1
+    );
+    try {
+      inpbook.setTitle(titleField.getText());
+      inpbook.setAuthor(authorField.getText());
+      inpbook.setCategory(categoryField.getText());
+      inpbook.setEdition(editionField.getText());
+      inpbook.setPages(Integer.parseInt(pagesField.getText()));
+      inpbook.setIsbn(Long.parseLong(ISBNField.getText()));
+      inpbook.setShelfNo(shelfNoField.getText());
+      inpbook.setNoOfBookCopy(Integer.parseInt(noOfBookCopyField.getText()));
+
+      String str = Admin.addBook(inpbook);
+      System.out.println(str);
+
+      Stage stage = (Stage) add.getScene().getWindow();
+      Parent root = FXMLLoader.load(
+        getClass().getResource("fx/admin/BookList.fxml")
+      );
+      Scene scene = new Scene(root);
+      stage.setScene(scene);
+      stage.show();
+    } catch (NumberFormatException e) {
+      checkInput.setText("INVALID INPUT! REVIEW YOUR INPUTS!");
     }
+  }
 
-    @FXML
-    public void issuePage(ActionEvent event) throws IOException {
-        Stage stage = (Stage) book.getScene().getWindow();
-        Parent root = FXMLLoader.load(
-                getClass().getResource("fx/admin/IssueList.fxml")
-        );
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+  public void showEditForm(ActionEvent event) throws IOException {
+    formContainer.setVisible(true);
+    saveAdd.setVisible(false);
+  }
+
+  @Override
+  public void initialize(URL url, ResourceBundle rb) {
+    bookid.setCellValueFactory(new PropertyValueFactory<>("book_id"));
+    title.setCellValueFactory(new PropertyValueFactory<>("title"));
+    author.setCellValueFactory(new PropertyValueFactory<>("author"));
+    category.setCellValueFactory(new PropertyValueFactory<>("category"));
+    edition.setCellValueFactory(new PropertyValueFactory<>("edition"));
+    isbn.setCellValueFactory(new PropertyValueFactory<>("isbn"));
+    pages.setCellValueFactory(new PropertyValueFactory<>("pages"));
+    shelf.setCellValueFactory(new PropertyValueFactory<>("shelfNo"));
+    copies.setCellValueFactory(new PropertyValueFactory<>("noOfBookCopy"));
+    availablity.setCellValueFactory(new PropertyValueFactory<>("isAvailable"));
+
+    try {
+      tableBook.setItems(giveBooks());
+    } catch (FileNotFoundException ex) {
+      System.out.println("FileNotFound");
     }
+    //wrap the observable list in a set filter to use to filter out the search
+    FilteredList<Book> searchFilter;
+    try {
+      searchFilter = new FilteredList<>(giveBooks(), b -> true);
+      //set the filter whenever the searchBar changes value
+      searchBar
+        .textProperty()
+        .addListener((observable, oldvalue, newvalue) -> {
+          searchFilter.setPredicate(book -> {
+            //if the search bar is empty then return the orginal table
+            if (newvalue == null || newvalue.isEmpty()) {
+              return true;
+            }
+            if (
+              Integer.toString(book.getBook_id()).contains(searchBar.getText())
+            ) {
+              return true;
+            } else if (
+              book
+                .getTitle()
+                .toLowerCase()
+                .contains(searchBar.getText().toLowerCase())
+            ) {
+              return true;
+            } else if (
+              book
+                .getAuthor()
+                .toLowerCase()
+                .contains(searchBar.getText().toLowerCase())
+            ) {
+              return true;
+            } else if (
+              book
+                .getEdition()
+                .toLowerCase()
+                .contains(searchBar.getText().toLowerCase())
+            ) {
+              return true;
+            } else if (
+              Long.toString(book.getIsbn()).contains(searchBar.getText())
+            ) {
+              return true;
+            } else if (
+              Integer.toString(book.getPages()).contains(searchBar.getText())
+            ) {
+              return true;
+            } else if (
+              book
+                .getShelfNo()
+                .toLowerCase()
+                .contains(searchBar.getText().toLowerCase())
+            ) {
+              return true;
+            }
 
-    @FXML
-    public void libPage(ActionEvent event) throws IOException {
-        Stage stage = (Stage) book.getScene().getWindow();
-        Parent root = FXMLLoader.load(
-                getClass().getResource("fx/admin/LibList.fxml")
-        );
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+            return false;
+          });
+        });
+
+      SortedList<Book> sortedSearch = new SortedList<>(searchFilter);
+      sortedSearch.comparatorProperty().bind(tableBook.comparatorProperty());
+
+      tableBook.setItems(sortedSearch);
+    } catch (FileNotFoundException ex) {
+      Logger
+        .getLogger(BookListController.class.getName())
+        .log(Level.SEVERE, null, ex);
     }
+  }
 
-    @FXML
-    public void adminPage(ActionEvent event) throws IOException {
-        Stage stage = (Stage) book.getScene().getWindow();
-        Parent root = FXMLLoader.load(
-                getClass().getResource("fx/admin/AdminList.fxml")
-        );
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    @FXML
-    public void showForm(ActionEvent event) throws IOException {
-        formContainer.setVisible(true);
-        titleField.requestFocus();
-        saveEdit.setVisible(false);
-    }
-
-    @FXML
-    private void completeAddBook(ActionEvent event) throws IOException {
-        Book inpbook = new Book();
-        
-        ArrayList<Book> booklist = new ArrayList<>();
-        try{
-        booklist = FileAlter.retrieveAllbookFile();            
-        }catch(java.io.FileNotFoundException e){
- 
-        }
-            
-    if(!booklist.isEmpty())
-        inpbook.setBook_id(booklist.get(booklist.size()-1).getBook_id()+1);
-        try{
-        inpbook.setTitle(titleField.getText());
-        inpbook.setAuthor(authorField.getText());
-        inpbook.setCategory(categoryField.getText());
-        inpbook.setEdition(editionField.getText());
-        inpbook.setPages(Integer.parseInt(pagesField.getText()));
-        inpbook.setIsbn(Long.parseLong(ISBNField.getText()));
-        inpbook.setShelfNo(shelfNoField.getText());
-        inpbook.setNoOfBookCopy(Integer.parseInt(noOfBookCopyField.getText()));
-      
-
-        String str = Admin.addBook(inpbook);
-        System.out.println(str);
-
-        Stage stage = (Stage) add.getScene().getWindow();
-        Parent root = FXMLLoader.load(
-                getClass().getResource("fx/admin/BookList.fxml")
-        );
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-      }
-      catch (NumberFormatException e){
-        checkInput.setText("INVALID INPUT! REVIEW YOUR INPUTS!");
-      }
-    }
-
-    public void showEditForm(ActionEvent event) throws IOException {
-        formContainer.setVisible(true);
-        saveAdd.setVisible(false);
-    }
-
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        bookid.setCellValueFactory(new PropertyValueFactory<>("book_id"));
-        title.setCellValueFactory(new PropertyValueFactory<>("title"));
-        author.setCellValueFactory(new PropertyValueFactory<>("author"));
-        category.setCellValueFactory(new PropertyValueFactory<>("category"));
-        edition.setCellValueFactory(new PropertyValueFactory<>("edition"));
-        isbn.setCellValueFactory(new PropertyValueFactory<>("isbn"));
-        pages.setCellValueFactory(new PropertyValueFactory<>("pages"));
-        shelf.setCellValueFactory(new PropertyValueFactory<>("shelfNo"));
-        copies.setCellValueFactory(new PropertyValueFactory<>("noOfBookCopy"));
-        availablity.setCellValueFactory(new PropertyValueFactory<>("isAvailable"));
-
-        try {
-            tableBook.setItems(giveBooks());
-        } catch (FileNotFoundException ex) {
-            System.out.println("FileNotFound");
-        }
-        //wrap the observable list in a set filter to use to filter out the search
-        FilteredList<Book> searchFilter;
-        try {
-            searchFilter = new FilteredList<>(giveBooks(), b -> true);
-            //set the filter whenever the searchBar changes value
-            searchBar
-                    .textProperty()
-                    .addListener((observable, oldvalue, newvalue) -> {
-                        searchFilter.setPredicate(book -> {
-                            //if the search bar is empty then return the orginal table
-                            if (newvalue == null || newvalue.isEmpty()) {
-                                return true;
-                            }
-                            if (Integer.toString(book.getBook_id()).contains(searchBar.getText())) {
-                                return true;
-                            } else if (book
-                                    .getTitle()
-                                    .toLowerCase()
-                                    .contains(searchBar.getText().toLowerCase())) {
-                                return true;
-                            } else if (book
-                                    .getAuthor()
-                                    .toLowerCase()
-                                    .contains(searchBar.getText().toLowerCase())) {
-                                return true;
-                            } else if (book
-                                    .getEdition()
-                                    .toLowerCase()
-                                    .contains(searchBar.getText().toLowerCase())) {
-                                return true;
-                            } else if (Long.toString(book.getIsbn()).contains(searchBar.getText())) {
-                                return true;
-                            } else if (Integer.toString(book.getPages()).contains(searchBar.getText())) {
-                                return true;
-                            } else if (book
-                                    .getShelfNo()
-                                    .toLowerCase()
-                                    .contains(searchBar.getText().toLowerCase())) {
-                                return true;
-                            }
-
-                            return false;
-                        });
-                    });
-
-            SortedList<Book> sortedSearch = new SortedList<>(searchFilter);
-            sortedSearch.comparatorProperty().bind(tableBook.comparatorProperty());
-
-            tableBook.setItems(sortedSearch);
-        } catch (FileNotFoundException ex) {
-            Logger
-                    .getLogger(BookListController.class.getName())
-                    .log(Level.SEVERE, null, ex);
-        }
-    }
-
-    public ObservableList<Book> giveBooks() throws FileNotFoundException {
-        ObservableList<Book> books = FXCollections.observableArrayList(
-                library.FileAlter.retrieveAllbookFile()
-        );
-        return books;
-    }
+  public ObservableList<Book> giveBooks() throws FileNotFoundException {
+    ObservableList<Book> books = FXCollections.observableArrayList(
+      library.FileAlter.retrieveAllbookFile()
+    );
+    return books;
+  }
 }
