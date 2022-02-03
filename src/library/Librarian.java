@@ -7,7 +7,7 @@ import java.io.IOException;
 public class Librarian extends Person {
 
   protected String username;
-  protected String password;
+  protected String password = "pass";
   protected int id = 1000;
 
   public Librarian() {}

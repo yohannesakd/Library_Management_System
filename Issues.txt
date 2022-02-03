@@ -1,3 +1,5 @@
 1001|1001|1000|2022-02-03|2022-02-24|Yohannes Teshome|the book|false
 1002|1002|1000|2022-02-03|2022-02-20|Tsion Moges|The Examiner|false
 1001|1001|1000|2022-02-03|2022-02-24|Yohannes Teshome|the book|false
+1016|1000|1000|2022-02-03|2022-02-16|new member|The Book|true
+1015|1000|1000|2022-02-03|2022-02-16|added another|The Book|false
