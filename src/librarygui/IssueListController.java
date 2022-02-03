@@ -1,5 +1,9 @@
 package librarygui;
 
+import static library.FileAlter.retrieveBookTitle;
+import static library.FileAlter.retrieveMemberName;
+import static library.FileAlter.retrieveSingleIssue;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
@@ -23,9 +27,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import library.*;
-import static library.FileAlter.retrieveBookTitle;
-import static library.FileAlter.retrieveMemberName;
-import static library.FileAlter.retrieveSingleIssue;
 
 public class IssueListController implements Initializable {
 
@@ -140,79 +141,88 @@ public class IssueListController implements Initializable {
   @FXML
   private Button confirmReturn;
 
+  @FXML
+  public void showReturnForm(ActionEvent event) throws IOException {
+    returnForm.setVisible(true);
+  }
 
   @FXML
-public void showReturnForm(ActionEvent event) throws IOException{
-  returnForm.setVisible(true); 
-}
+  public void showReturnInfo(ActionEvent event) throws IOException {
+    int memberId, bookId;
+    memberId = Integer.parseInt(memberId1.getText());
+    bookId = Integer.parseInt(bookId1.getText());
+    Issue issueInfo = retrieveSingleIssue(memberId, bookId);
 
-@FXML
-public void showReturnInfo(ActionEvent event) throws IOException{
-  int memberId, bookId;
-  memberId = Integer.parseInt(memberId1.getText());
-  bookId = Integer.parseInt(bookId1.getText());
-  Issue issueInfo = retrieveSingleIssue(memberId, bookId);
-
-  returnInfo.setVisible(true);
-  if(issueInfo.getBookTitle() == ""){
-    issueId.setText("No Issue Found"); 
+    returnInfo.setVisible(true);
+    if (issueInfo.getBookTitle() == "") {
+      issueId.setText("No Issue Found");
+    } else {
+      issueId.setText(String.valueOf(issueInfo.getIssue_id()));
+      bookTitle.setText(issueInfo.getBookTitle());
+      issuedDate.setText(issueInfo.getIssueDate());
+      dueDate.setText(issueInfo.getDueDate());
+      totalDate.setText(
+        String.valueOf(
+          (LocalDate.parse(issueInfo.getIssueDate())).until(LocalDate.now())
+            .getDays()
+        ) +
+        " Days"
+      );
+      int dateTaken = LocalDate
+        .now()
+        .until(LocalDate.parse(issueInfo.getDueDate()))
+        .getDays();
+      int penalDate = LocalDate
+        .parse(issueInfo.getDueDate())
+        .until(LocalDate.now())
+        .getDays();
+      if (dateTaken >= 0) {
+        penalty.setText("No Penalty");
+      } else {
+        penalty.setText("Penalty!! Taken for Extra " + penalDate + " Days.");
+      }
+    }
   }
-  else{
-  issueId.setText(String.valueOf(issueInfo.getIssue_id())); 
-  bookTitle.setText(issueInfo.getBookTitle()); 
-  issuedDate.setText(issueInfo.getIssueDate()); 
-  dueDate.setText(issueInfo.getDueDate()); 
-  totalDate.setText(String.valueOf((LocalDate.parse(issueInfo.getIssueDate())).until(LocalDate.now()).getDays()) + " Days"); 
-  int dateTaken = LocalDate.now().until(LocalDate.parse(issueInfo.getDueDate())).getDays();
-  int penalDate = LocalDate.parse(issueInfo.getDueDate()).until(LocalDate.now()).getDays();
-  if(dateTaken >=0){
-    penalty.setText("No Penalty"); 
-  }
-  else{
-    penalty.setText("Penalty!! Taken for Extra "+ penalDate+" Days."); 
-  }
-  
-} 
 
-}
+  @FXML
+  public void returnBook(ActionEvent event) throws IOException {
+    int memberId, bookId;
+    memberId = Integer.parseInt(memberId1.getText());
+    bookId = Integer.parseInt(bookId1.getText());
+    Issue issueInfo = retrieveSingleIssue(memberId, bookId);
 
-@FXML
-public void returnBook(ActionEvent event) throws IOException{
-  int memberId, bookId;
-  memberId = Integer.parseInt(memberId1.getText());
-  bookId = Integer.parseInt(bookId1.getText());
-  Issue issueInfo = retrieveSingleIssue(memberId, bookId);
-
-  returnInfo.setVisible(true);
-  if("".equals(issueInfo.getBookTitle())){
-    issueId.setText("No Issue Found"); 
-  }
-  else{
-    issueInfo.setIsActive(false);
+    returnInfo.setVisible(true);
+    if ("".equals(issueInfo.getBookTitle())) {
+      issueId.setText("No Issue Found");
+    } else {
+      issueInfo.setIsActive(false);
       System.out.println(issueInfo);
-    FileAlter.editIssueState(issueInfo);
-    Stage stage = (Stage) book.getScene().getWindow();
-    Parent root = FXMLLoader.load(getClass().getResource("fx/Admin/IssueList.fxml"));
+      FileAlter.editIssueState(issueInfo);
+      Stage stage = (Stage) book.getScene().getWindow();
+      Parent root = FXMLLoader.load(
+        getClass().getResource("fx/Admin/IssueList.fxml")
+      );
 
-    Scene scene = new Scene(root);
-    stage.setScene(scene);
-    stage.show();
+      Scene scene = new Scene(root);
+      stage.setScene(scene);
+      stage.show();
+    }
   }
-}
 
-  @FXML 
+  @FXML
   public void issueBook(ActionEvent event) throws IOException {
     Issue inpIssue = new Issue();
-    
+
     ArrayList<Issue> issueList = new ArrayList<>();
-        try{
-        issueList = FileAlter.retrieveAllIssueFile();            
-        }catch(java.io.FileNotFoundException e){
-        }    
-    
+    try {
+      issueList = FileAlter.retrieveAllIssueFile();
+    } catch (java.io.FileNotFoundException e) {}
+
     inpIssue.setMember_id(Integer.parseInt(memberId.getText()));
     inpIssue.setBook_id(Integer.parseInt(bookId.getText()));
-    inpIssue.setBookTitle(retrieveBookTitle(Integer.parseInt(bookId.getText())));
+    inpIssue.setBookTitle(
+      retrieveBookTitle(Integer.parseInt(bookId.getText()))
+    );
     inpIssue.setName(retrieveMemberName(Integer.parseInt(memberId.getText())));
     inpIssue.setIssueDate(inpIssue.getDateNow().toString());
     inpIssue.setDueDate(getDueDate(event).toString());
@@ -221,31 +231,30 @@ public void returnBook(ActionEvent event) throws IOException{
     System.out.println(str);
 
     Stage stage = (Stage) book.getScene().getWindow();
-    Parent root = FXMLLoader.load(getClass().getResource("fx/Admin/IssueList.fxml"));
+    Parent root = FXMLLoader.load(
+      getClass().getResource("fx/Admin/IssueList.fxml")
+    );
 
     Scene scene = new Scene(root);
     stage.setScene(scene);
     stage.show();
-    
-
-
   }
 
-@FXML
-public void showIssueForm(ActionEvent event) throws IOException{
-  issueInfo.setVisible(true);
-  LocalDate showDate = LocalDate.now();
-  issueDate.setText(showDate.toString());
-  
-}
+  @FXML
+  public void showIssueForm(ActionEvent event) throws IOException {
+    issueInfo.setVisible(true);
+    LocalDate showDate = LocalDate.now();
+    issueDate.setText(showDate.toString());
+  }
 
-@FXML
-public LocalDate getDueDate(ActionEvent event){
-  LocalDate dueDate = selectDate.getValue();
-  daysIssuedFor.setText(String.valueOf(LocalDate.now().until(dueDate).getDays()) + " Days");
-  return dueDate;
-}
-
+  @FXML
+  public LocalDate getDueDate(ActionEvent event) {
+    LocalDate dueDate = selectDate.getValue();
+    daysIssuedFor.setText(
+      String.valueOf(LocalDate.now().until(dueDate).getDays()) + " Days"
+    );
+    return dueDate;
+  }
 
   @FXML
   public void homePage(ActionEvent event) throws IOException {
@@ -377,12 +386,11 @@ public LocalDate getDueDate(ActionEvent event){
           });
         });
 
-      searchFilter.setPredicate((issue) ->{
-            if(issue.getIsActive() == false)
-                return false;
-            return true;
-      });      
-      
+      searchFilter.setPredicate(issue -> {
+        if (issue.getIsActive() == false) return false;
+        return true;
+      });
+
       SortedList<Issue> sortedSearch = new SortedList<>(searchFilter);
       sortedSearch.comparatorProperty().bind(tableIssue.comparatorProperty());
 

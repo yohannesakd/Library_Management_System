@@ -35,6 +35,23 @@ public class FileAlter {
     return "SUCCESSFULL";
   }
 
+  public static String deleteMember(int id) throws FileNotFoundException {
+    boolean deletion = false;
+    ArrayList<Member> memlist = retrieveAllMemberFile();
+
+    if (new File("Members.txt").delete()) {} else {
+      return "FILE NOT DELETED";
+    }
+
+    for (Member memItem : memlist) {
+      if (memItem.getMember_id() != id) Librarian.addMember(memItem); else {
+        deletion = true;
+      }
+    }
+    if (!deletion) return "NO FILE DELETED";
+    return "SUCCESSFULL";
+  }
+
   public static String deleteLibrarian(int id) throws FileNotFoundException {
     boolean deletion = false;
     ArrayList<Librarian> librarianlist = retrieveAllemployeeFile();
@@ -70,21 +87,23 @@ public class FileAlter {
     if (!alter) return "NO FILE ALTERED";
     return "SUCCESSFULL";
   }
-  
-  
-    public static String editIssueState(Issue editedIssue) throws FileNotFoundException, IOException {
+
+  public static String editIssueState(Issue editedIssue)
+    throws FileNotFoundException, IOException {
     ArrayList<Issue> issueList = FileAlter.retrieveAllIssueFile();
     boolean alter = false;
     if (new File("Issues.txt").delete()) {} else {
       return "FILE NOT DELETED";
     }
-    
-    for(int i = 0; i < issueList.size(); i++){
-        System.out.println(issueList.get(i) );
-        System.out.println("lets see again");
-        
-      if (issueList.get(i).getBook_id()!= editedIssue.getBook_id() || issueList.get(i).getMember_id()!= editedIssue.getMember_id() )Librarian.addIssue(issueList.get(i));
-      else {
+
+    for (int i = 0; i < issueList.size(); i++) {
+      System.out.println(issueList.get(i));
+      System.out.println("lets see again");
+
+      if (
+        issueList.get(i).getBook_id() != editedIssue.getBook_id() ||
+        issueList.get(i).getMember_id() != editedIssue.getMember_id()
+      ) Librarian.addIssue(issueList.get(i)); else {
         alter = true;
         Librarian.addIssue(editedIssue);
       }
@@ -93,25 +112,16 @@ public class FileAlter {
     return "SUCCESSFULL";
   }
 
-
-
-public static String retrieveBookTitle(int bookId) throws IOException{
-
-ArrayList<Book> bookList = new ArrayList<>();
-bookList = retrieveAllbookFile();
-      for(int i=0; i<bookList.size(); i++){
-        if(bookList.get(i).getBook_id()==bookId){
-
-          return bookList.get(i).getTitle();
-        }
-         }
-  return "";
-        }
-      
-    
-
-    
-  
+  public static String retrieveBookTitle(int bookId) throws IOException {
+    ArrayList<Book> bookList = new ArrayList<>();
+    bookList = retrieveAllbookFile();
+    for (int i = 0; i < bookList.size(); i++) {
+      if (bookList.get(i).getBook_id() == bookId) {
+        return bookList.get(i).getTitle();
+      }
+    }
+    return "";
+  }
 
   public static ArrayList<Book> retrieveAllbookFile()
     throws FileNotFoundException {
@@ -184,15 +194,40 @@ bookList = retrieveAllbookFile();
     return adminList;
   }
 
-public static Issue retrieveSingleIssue(int memberId, int bookId) throws FileNotFoundException{
-  ArrayList<Issue> issueList  = retrieveAllIssueFile();
-  for(int i=0; i<issueList.size(); i++){
-    if(issueList.get(i).getBook_id() == bookId && issueList.get(i).getMember_id()==memberId){
-      return issueList.get(i);
+  public static Issue retrieveSingleIssue(int memberId, int bookId)
+    throws FileNotFoundException {
+    ArrayList<Issue> issueList = retrieveAllIssueFile();
+    for (int i = 0; i < issueList.size(); i++) {
+      if (
+        issueList.get(i).getBook_id() == bookId &&
+        issueList.get(i).getMember_id() == memberId
+      ) {
+        return issueList.get(i);
+      }
     }
+    return new Issue();
   }
-  return  new Issue();
-}
+
+  public static Admin retrieveSingleAdmin(int id) throws FileNotFoundException {
+    ArrayList<Admin> adminList = retrieveAllAdminFile();
+    for (int i = 0; i < adminList.size(); i++) {
+      if (adminList.get(i).getId() == id) {
+        return adminList.get(i);
+      }
+    }
+    return new Admin();
+  }
+
+  public static Librarian retrieveSingleEmployee(int id)
+    throws FileNotFoundException {
+    ArrayList<Librarian> empList = retrieveAllemployeeFile();
+    for (int i = 0; i < empList.size(); i++) {
+      if (empList.get(i).getId() == id) {
+        return empList.get(i);
+      }
+    }
+    return new Admin();
+  }
 
   public static ArrayList<Issue> retrieveAllIssueFile()
     throws FileNotFoundException {
@@ -218,22 +253,18 @@ public static Issue retrieveSingleIssue(int memberId, int bookId) throws FileNot
     return issueList;
   }
 
-  public static String retrieveMemberName(int memberId) 
-  throws FileNotFoundException{
-      ArrayList<Member> memberList = new ArrayList<>();
-      memberList = retrieveAllMemberFile();
+  public static String retrieveMemberName(int memberId)
+    throws FileNotFoundException {
+    ArrayList<Member> memberList = new ArrayList<>();
+    memberList = retrieveAllMemberFile();
 
-        for(int i=0; i<memberList.size(); i++){
-          if(memberList.get(i).getMember_id() == memberId){
-            return memberList.get(i).getFullName();
-            
-          }
-        }
-        return "";
-      
-     
+    for (int i = 0; i < memberList.size(); i++) {
+      if (memberList.get(i).getMember_id() == memberId) {
+        return memberList.get(i).getFullName();
+      }
     }
-  
+    return "";
+  }
 
   public static ArrayList<Member> retrieveAllMemberFile()
     throws FileNotFoundException {

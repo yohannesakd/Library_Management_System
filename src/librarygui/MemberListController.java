@@ -110,6 +110,39 @@ public class MemberListController implements Initializable {
   }
 
   @FXML
+  private void addMemberWindow(ActionEvent event) throws IOException {
+    Stage stage = (Stage) book.getScene().getWindow();
+    stage.close();
+    stage = new Stage();
+    Parent root = FXMLLoader.load(
+      getClass().getResource("fx/admin/addMember.fxml")
+    );
+    Scene scene = new Scene(root);
+    stage.setScene(scene);
+    stage.show();
+  }
+
+  @FXML
+  private void handleMemberDelete(ActionEvent event) throws IOException {
+    Member toBeDeleted = tableMember.getSelectionModel().getSelectedItem();
+
+    if (toBeDeleted == null) {
+      // removeAlert.setText("PLEASE SELECT A ROW TO DELETE.");
+      return;
+    }
+
+    FileAlter.deleteMember(toBeDeleted.getMember_id());
+
+    Stage stage = (Stage) book.getScene().getWindow();
+    Parent root = FXMLLoader.load(
+      getClass().getResource("fx/Admin/MemberList.fxml")
+    );
+    Scene scene = new Scene(root);
+    stage.setScene(scene);
+    stage.show();
+  }
+
+  @FXML
   public void custPage(ActionEvent event) throws IOException {
     Stage stage = (Stage) book.getScene().getWindow();
     Parent root = FXMLLoader.load(

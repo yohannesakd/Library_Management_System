@@ -62,7 +62,7 @@ public class Librarian extends Person {
 
   void changeUsername(String oldUsername, String newUsername) {}
 
-  public static String addMember(Member member) throws IOException {
+  public static String addMember(Member member) {
     String memInput =
       member.getFullName() +
       "|" +
@@ -83,21 +83,21 @@ public class Librarian extends Person {
     return "SUCCESSFUL";
   }
 
-  public static String addIssue(Issue issue) throws IOException {
+  public static String addIssue(Issue issue) {
     String issueInput =
-    issue.getMember_id() +
-    "|" +
-    issue.getBook_id() +
-    "|" +
-    issue.getIssue_id() +
-    "|" +
+      issue.getMember_id() +
+      "|" +
+      issue.getBook_id() +
+      "|" +
+      issue.getIssue_id() +
+      "|" +
       issue.getIssueDate() +
       "|" +
       issue.getDueDate() +
       "|" +
       issue.getName() +
       "|" +
-      issue.getBookTitle()+
+      issue.getBookTitle() +
       "|" +
       issue.getIsActive();
     try {
@@ -107,5 +107,4 @@ public class Librarian extends Person {
     }
     return "SUCCESSFUL";
   }
-
 }
