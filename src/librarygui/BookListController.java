@@ -148,34 +148,10 @@ public class BookListController implements Initializable {
     Parent root = FXMLLoader.load(
       getClass().getResource("fx/admin/EditProfile.fxml")
     );
-
-    @FXML
-    private void bookEdit(ActionEvent event) throws IOException {
-        Book inpbook = new Book();
-        try{
-        inpbook.setBook_id(CurrentBookId);
-        inpbook.setTitle(titleField.getText());
-        inpbook.setAuthor(authorField.getText());
-        inpbook.setCategory(categoryField.getText());
-        inpbook.setEdition(editionField.getText());
-        inpbook.setPages(Integer.parseInt(pagesField.getText()));
-        inpbook.setIsbn(Long.parseLong(ISBNField.getText()));
-        inpbook.setShelfNo(shelfNoField.getText());
-        inpbook.setNoOfBookCopy(Integer.parseInt(noOfBookCopyField.getText()));
-        FileAlter.editBook(inpbook);
-
-        Stage stage = (Stage) add.getScene().getWindow();
-        Parent root = FXMLLoader.load(
-                getClass().getResource("fx/admin/BookList.fxml")
-        );
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-      }
-      catch (NumberFormatException e){
-        checkInput.setText("INVALID INPUT! REVIEW YOUR INPUTS!");
-      }
-    }
+    Scene scene = new Scene(root);
+    stage.setScene(scene);
+    stage.show();
+  }
 
   @FXML
   void logOut(ActionEvent event) throws IOException {
@@ -228,18 +204,18 @@ public class BookListController implements Initializable {
 
   @FXML
   private void handleBookEdit(ActionEvent event) throws IOException {
-    Book toBeEdited = tableBook.getSelectionModel().getSelectedItem();
-    CurrentBookId = toBeEdited.getBook_id();
-
-    if (toBeEdited == null) {
+    try {
+      Book toBeEdited = tableBook.getSelectionModel().getSelectedItem();
+      CurrentBookId = toBeEdited.getBook_id();
+      editBook(toBeEdited);
+      formContainer.setVisible(true);
+      titleField.requestFocus();
+      saveAdd.setVisible(false);
+      saveEdit.setVisible(true);
+    } catch (NullPointerException e) {
       editAlert.setText("PLEASE SELECT THE ROW TO EDIT");
       return;
     }
-    editBook(toBeEdited);
-    formContainer.setVisible(true);
-    titleField.requestFocus();
-    saveAdd.setVisible(false);
-    saveEdit.setVisible(true);
   }
 
   @FXML
