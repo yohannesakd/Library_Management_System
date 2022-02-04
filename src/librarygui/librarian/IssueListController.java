@@ -1,6 +1,11 @@
 package librarygui.librarian;
 
+import static library.FileAlter.retrieveBookTitle;
+import static library.FileAlter.retrieveMemberName;
+import static library.FileAlter.retrieveSingleIssue;
+
 import CustomException.BookUnavailability;
+import CustomException.MemberRestrictionException;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
@@ -21,14 +26,15 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import library.*;
-import static library.FileAlter.retrieveBookTitle;
-import static library.FileAlter.retrieveMemberName;
-import static library.FileAlter.retrieveSingleIssue;
 
 public class IssueListController implements Initializable {
+
+  @FXML
+  private Label alertIssue;
 
   @FXML
   private Button home;
@@ -47,6 +53,9 @@ public class IssueListController implements Initializable {
 
   @FXML
   private Button admin;
+
+  @FXML
+  private Button newMemberBtn;
 
   @FXML
   private TableView<Issue> tableIssue;
@@ -139,125 +148,206 @@ public class IssueListController implements Initializable {
   private Button confirmReturn;
 
   @FXML
-  private Button newMemberBtn;
+  private MenuItem editProfile;
 
-  
+  @FXML
+  private MenuItem logout;
 
-@FXML
-public void showReturnForm(ActionEvent event) throws IOException{
-  returnForm.setVisible(true); 
-}
+  @FXML
+  private MenuItem exit;
 
-@FXML
-public void showReturnInfo(ActionEvent event) throws IOException{
-  int memberId, bookId;
-  memberId = Integer.parseInt(memberId1.getText());
-  bookId = Integer.parseInt(bookId1.getText());
-  Issue issueInfo = retrieveSingleIssue(memberId, bookId);
-
-  returnInfo.setVisible(true);
-  if(issueInfo.getBookTitle() == ""){
-    issueId.setText("No Issue Found"); 
-  }
-  else{
-  issueId.setText(String.valueOf(issueInfo.getIssue_id())); 
-  bookTitle.setText(issueInfo.getBookTitle()); 
-  issuedDate.setText(issueInfo.getIssueDate()); 
-  dueDate.setText(issueInfo.getDueDate()); 
-  totalDate.setText(String.valueOf((LocalDate.parse(issueInfo.getIssueDate())).until(LocalDate.now()).getDays()) + " Days"); 
-  int dateTaken = LocalDate.now().until(LocalDate.parse(issueInfo.getDueDate())).getDays();
-  int penalDate = LocalDate.parse(issueInfo.getDueDate()).until(LocalDate.now()).getDays();
-  if(dateTaken >=0){
-    penalty.setText("No Penalty"); 
-  }
-  else{
-    penalty.setText("Penalty!! Taken for Extra "+ penalDate+" Days."); 
-  }
-  
-}
-}
-
-@FXML
-public void returnBook(ActionEvent event) throws IOException{
-  int memberId, bookId;
-  memberId = Integer.parseInt(memberId1.getText());
-  bookId = Integer.parseInt(bookId1.getText());
-  Issue issueInfo = retrieveSingleIssue(memberId, bookId);
-
-  returnInfo.setVisible(true);
-  if(issueInfo.getBookTitle() == ""){
-    issueId.setText("No Issue Found"); 
-  }
-  else{
-    issueInfo.setIsActive(false);
-    FileAlter.editIssueState(issueInfo);
+  @FXML
+  public void editWindow(ActionEvent event) throws IOException {
     Stage stage = (Stage) book.getScene().getWindow();
-    Parent root = FXMLLoader.load(getClass().getResource("IssueList.fxml"));
+    stage.close();
+    stage = new Stage();
+    Parent root = FXMLLoader.load(getClass().getResource("EditProfile.fxml"));
 
     Scene scene = new Scene(root);
     stage.setScene(scene);
     stage.show();
   }
-}
-  @FXML 
-  public void issueBook(ActionEvent event) throws IOException {
-    
-        try{
-            
-            Issue inpIssue = new Issue();
-            
-            ArrayList<Issue> issueList = new ArrayList<>();
-            try{
-                issueList = FileAlter.retrieveAllIssueFile();
-            }catch(java.io.FileNotFoundException e){
-            }
-            
-            if(!issueList.isEmpty())
-                inpIssue.setBook_id(issueList.get(issueList.size()-1).getIssue_id()+1);
-            
-            inpIssue.setMember_id(Integer.parseInt(memberId.getText()));
-            inpIssue.setBook_id(Integer.parseInt(bookId.getText()));
-            inpIssue.setBookTitle(retrieveBookTitle(Integer.parseInt(bookId.getText())));
-            inpIssue.setName(retrieveMemberName(Integer.parseInt(memberId.getText())));
-            inpIssue.setIssueDate(inpIssue.getDateNow().toString());
-            inpIssue.setDueDate(getDueDate(event).toString());
-            
-            String str = Admin.addIssue(inpIssue);
-            System.out.println(str);
-            
-            Stage stage = (Stage) book.getScene().getWindow();
-            Parent root = FXMLLoader.load(getClass().getResource("IssueList.fxml"));
-            
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-            
-            
-            
-        }catch(BookUnavailability ex){
-            System.out.println("BOOK IS UNAVAILABLE");
-        
-        }
-    
 
+  @FXML
+  void logOut(ActionEvent event) throws IOException {
+    Stage stage = (Stage) book.getScene().getWindow();
+    stage.close();
+    stage = new Stage();
+    Parent root = FXMLLoader.load(getClass().getResource("fx/Login.fxml"));
+    Image icon = new Image(getClass().getResourceAsStream("icon.png"));
+    stage.getIcons().add(icon);
 
+    Scene scene = new Scene(root);
+    stage.setScene(scene);
+    stage.show();
   }
 
-@FXML
-public void showIssueForm(ActionEvent event) throws IOException{
-  issueInfo.setVisible(true);
-  LocalDate showDate = LocalDate.now();
-  issueDate.setText(showDate.toString());
-  
-}
+  @FXML
+  void quit(ActionEvent event) throws IOException {
+    Stage stage = (Stage) book.getScene().getWindow();
+    stage.close();
+  }
 
-@FXML
-public LocalDate getDueDate(ActionEvent event){
-  LocalDate dueDate = selectDate.getValue();
-  daysIssuedFor.setText(String.valueOf(LocalDate.now().until(dueDate).getDays()) + " Days");
-  return dueDate;
+  @FXML
+  public void showReturnForm(ActionEvent event) throws IOException {
+    returnForm.setVisible(true);
+  }
 
-}
+  @FXML
+  public void showReturnInfo(ActionEvent event) throws IOException {
+    int memberId, bookId;
+    memberId = Integer.parseInt(memberId1.getText());
+    bookId = Integer.parseInt(bookId1.getText());
+    Issue issueInfo = retrieveSingleIssue(memberId, bookId);
+
+    returnInfo.setVisible(true);
+    if (issueInfo.getBookTitle() == "") {
+      issueId.setText("No Issue Found");
+    } else {
+      issueId.setText(String.valueOf(issueInfo.getIssue_id()));
+      bookTitle.setText(issueInfo.getBookTitle());
+      issuedDate.setText(issueInfo.getIssueDate());
+      dueDate.setText(issueInfo.getDueDate());
+      totalDate.setText(
+        String.valueOf(
+          (LocalDate.parse(issueInfo.getIssueDate())).until(LocalDate.now())
+            .getDays()
+        ) +
+        " Days"
+      );
+      int dateTaken = LocalDate
+        .now()
+        .until(LocalDate.parse(issueInfo.getDueDate()))
+        .getDays();
+      int penalDate = LocalDate
+        .parse(issueInfo.getDueDate())
+        .until(LocalDate.now())
+        .getDays();
+      if (dateTaken >= 0) {
+        penalty.setText("No Penalty");
+      } else {
+        penalty.setText("Penalty!! Taken for Extra " + penalDate + " Days.");
+      }
+    }
+  }
+
+  @FXML
+  public void returnBook(ActionEvent event)
+    throws IOException, FileNotFoundException {
+    int memberId, bookId;
+    memberId = Integer.parseInt(memberId1.getText());
+    bookId = Integer.parseInt(bookId1.getText());
+    try {
+      Issue issueInfo = retrieveSingleIssue(memberId, bookId);
+
+      returnInfo.setVisible(true);
+      if ("".equals(issueInfo.getBookTitle())) {
+        issueId.setText("No Issue Found");
+      } else {
+        issueInfo.setIsActive(false);
+
+        FileAlter.editIssueState(issueInfo);
+
+        FileAlter.updateIssuedBook(Integer.parseInt(bookId1.getText()), true);
+        FileAlter.updateIssueMember(memberId, true);
+
+        Stage stage = (Stage) book.getScene().getWindow();
+        Parent root = FXMLLoader.load(getClass().getResource("IssueList.fxml"));
+
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+
+        Parent alert = FXMLLoader.load(
+          getClass().getResource("fx/alertBox.fxml")
+        );
+        Stage stage1 = new Stage();
+        Scene alertScene = new Scene(alert);
+        Image icon = new Image(getClass().getResourceAsStream("icon.png"));
+        stage1.getIcons().add(icon);
+        stage1.setTitle("Shewe Library Management System");
+        stage1.setScene(alertScene);
+        stage1.show();
+      }
+    } catch (MemberRestrictionException ex) {
+      alertIssue.setText(
+        "Trying to return a book that has not been issued. please review the member or book id."
+      );
+    }
+  }
+
+  @FXML
+  public void issueBook(ActionEvent event) throws IOException {
+    try {
+      Issue inpIssue = new Issue();
+
+      ArrayList<Issue> issueList = new ArrayList<>();
+      try {
+        issueList = FileAlter.retrieveAllIssueFile();
+      } catch (java.io.FileNotFoundException e) {}
+
+      inpIssue.setMember_id(Integer.parseInt(memberId.getText()));
+      inpIssue.setBookTitle(
+        retrieveBookTitle(Integer.parseInt(bookId.getText()))
+      );
+      FileAlter.updateIssueMember(Integer.parseInt(memberId.getText()), false);
+
+      inpIssue.setBook_id(Integer.parseInt(bookId.getText()));
+      if (!issueList.isEmpty()) inpIssue.setIssue_id(
+        issueList.get(issueList.size() - 1).getIssue_id() + 1
+      );
+      inpIssue.setName(
+        retrieveMemberName(Integer.parseInt(memberId.getText()))
+      );
+      inpIssue.setIssueDate(inpIssue.getDateNow().toString());
+      inpIssue.setDueDate(getDueDate(event).toString());
+
+      FileAlter.updateIssuedBook(Integer.parseInt(bookId.getText()), false);
+
+      String str = Admin.addIssue(inpIssue);
+      System.out.println(str);
+
+      Stage stage = (Stage) book.getScene().getWindow();
+      Parent root = FXMLLoader.load(getClass().getResource("IssueList.fxml"));
+      stage.setScene(new Scene(root));
+      stage.show();
+
+      //pop up alert of completion-----------------------------------------------------------
+      Parent alert = FXMLLoader.load(
+        getClass().getResource("fx/alertBox.fxml")
+      );
+      Stage stage1 = new Stage();
+      Scene alertScene = new Scene(alert);
+      stage1.setScene(alertScene);
+      stage1.show();
+      //the pop up window------------------------------------------------------------------
+
+    } catch (FileNotFoundException ex) {} catch (
+      MemberRestrictionException ex
+    ) {
+      alertIssue.setText(
+        "ONE USER CAN ISSUE ONLY ONE BOOK AT A TIME. TO ISSUE ANOTHER BOOK PLEASE RETURN YOUR ISSUE."
+      );
+    } catch (BookUnavailability ex) {
+      alertIssue.setText("BOOK IS UNAVAILABLE.");
+    }
+  }
+
+  @FXML
+  public void showIssueForm(ActionEvent event) throws IOException {
+    issueInfo.setVisible(true);
+    LocalDate showDate = LocalDate.now();
+    issueDate.setText(showDate.toString());
+  }
+
+  @FXML
+  public LocalDate getDueDate(ActionEvent event) {
+    LocalDate dueDate = selectDate.getValue();
+    daysIssuedFor.setText(
+      String.valueOf(LocalDate.now().until(dueDate).getDays()) + " Days"
+    );
+    return dueDate;
+  }
 
   @FXML
   public void homePage(ActionEvent event) throws IOException {
@@ -288,6 +378,17 @@ public LocalDate getDueDate(ActionEvent event){
     stage.show();
   }
 
+  @FXML
+  private void addMemberWindow(ActionEvent event) throws IOException {
+    Stage stage = (Stage) book.getScene().getWindow();
+    stage.close();
+    stage = new Stage();
+    Parent root = FXMLLoader.load(getClass().getResource("addMember.fxml"));
+    Scene scene = new Scene(root);
+    stage.setScene(scene);
+    stage.show();
+  }
+
   public void initialize(URL url, ResourceBundle rb) {
     issue_id.setCellValueFactory(new PropertyValueFactory<>("issue_id"));
     name.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -304,19 +405,16 @@ public LocalDate getDueDate(ActionEvent event){
     }
 
     FilteredList<Issue> searchFilter;
-
     try {
       searchFilter = new FilteredList<>(giveIssues());
       searchBar
         .textProperty()
         .addListener((observable, oldvalue, newvalue) -> {
           searchFilter.setPredicate(issue -> {
-            
             if (newvalue == null || newvalue.isEmpty()) {
               return true;
             }
-
-             if (
+            if (
               Integer
                 .toString(issue.getIssue_id())
                 .contains(searchBar.getText())
@@ -352,19 +450,18 @@ public LocalDate getDueDate(ActionEvent event){
           });
         });
 
-      searchFilter.setPredicate((issue) ->{
-            if(issue.getIsActive() == false)
-                return false;
-            return true;
+      searchFilter.setPredicate(issue -> {
+        if (issue.getIsActive() == false) return false;
+        return true;
       });
-      
+
       SortedList<Issue> sortedSearch = new SortedList<>(searchFilter);
       sortedSearch.comparatorProperty().bind(tableIssue.comparatorProperty());
 
       tableIssue.setItems(sortedSearch);
     } catch (FileNotFoundException ex) {
       Logger
-        .getLogger(IssueListController.class.getName())
+        .getLogger(BookListController.class.getName())
         .log(Level.SEVERE, null, ex);
     }
   }
