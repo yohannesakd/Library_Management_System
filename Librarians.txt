@@ -1,2 +1,2 @@
 1001|fantish|admin|Yohannes Fantahun|911122112|fantish@mail.com|Bole1001
-1002|qwertyu|null|qwertyui|1234567|qwerty|qwerty
+1002|pass|pass|qwertyui|123456798|qwerty@mail|qwertyhome

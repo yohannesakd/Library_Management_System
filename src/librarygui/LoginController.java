@@ -48,13 +48,8 @@ public class LoginController implements Initializable {
   @FXML
   private ComboBox<String> loger;
 
-
-
-
   public static int currentUser;
   public static String userType;
-
-  
 
   ObservableList<String> list = FXCollections.observableArrayList(
     "Admin",
@@ -100,7 +95,7 @@ public class LoginController implements Initializable {
           Image icon = new Image(getClass().getResourceAsStream("icon.png"));
           stage.getIcons().add(icon);
           stage.setTitle("Shewe Library Management System");
-    
+
           stage.show();
         }
       }
@@ -121,6 +116,8 @@ public class LoginController implements Initializable {
             found = true;
             userType = loger.getValue();
             currentUser = liblist.get(i).getId();
+            System.out.println(userType);
+            System.out.println(currentUser);
             System.out.println("at least this executes");
             alert.setText("Login Successfull");
             Stage stage = (Stage) login.getScene().getWindow();

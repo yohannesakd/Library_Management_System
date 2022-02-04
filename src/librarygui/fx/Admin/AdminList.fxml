@@ -169,5 +169,29 @@
             </AnchorPane>
         </items>
       </SplitPane>
+<<<<<<< HEAD
     </children>
 </AnchorPane>
+=======
+   </center>
+   <top>
+      <MenuBar prefHeight="25.0" prefWidth="1154.0" BorderPane.alignment="CENTER">
+         <menus>
+            <Menu mnemonicParsing="false" text="Menu">
+               <items>
+                  <MenuItem fx:id="editProfile" mnemonicParsing="false" onAction="#editWindow" text="Edit Profile" />
+                  <MenuItem fx:id="logout" mnemonicParsing="false" onAction="#logOut" text="Log Out" />
+                  <MenuItem fx:id="exit" mnemonicParsing="false" onAction="#quit" text="Exit" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Help">
+               <items>
+                  <MenuItem fx:id="about" mnemonicParsing="false" text="About" />
+                  <MenuItem mnemonicParsing="false" text="User Manual" />
+               </items>
+            </Menu>
+         </menus>
+      </MenuBar>
+   </top>
+</BorderPane>
+>>>>>>> 20f197ced1564a2d75abe2cdd2d17fe685b42893

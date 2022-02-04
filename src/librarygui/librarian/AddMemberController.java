@@ -1,4 +1,4 @@
-package librarygui;
+package librarygui.librarian;
 
 import CustomException.*;
 import java.io.IOException;
@@ -87,9 +87,7 @@ public class AddMemberController implements Initializable {
       stage.setY(bounds.getMinY());
       stage.setWidth(bounds.getWidth());
       stage.setHeight(bounds.getHeight());
-      Parent root = FXMLLoader.load(
-        getClass().getResource("fx/admin/MemberList.fxml")
-      );
+      Parent root = FXMLLoader.load(getClass().getResource("MemberList.fxml"));
       Scene scene = new Scene(root);
       stage.setScene(scene);
       stage.show();
@@ -134,9 +132,7 @@ public class AddMemberController implements Initializable {
     stage.setMinWidth(700);
     stage.setMinHeight(700);
 
-    Parent root = FXMLLoader.load(
-      getClass().getResource("fx/admin/MemberList.fxml")
-    );
+    Parent root = FXMLLoader.load(getClass().getResource("MemberList.fxml"));
     Scene scene = new Scene(root);
     stage.setScene(scene);
     stage.show();

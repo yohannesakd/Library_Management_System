@@ -1,4 +1,4 @@
-package librarygui;
+package librarygui.librarian;
 
 import static librarygui.LoginController.currentUser;
 import static librarygui.LoginController.userType;
@@ -95,9 +95,7 @@ public class EditProfileController implements Initializable {
         Admin.addAdmin(edited);
 
         Stage stage = (Stage) edit.getScene().getWindow();
-        Parent root = FXMLLoader.load(
-          getClass().getResource("fx/admin/Home.fxml")
-        );
+        Parent root = FXMLLoader.load(getClass().getResource("Home.fxml"));
 
         Screen screen = Screen.getPrimary();
         Rectangle2D bounds = screen.getVisualBounds();
@@ -172,16 +170,34 @@ public class EditProfileController implements Initializable {
         edited.setUsername(usernameField.getText());
         edited.setPhoneNo(Integer.parseInt(phoneField.getText()));
 
-        FileAlter.deleteAdmin(currentUser);
+        FileAlter.deleteLibrarian(currentUser);
         Admin.addLibrarian(edited);
 
         Stage stage = (Stage) edit.getScene().getWindow();
-        Parent root = FXMLLoader.load(
-          getClass().getResource("fx/admin/Home.fxml")
-        );
+        Parent root = FXMLLoader.load(getClass().getResource("Home.fxml"));
+        Screen screen = Screen.getPrimary();
+        Rectangle2D bounds = screen.getVisualBounds();
+
+        stage.setX(bounds.getMinX());
+        stage.setY(bounds.getMinY());
+        stage.setWidth(bounds.getWidth());
+        stage.setHeight(bounds.getHeight());
+
+        stage.setMinWidth(700);
+        stage.setMinHeight(700);
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+        Parent alert = FXMLLoader.load(
+          getClass().getResource("fx/alertBox.fxml")
+        );
+        Stage stage1 = new Stage();
+        Scene alertScene = new Scene(alert);
+        Image icon = new Image(getClass().getResourceAsStream("icon.png"));
+        stage1.getIcons().add(icon);
+        stage1.setTitle("Shewe Library Management System");
+        stage1.setScene(alertScene);
+        stage1.show();
       } catch (EmailException eE) {
         System.out.println(eE.getMessage());
         emailField.setStyle("-fx-text-inner-color: #b50909;");
@@ -218,7 +234,7 @@ public class EditProfileController implements Initializable {
         emailField.setText(toBeEdited.getEmail());
         addressField.setText(toBeEdited.getAddress());
         usernameField.setText(toBeEdited.getUsername());
-      } else {
+      } else if (userType == "Librarian") {
         Librarian toBeEdited = FileAlter.retrieveSingleEmployee(currentUser);
         if (toBeEdited == null) {
           return;
@@ -229,6 +245,7 @@ public class EditProfileController implements Initializable {
         phoneField.setText(Integer.toString(toBeEdited.getPhoneNo()));
         emailField.setText(toBeEdited.getEmail());
         addressField.setText(toBeEdited.getAddress());
+        usernameField.setText(toBeEdited.getUsername());
       }
     } catch (FileNotFoundException e) {
       System.out.println("ERROR,FILENOTFOUND");

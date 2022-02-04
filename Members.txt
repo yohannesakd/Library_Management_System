@@ -1,2 +1,3 @@
 another customer|987654321|mail@|d|1004|1
-now never ldel|987654321|mail@|homerun|1005|0
+now never ldel|987654321|mail@|homerun|1005|1
+Yohannes|990090999|mail@mail.com |home|1006|0
