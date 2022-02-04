@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.collections.*;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -40,6 +41,9 @@ public class AddMemberController implements Initializable {
 
   @FXML
   private Label errorMsg;
+
+  @FXML
+  private Button backBtn;
 
   @FXML
   private void handleRegister() throws IOException {
@@ -108,6 +112,29 @@ try{
 
   }
 
+  
+
+  @FXML
+  public void goBack(ActionEvent event) throws IOException {
+    Stage stage = (Stage) registerBtn.getScene().getWindow();
+    Screen screen = Screen.getPrimary();
+  Rectangle2D bounds = screen.getVisualBounds();
+
+  stage.setX(bounds.getMinX());
+  stage.setY(bounds.getMinY());
+  stage.setWidth(bounds.getWidth());
+  stage.setHeight(bounds.getHeight());
+
+  stage.setMinWidth(700);
+  stage.setMinHeight(700);
+  
+    Parent root = FXMLLoader.load(
+      getClass().getResource("fx/admin/MemberList.fxml")
+    );
+    Scene scene = new Scene(root);
+    stage.setScene(scene);
+    stage.show();
+  }
  
 
   public void initialize(URL url, ResourceBundle rb) {}

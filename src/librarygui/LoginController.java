@@ -18,6 +18,8 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import library.*;
@@ -29,7 +31,7 @@ import library.*;
 public class LoginController implements Initializable {
 
   @FXML
-  private Label logo;
+  private ImageView logo;
 
   @FXML
   private Label alert;
@@ -46,8 +48,13 @@ public class LoginController implements Initializable {
   @FXML
   private ComboBox<String> loger;
 
+
+
+
   public static int currentUser;
   public static String userType;
+
+  
 
   ObservableList<String> list = FXCollections.observableArrayList(
     "Admin",
@@ -90,6 +97,10 @@ public class LoginController implements Initializable {
           );
           Scene scene = new Scene(root);
           stage.setScene(scene);
+          Image icon = new Image(getClass().getResourceAsStream("icon.png"));
+          stage.getIcons().add(icon);
+          stage.setTitle("Shewe Library Management System");
+    
           stage.show();
         }
       }

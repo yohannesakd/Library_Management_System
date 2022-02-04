@@ -120,6 +120,8 @@ public class LibListController implements Initializable {
   @FXML
   private MenuItem exit;
 
+ 
+
   @FXML
   public void editWindow(ActionEvent event) throws IOException {
     Stage stage = (Stage) book.getScene().getWindow();

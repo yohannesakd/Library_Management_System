@@ -7,20 +7,27 @@
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.paint.LinearGradient?>
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane minHeight="400.0" minWidth="400.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="librarygui.LoginController">
+<BorderPane minHeight="400.0" minWidth="400.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="librarygui.LoginController">
    <top>
-      <Label fx:id="logo" alignment="CENTER" contentDisplay="CENTER" prefHeight="115.0" prefWidth="300.0" text="Library Management System " BorderPane.alignment="CENTER">
-         <font>
-            <Font size="22.0" />
-         </font>
-      </Label>
+      <HBox BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fx:id="logo" fitHeight="121.0" fitWidth="458.0" pickOnBounds="true">
+               <image>
+                  <Image url="@shewe_logo.png" />
+               </image>
+            </ImageView>
+         </children>
+      </HBox>
    </top>
    <center>
       <AnchorPane id="AnchorPane" prefHeight="455.0" prefWidth="460.0" BorderPane.alignment="CENTER">
@@ -36,7 +43,7 @@
                         </Stop>
                         <Stop offset="1.0">
                            <color>
-                              <Color red="0.7894737124443054" green="0.4093567132949829" blue="0.4093567132949829" />
+                              <Color blue="0.4093567132949829" green="0.4093567132949829" red="0.7894737124443054" />
                            </color>
                         </Stop>
                      </stops>
@@ -53,7 +60,7 @@
                <effect>
                   <DropShadow>
                      <color>
-                        <Color red="0.28947368264198303" green="0.18226121366024017" blue="0.18226121366024017" />
+                        <Color blue="0.18226121366024017" green="0.18226121366024017" red="0.28947368264198303" />
                      </color>
                   </DropShadow>
                </effect>
