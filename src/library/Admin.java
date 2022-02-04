@@ -23,6 +23,7 @@ public class Admin extends Librarian {
 
   //just for the demonstration lets make it static
   public static String addBook(Book book) {
+    book.setIsAvailable();
     String bookinput =
       book.getBook_id() +
       "|" +
