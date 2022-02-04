@@ -69,7 +69,7 @@
             </AnchorPane>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="544.0" prefWidth="520.0">
                <children>
-                  <VBox layoutY="14.0" prefHeight="200.0" prefWidth="895.0">
+                  <VBox layoutY="14.0" prefHeight="200.0" prefWidth="895.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="14.0">
                      <children>
                         <ImageView fitHeight="452.0" fitWidth="946.0" pickOnBounds="true">
                            <image>

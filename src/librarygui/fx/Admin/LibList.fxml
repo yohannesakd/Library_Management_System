@@ -210,7 +210,7 @@
             <Menu mnemonicParsing="false" text="Help">
                <items>
                   <MenuItem fx:id="about" mnemonicParsing="false" text="About" />
-                  <MenuItem mnemonicParsing="false" text="User Manual" />
+                  <MenuItem fx:id="userManual" mnemonicParsing="false" onAction="#userManual" text="User Manual" />
                </items>
             </Menu>
          </menus>

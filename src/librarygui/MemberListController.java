@@ -79,6 +79,24 @@ public class MemberListController implements Initializable {
   private MenuItem exit;
 
   @FXML
+  private MenuItem userManual;
+
+
+  @FXML
+  public void userManual(ActionEvent event) throws IOException {
+    Stage stage = (Stage) book.getScene().getWindow();
+    
+    stage = new Stage();
+    Parent root = FXMLLoader.load(
+      getClass().getResource("fx/UserManual.fxml")
+    );
+
+    Scene scene = new Scene(root);
+    stage.setScene(scene);
+    stage.show();
+  }
+
+  @FXML
   public void editWindow(ActionEvent event) throws IOException {
     Stage stage = (Stage) book.getScene().getWindow();
     stage.close();
