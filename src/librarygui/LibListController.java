@@ -1,5 +1,8 @@
 package librarygui;
 
+import CustomException.EmailException;
+import CustomException.NullFieldException;
+import CustomException.PhoneException;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
@@ -7,11 +10,6 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import CustomException.EmailException;
-import CustomException.NullFieldException;
-import CustomException.PhoneException;
-import javafx.collections.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -119,8 +117,6 @@ public class LibListController implements Initializable {
 
   @FXML
   private MenuItem exit;
-
- 
 
   @FXML
   public void editWindow(ActionEvent event) throws IOException {
@@ -254,52 +250,53 @@ public class LibListController implements Initializable {
       liblist.get(liblist.size() - 1).getId() + 1
     );
     try {
-      if(fullNameField.getText().equals("") || phoneField.getText().equals("") || emailField.getText().equals("") || addressField.getText().equals("")){
+      if (
+        fullNameField.getText().equals("") ||
+        phoneField.getText().equals("") ||
+        emailField.getText().equals("") ||
+        addressField.getText().equals("")
+      ) {
         throw new NullFieldException();
       }
-      if(phoneField.getText().length() != 9){
+      if (phoneField.getText().length() != 9) {
         throw new PhoneException();
       }
-      if(!emailField.getText().contains("@")){
+      if (!emailField.getText().contains("@")) {
         throw new EmailException();
       }
-    inpLib.setFullName(fullNameField.getText());
+      inpLib.setFullName(fullNameField.getText());
 
-    inpLib.setPhoneNo(Integer.parseInt(phoneField.getText()));
-    inpLib.setUsername(usernameField.getText());
-    inpLib.setEmail(emailField.getText());
-    inpLib.setAddress(addressField.getText());
+      inpLib.setPhoneNo(Integer.parseInt(phoneField.getText()));
+      inpLib.setUsername(usernameField.getText());
+      inpLib.setEmail(emailField.getText());
+      inpLib.setAddress(addressField.getText());
 
-    String str = Admin.addLibrarian(inpLib);
-    System.out.println(str);
-    response.setText(str);
+      String str = Admin.addLibrarian(inpLib);
+      System.out.println(str);
+      response.setText(str);
 
-    Stage stage = (Stage) response.getScene().getWindow();
-    Parent root = FXMLLoader.load(
-      getClass().getResource("fx/admin/LibList.fxml")
-    );
-    Scene scene = new Scene(root);
-    stage.setScene(scene);
-    stage.show();
-    }
-    catch(EmailException eE){
+      Stage stage = (Stage) response.getScene().getWindow();
+      Parent root = FXMLLoader.load(
+        getClass().getResource("fx/admin/LibList.fxml")
+      );
+      Scene scene = new Scene(root);
+      stage.setScene(scene);
+      stage.show();
+    } catch (EmailException eE) {
       System.out.println(eE.getMessage());
       emailField.setStyle("-fx-text-inner-color: #b50909;");
       response.setText(eE.getMessage());
       response.setTextFill(Color.RED);
-  }
-
-  catch(PhoneException pE){
-    System.out.println(pE.getMessage());
+    } catch (PhoneException pE) {
+      System.out.println(pE.getMessage());
       phoneField.setStyle("-fx-text-inner-color: #b50909;");
       response.setText(pE.getMessage());
       response.setTextFill(Color.RED);
-  }
-    catch(NullFieldException nE){
+    } catch (NullFieldException nE) {
       System.out.println(nE.getMessage());
-        response.setText(nE.getMessage());
-        response.setTextFill(Color.RED);
-      }
+      response.setText(nE.getMessage());
+      response.setTextFill(Color.RED);
+    }
   }
 
   @Override

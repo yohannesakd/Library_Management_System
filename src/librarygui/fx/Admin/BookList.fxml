@@ -283,9 +283,9 @@
          <menus>
             <Menu mnemonicParsing="false" text="Menu">
                <items>
-                  <MenuItem fx:id="editProfile" mnemonicParsing="false" text="Edit Profile" />
-                  <MenuItem fx:id="logout" mnemonicParsing="false" text="Log Out" />
-                  <MenuItem fx:id="exit" mnemonicParsing="false" text="Exit" />
+                  <MenuItem fx:id="editProfile" mnemonicParsing="false" onAction="#editWindow" text="Edit Profile" />
+                  <MenuItem fx:id="logout" mnemonicParsing="false" onAction="#logOut" text="Log Out" />
+                  <MenuItem fx:id="exit" mnemonicParsing="false" onAction="#quit" text="Exit" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Help">

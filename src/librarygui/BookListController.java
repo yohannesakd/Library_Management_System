@@ -1,5 +1,6 @@
 package librarygui;
 
+import CustomException.NullFieldException;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
@@ -7,9 +8,6 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import CustomException.NullFieldException;
-import javafx.collections.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -25,7 +23,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import javafx.util.converter.IntegerStringConverter;
 import library.*;
 
 public class BookListController implements Initializable {
@@ -115,10 +112,10 @@ public class BookListController implements Initializable {
 
   @FXML
   private TableColumn<Book, String> copies;
-  
+
   @FXML
-  private TableColumn<Book , String> issuesCol;
-  
+  private TableColumn<Book, String> issuesCol;
+
   @FXML
   private TableColumn<Book, String> availablity;
 
@@ -145,7 +142,7 @@ public class BookListController implements Initializable {
 
   @FXML
   private MenuItem exit;
-  
+
   @FXML
   public void editWindow(ActionEvent event) throws IOException {
     Stage stage = (Stage) book.getScene().getWindow();
@@ -196,7 +193,6 @@ public class BookListController implements Initializable {
   }
 
   public void editBook(Book book) {
-
     titleField.setText(book.getTitle());
     authorField.setText(book.getAuthor());
     editionField.setText(book.getEdition());
@@ -225,39 +221,46 @@ public class BookListController implements Initializable {
   @FXML
   private void bookEdit(ActionEvent event) throws IOException {
     Book inpbook = new Book();
-try{
-  if(titleField.getText().equals("") || authorField.getText().equals("") || categoryField.getText().equals("") || editionField.getText().equals("") || pagesField.getText().equals("") || ISBNField.getText().equals("") || shelfNoField.getText().equals("") || noOfBookCopyField.getText().equals("")){
-    throw new NullFieldException();
-  }
- 
-    inpbook.setBook_id(CurrentBookId);
-    inpbook.setTitle(titleField.getText());
-    inpbook.setAuthor(authorField.getText());
-    inpbook.setCategory(categoryField.getText());
-    inpbook.setEdition(editionField.getText());
-    inpbook.setPages(Integer.parseInt(pagesField.getText()));
-    inpbook.setIsbn(Long.parseLong(ISBNField.getText()));
-    inpbook.setShelfNo(shelfNoField.getText());
-    inpbook.setNoOfBookCopy(Integer.parseInt(noOfBookCopyField.getText()));
-    FileAlter.editBook(inpbook);
+    try {
+      if (
+        titleField.getText().equals("") ||
+        authorField.getText().equals("") ||
+        categoryField.getText().equals("") ||
+        editionField.getText().equals("") ||
+        pagesField.getText().equals("") ||
+        ISBNField.getText().equals("") ||
+        shelfNoField.getText().equals("") ||
+        noOfBookCopyField.getText().equals("")
+      ) {
+        throw new NullFieldException();
+      }
 
-    Stage stage = (Stage) add.getScene().getWindow();
-    Parent root = FXMLLoader.load(
-      getClass().getResource("fx/admin/BookList.fxml")
-    );
-    Scene scene = new Scene(root);
-    stage.setScene(scene);
-    stage.show();
-}
-catch(NullFieldException nE){
-System.out.println(nE.getMessage());
-  checkInput.setText(nE.getMessage());
-  checkInput.setTextFill(Color.RED);
-}
-catch (NumberFormatException e) {
-  checkInput.setText("INVALID INPUT! REVIEW YOUR INPUTS!");
-  checkInput.setTextFill(Color.RED);
-}
+      inpbook.setBook_id(CurrentBookId);
+      inpbook.setTitle(titleField.getText());
+      inpbook.setAuthor(authorField.getText());
+      inpbook.setCategory(categoryField.getText());
+      inpbook.setEdition(editionField.getText());
+      inpbook.setPages(Integer.parseInt(pagesField.getText()));
+      inpbook.setIsbn(Long.parseLong(ISBNField.getText()));
+      inpbook.setShelfNo(shelfNoField.getText());
+      inpbook.setNoOfBookCopy(Integer.parseInt(noOfBookCopyField.getText()));
+      FileAlter.editBook(inpbook);
+
+      Stage stage = (Stage) add.getScene().getWindow();
+      Parent root = FXMLLoader.load(
+        getClass().getResource("fx/admin/BookList.fxml")
+      );
+      Scene scene = new Scene(root);
+      stage.setScene(scene);
+      stage.show();
+    } catch (NullFieldException nE) {
+      System.out.println(nE.getMessage());
+      checkInput.setText(nE.getMessage());
+      checkInput.setTextFill(Color.RED);
+    } catch (NumberFormatException e) {
+      checkInput.setText("INVALID INPUT! REVIEW YOUR INPUTS!");
+      checkInput.setTextFill(Color.RED);
+    }
   }
 
   @FXML
@@ -331,9 +334,6 @@ catch (NumberFormatException e) {
     saveEdit.setVisible(false);
   }
 
-
-
-  
   @FXML
   private void completeAddBook(ActionEvent event) throws IOException {
     Book inpbook = new Book();
@@ -347,7 +347,16 @@ catch (NumberFormatException e) {
       booklist.get(booklist.size() - 1).getBook_id() + 1
     );
     try {
-      if(titleField.getText().equals("") || authorField.getText().equals("") || categoryField.getText().equals("") || editionField.getText().equals("") || pagesField.getText().equals("") || ISBNField.getText().equals("") || shelfNoField.getText().equals("") || noOfBookCopyField.getText().equals("")){
+      if (
+        titleField.getText().equals("") ||
+        authorField.getText().equals("") ||
+        categoryField.getText().equals("") ||
+        editionField.getText().equals("") ||
+        pagesField.getText().equals("") ||
+        ISBNField.getText().equals("") ||
+        shelfNoField.getText().equals("") ||
+        noOfBookCopyField.getText().equals("")
+      ) {
         throw new NullFieldException();
       }
       inpbook.setTitle(titleField.getText());
@@ -371,13 +380,12 @@ catch (NumberFormatException e) {
       stage.show();
     } catch (NumberFormatException e) {
       checkInput.setText("INVALID INPUT! REVIEW YOUR INPUTS!");
-  checkInput.setTextFill(Color.RED);
-    }
-    catch(NullFieldException nE){
+      checkInput.setTextFill(Color.RED);
+    } catch (NullFieldException nE) {
       System.out.println(nE.getMessage());
-        checkInput.setText(nE.getMessage());
-        checkInput.setTextFill(Color.RED);
-      }
+      checkInput.setText(nE.getMessage());
+      checkInput.setTextFill(Color.RED);
+    }
   }
 
   public void showEditForm(ActionEvent event) throws IOException {
@@ -387,7 +395,6 @@ catch (NumberFormatException e) {
 
   @Override
   public void initialize(URL url, ResourceBundle rb) {
-    
     bookid.setCellValueFactory(new PropertyValueFactory<>("book_id"));
     title.setCellValueFactory(new PropertyValueFactory<>("title"));
     author.setCellValueFactory(new PropertyValueFactory<>("author"));

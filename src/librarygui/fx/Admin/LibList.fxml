@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="librarygui.LibListController">
+<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="librarygui.LibListController">
    <center>
       <SplitPane dividerPositions="0.1762152777777778, 0.7005208333333334" prefHeight="819.0" prefWidth="1154.0">
          <items>
@@ -202,9 +202,9 @@
          <menus>
             <Menu mnemonicParsing="false" text="Menu">
                <items>
-                  <MenuItem fx:id="editProfile" mnemonicParsing="false" text="Edit Profile" />
-                  <MenuItem fx:id="logout" mnemonicParsing="false" text="Log Out" />
-                  <MenuItem fx:id="exit" mnemonicParsing="false" text="Exit" />
+                  <MenuItem fx:id="editProfile" mnemonicParsing="false" onAction="#editWindow" text="Edit Profile" />
+                  <MenuItem fx:id="logout" mnemonicParsing="false" onAction="#logOut" text="Log Out" />
+                  <MenuItem fx:id="exit" mnemonicParsing="false" onAction="#quit" text="Exit" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Help">
