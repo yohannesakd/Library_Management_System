@@ -387,6 +387,7 @@ catch (NumberFormatException e) {
 
   @Override
   public void initialize(URL url, ResourceBundle rb) {
+    
     bookid.setCellValueFactory(new PropertyValueFactory<>("book_id"));
     title.setCellValueFactory(new PropertyValueFactory<>("title"));
     author.setCellValueFactory(new PropertyValueFactory<>("author"));

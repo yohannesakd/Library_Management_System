@@ -1,1 +1,2 @@
-1000|the book|the author|the category|edition|453453|3423|2|3|1
+1000|the book|the author|the ategoyr|34|5343|4|4|2|1
+1001|another one|another|cat|3|435354|432|4|3|0

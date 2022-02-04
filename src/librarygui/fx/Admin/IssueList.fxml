@@ -19,7 +19,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="librarygui.IssueListController">
    <center>
       <SplitPane dividerPositions="0.1762152777777778, 0.7144097222222222" prefHeight="821.0" prefWidth="1154.0">
@@ -132,7 +131,10 @@
                               <Insets top="10.0" />
                            </VBox.margin>
                         </Button>
-                        <StackPane prefHeight="67.0" prefWidth="338.0" />
+                        <StackPane prefHeight="67.0" prefWidth="338.0">
+                           <children>
+                              <Label fx:id="alertIssue" prefHeight="48.0" prefWidth="276.0" />
+                           </children></StackPane>
                         <VBox fx:id="issueInfo" visible="false">
                            <children>
                               <Label alignment="CENTER" prefHeight="32.0" prefWidth="338.0" text="Insert Issue Information">

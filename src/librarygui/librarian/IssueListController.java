@@ -1,5 +1,6 @@
 package librarygui.librarian;
 
+import CustomException.BookUnavailability;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
@@ -201,33 +202,42 @@ public void returnBook(ActionEvent event) throws IOException{
   @FXML 
   public void issueBook(ActionEvent event) throws IOException {
     
-    Issue inpIssue = new Issue();
-        
-    ArrayList<Issue> issueList = new ArrayList<>();
         try{
-        issueList = FileAlter.retrieveAllIssueFile();            
-        }catch(java.io.FileNotFoundException e){
-        }
             
-    if(!issueList.isEmpty())
-        inpIssue.setBook_id(issueList.get(issueList.size()-1).getIssue_id()+1);
-    
-    inpIssue.setMember_id(Integer.parseInt(memberId.getText()));
-    inpIssue.setBook_id(Integer.parseInt(bookId.getText()));
-    inpIssue.setBookTitle(retrieveBookTitle(Integer.parseInt(bookId.getText())));
-    inpIssue.setName(retrieveMemberName(Integer.parseInt(memberId.getText())));
-    inpIssue.setIssueDate(inpIssue.getDateNow().toString());
-    inpIssue.setDueDate(getDueDate(event).toString());
-
-    String str = Admin.addIssue(inpIssue);
-    System.out.println(str);
-
-    Stage stage = (Stage) book.getScene().getWindow();
-    Parent root = FXMLLoader.load(getClass().getResource("IssueList.fxml"));
-
-    Scene scene = new Scene(root);
-    stage.setScene(scene);
-    stage.show();
+            Issue inpIssue = new Issue();
+            
+            ArrayList<Issue> issueList = new ArrayList<>();
+            try{
+                issueList = FileAlter.retrieveAllIssueFile();
+            }catch(java.io.FileNotFoundException e){
+            }
+            
+            if(!issueList.isEmpty())
+                inpIssue.setBook_id(issueList.get(issueList.size()-1).getIssue_id()+1);
+            
+            inpIssue.setMember_id(Integer.parseInt(memberId.getText()));
+            inpIssue.setBook_id(Integer.parseInt(bookId.getText()));
+            inpIssue.setBookTitle(retrieveBookTitle(Integer.parseInt(bookId.getText())));
+            inpIssue.setName(retrieveMemberName(Integer.parseInt(memberId.getText())));
+            inpIssue.setIssueDate(inpIssue.getDateNow().toString());
+            inpIssue.setDueDate(getDueDate(event).toString());
+            
+            String str = Admin.addIssue(inpIssue);
+            System.out.println(str);
+            
+            Stage stage = (Stage) book.getScene().getWindow();
+            Parent root = FXMLLoader.load(getClass().getResource("IssueList.fxml"));
+            
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+            
+            
+            
+        }catch(BookUnavailability ex){
+            System.out.println("BOOK IS UNAVAILABLE");
+        
+        }
     
 
 

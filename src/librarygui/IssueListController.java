@@ -1,5 +1,7 @@
 package librarygui;
 
+import CustomException.BookUnavailability;
+import CustomException.MemberRestrictionException;
 import static library.FileAlter.retrieveBookTitle;
 import static library.FileAlter.retrieveMemberName;
 import static library.FileAlter.retrieveSingleIssue;
@@ -31,6 +33,9 @@ import static library.FileAlter.updateIssuedBook;
 
 public class IssueListController implements Initializable {
 
+ @FXML
+private Label alertIssue; 
+    
   @FXML
   private Button home;
 
@@ -233,81 +238,102 @@ public class IssueListController implements Initializable {
   }
 
   @FXML
-  public void returnBook(ActionEvent event) throws IOException {
+  public void returnBook(ActionEvent event) throws IOException, FileNotFoundException {
     int memberId, bookId;
     memberId = Integer.parseInt(memberId1.getText());
     bookId = Integer.parseInt(bookId1.getText());
+    try {
     Issue issueInfo = retrieveSingleIssue(memberId, bookId);
 
     returnInfo.setVisible(true);
     if ("".equals(issueInfo.getBookTitle())) {
       issueId.setText("No Issue Found");
     } else {
-      issueInfo.setIsActive(false);
-      System.out.println(issueInfo);
-      FileAlter.editIssueState(issueInfo);
+            issueInfo.setIsActive(false);
 
-      FileAlter.updateIssuedBook(Integer.parseInt(bookId1.getText()), true);
-      FileAlter.updateIssueMember(memberId, true);
-      
-      Stage stage = (Stage) book.getScene().getWindow();
-      Parent root = FXMLLoader.load(
-        getClass().getResource("fx/Admin/IssueList.fxml")
-      );
-
-      Scene scene = new Scene(root);
-      stage.setScene(scene);
-      stage.show();
-      Parent alert = FXMLLoader.load(
-        getClass().getResource("fx/alertBox.fxml")
-      );
-
-      Scene alertScene = new Scene(alert);
-      stage.setScene(alertScene);
-      stage.show();
-    }
+            FileAlter.editIssueState(issueInfo);
+            
+            FileAlter.updateIssuedBook(Integer.parseInt(bookId1.getText()), true);
+            FileAlter.updateIssueMember(memberId, true);
+            
+            Stage stage = (Stage) book.getScene().getWindow();
+            Parent root = FXMLLoader.load(
+                    getClass().getResource("fx/Admin/IssueList.fxml")
+            );
+            
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+            Parent alert = FXMLLoader.load(
+                    getClass().getResource("fx/alertBox.fxml")
+            );
+            
+            Scene alertScene = new Scene(alert);
+            stage.setScene(alertScene);
+            stage.show();
+        }
+    } catch (MemberRestrictionException ex) {
+            alertIssue.setText("Trying to return a book that has not been issued. please review the member or book id.");
+        }
   }
 
   @FXML
   public void issueBook(ActionEvent event) throws IOException {
-    Issue inpIssue = new Issue();
-
-    ArrayList<Issue> issueList = new ArrayList<>();
     try {
-      issueList = FileAlter.retrieveAllIssueFile();
-    } catch (java.io.FileNotFoundException e) {}
+        Issue inpIssue = new Issue();
+        
+        ArrayList<Issue> issueList = new ArrayList<>();
+        try {
+            issueList = FileAlter.retrieveAllIssueFile();
+        } catch (java.io.FileNotFoundException e) {}
+        
+        inpIssue.setMember_id(Integer.parseInt(memberId.getText()));        
+        inpIssue.setBookTitle(
+                retrieveBookTitle(Integer.parseInt(bookId.getText()))
+        );
+        FileAlter.updateIssueMember(Integer.parseInt(memberId.getText()), false);
+        
+        inpIssue.setBook_id(Integer.parseInt(bookId.getText()));
+        if (!issueList.isEmpty()) inpIssue.setIssue_id(
+                issueList.get(issueList.size() - 1).getIssue_id() + 1
+        );
+        inpIssue.setName(retrieveMemberName(Integer.parseInt(memberId.getText())));
+        inpIssue.setIssueDate(inpIssue.getDateNow().toString());
+        inpIssue.setDueDate(getDueDate(event).toString());
+        
+        
+        FileAlter.updateIssuedBook(Integer.parseInt(bookId.getText()), false);
+        
+        String str = Admin.addIssue(inpIssue);
+        System.out.println(str);
+        
+        Stage stage = (Stage) book.getScene().getWindow();
+        Parent root = FXMLLoader.load(
+                getClass().getResource("fx/Admin/IssueList.fxml")
+        );
+        stage.setScene(new Scene(root));
+        stage.show();
+        
+        
+//pop up alert of completion-----------------------------------------------------------
+        Stage alertStage = new Stage();
 
-    inpIssue.setBook_id(Integer.parseInt(bookId.getText()));
-    if (!issueList.isEmpty()) inpIssue.setIssue_id(
-      issueList.get(issueList.size() - 1).getIssue_id() + 1
-    );
-    inpIssue.setMember_id(Integer.parseInt(memberId.getText()));
-    inpIssue.setBookTitle(
-      retrieveBookTitle(Integer.parseInt(bookId.getText()))
-    );
-    inpIssue.setName(retrieveMemberName(Integer.parseInt(memberId.getText())));
-    inpIssue.setIssueDate(inpIssue.getDateNow().toString());
-    inpIssue.setDueDate(getDueDate(event).toString());
-    
-    FileAlter.updateIssuedBook(Integer.parseInt(bookId.getText()), false);
-    FileAlter.updateIssueMember(Integer.parseInt(memberId.getText()), false);
+        Parent alert = FXMLLoader.load(getClass().getResource("fx/alertBox.fxml"));
+        alert.setLayoutX(50);
+        alert.setLayoutY(50);
+        Scene alertScene = new Scene(alert);
 
-    String str = Admin.addIssue(inpIssue);
-    System.out.println(str);
-
-    Stage stage = (Stage) book.getScene().getWindow();
-    Parent root = FXMLLoader.load(
-      getClass().getResource("fx/Admin/IssueList.fxml")
-    );
-
-    Scene scene = new Scene(root);
-    stage.setScene(scene);
-    stage.show();
-    Parent alert = FXMLLoader.load(getClass().getResource("fx/alertBox.fxml"));
-
-    Scene alertScene = new Scene(alert);
-    stage.setScene(alertScene);
-    stage.show();
+        alertStage.setScene(alertScene);
+        alertStage.show();
+        
+ //the pop up window------------------------------------------------------------------
+        
+    } catch (FileNotFoundException ex) {}
+    catch (MemberRestrictionException ex) {
+          alertIssue.setText("ONE USER CAN ISSUE ONLY ONE BOOK AT A TIME. TO ISSUE ANOTHER BOOK PLEASE RETURN YOUR ISSUE.");
+      } catch (BookUnavailability ex) {
+         alertIssue.setText("BOOK IS UNAVAILABLE.");
+     }
   }
 
   @FXML

@@ -1,1 +1,2 @@
-Yohannes Mesganaw|98765432|fyosyh@|Hone|1000|0
+another customer|987654321|mail@|d|1004|1
+now never ldel|987654321|mail@|homerun|1005|0

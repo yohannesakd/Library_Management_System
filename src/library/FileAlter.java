@@ -132,11 +132,12 @@ public class FileAlter {
     return "SUCCESSFULL";
   }
 
-  public static String retrieveBookTitle(int bookId) throws IOException {
+  public static String retrieveBookTitle(int bookId) throws IOException, CustomException.BookUnavailability {
     ArrayList<Book> bookList = new ArrayList<>();
     bookList = retrieveAllbookFile();
     for (int i = 0; i < bookList.size(); i++) {
       if (bookList.get(i).getBook_id() == bookId) {
+          if(!bookList.get(i).getIsAvailable())throw new CustomException.BookUnavailability();
         return bookList.get(i).getTitle();
       }
     }
@@ -163,6 +164,7 @@ public class FileAlter {
           Integer.parseInt(values[8]),
           Integer.parseInt(values[9])
         );
+        bk.setIsAvailable();
         booklist.add(bk);
       }
     }
@@ -233,14 +235,21 @@ public class FileAlter {
   }
   
   
-    public static String updateIssueMember(int member_id, boolean isReturning) throws FileNotFoundException{
+    public static String updateIssueMember(int member_id, boolean isReturning) throws FileNotFoundException, CustomException.MemberRestrictionException{
       ArrayList<Member> members = FileAlter.retrieveAllMemberFile();
       for(Member member : members){
           if((member.getMember_id() == member_id) && isReturning){
+              System.out.println("this excutes here");
+              System.out.println(member.getNoOfBookIssued());
+              if(member.getNoOfBookIssued() == 0)throw new CustomException.MemberRestrictionException();
               member.setNoOfBookIssued(0);
               break;
           }
-          else {
+          else  if((member.getMember_id() == member_id) && !isReturning){
+              System.out.println("this here");
+              System.out.println(member.getNoOfBookIssued());
+              System.out.println(member.getFullName());
+              if(member.getNoOfBookIssued() == 1)throw new CustomException.MemberRestrictionException();
               member.setNoOfBookIssued(1);
               break;             
           }
@@ -252,9 +261,7 @@ public class FileAlter {
     }
 
     for (Member member : members) {
-      if (member.getMember_id() == member_id){
           library.Librarian.addMember(member);
-    }
   }
     if (!alter) return "NO FILE ALTERED";
     return "SUCCESSFULL";
